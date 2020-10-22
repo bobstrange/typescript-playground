@@ -1,0 +1,17 @@
+{
+  "name": "type-challenges",
+  "version": "0.0.1",
+  "description": "My solutions for [Type<Challenge[]>](https://github.com/type-challenges/type-challenges)",
+  "main": "index.js",
+  "scripts": {
+    "check": "tsc -w --noEmit"
+  },
+  "keywords": [],
+  "author": "bobstrange <bob.1983.g@gmail.com> (https://github.com/bobstrange)",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node14": "^1.0.0",
+    "@tsconfig/recommended": "^1.0.1",
+    "typescript": "^4.0.3"
+  }
+}
