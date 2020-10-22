@@ -18,7 +18,6 @@ interface Expected2 {
 type MyPick<T, K extends keyof T> = {
   [k in K]: k extends keyof T ? T[k] : never
 }
-type Hoge = MyPick<Todo, "title" | "completed">
 
 type cases = [
   Expect<Equal<Expected1, MyPick<Todo, "title">>>,
