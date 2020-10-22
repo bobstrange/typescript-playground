@@ -1,0 +1,16 @@
+{
+  "name": "typescript-exercise",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "check": "tsc -w --noEmit"
+  },
+  "keywords": [],
+  "author": "bobstrange <bob.1983.g@gmail.com> (https://github.com/bobstrange)",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "typescript": "^4.0.3"
+  }
+}
