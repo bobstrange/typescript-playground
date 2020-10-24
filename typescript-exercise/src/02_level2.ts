@@ -44,3 +44,65 @@ function getSpeed(speed: Speed): number {
       return value
   }
 }
+
+/**
+ * Property omit
+ */
+
+declare function addEventListener(
+  type: string,
+  handler: () => {},
+  options?: boolean | { [k in "capture" | "once" | "passive"]: boolean }
+): void
+
+addEventListener("foobar", () => {})
+addEventListener("event", () => {}, true)
+addEventListener("event2", () => {}, {})
+addEventListener("event3", () => {}, {
+  capture: true,
+  once: false,
+})
+
+// @ts-expect-error
+addEventListener("foobar", () => {}, "string")
+// @ts-expect-error
+addEventListener("hoge", () => {}, {
+  capture: true,
+  once: false,
+  excess: true,
+})
+
+/**
+ * Intersection Type
+ */
+function giveId<T extends object>(obj: T): T & { id: string } {
+  const id = "xxx"
+  return {
+    ...obj,
+    id,
+  }
+}
+
+const obj1: { id: string; foo: number } = giveId({ foo: 123 })
+const obj2: { id: string; num: number; hoge: boolean } = giveId({
+  num: 0,
+  hoge: true,
+})
+
+// @ts-expect-error
+const obj3: { id: string; piyo: string } = giveId({
+  foo: "bar",
+})
+
+type StateUpdateArg<T> = T | ((oldValue: T) => T)
+declare function useState<T>(
+  initialValue: T
+): [T, (setter: StateUpdateArg<T>) => void]
+
+const [numState, setNumState] = useState(0)
+
+setNumState(5)
+setNumState((state) => state + 10)
+
+// @ts-expect-error
+setNumState("test")
