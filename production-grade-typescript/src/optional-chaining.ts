@@ -1,9 +1,9 @@
 let x: {
   user: {
-    name: string;
+    name: string
     address?: {
-      street: string;
-      city: string;
-    };
-  };
-};
+      street: string
+      city: string
+    }
+  }
+}
