@@ -5,7 +5,10 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "npm build --watch --preserveWatchOutput"
+    "dev": "npm build --watch --preserveWatchOutput",
+    "lint": "eslint ./src --ext js,ts",
+    "format": "prettier --write ./src --ext",
+    "test": "jest"
   },
   "keywords": [],
   "author": "bobstrange <bob.1983.g@gmail.com> (https://github.com/bobstrange)",
