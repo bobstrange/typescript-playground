@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "check": "tsc --noEmit",
     "lint": "eslint ./src/**/*.{js,ts,tsx}",
     "format": "prettier --write ./src/**/*.{js,ts,tsx}"
   },
