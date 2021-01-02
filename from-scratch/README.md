@@ -160,3 +160,27 @@ tsconfig.eslint.json
     },
   ],
 ```
+
+## Test の設定
+
+必要な依存関係をインストール
+
+```shell
+npm install -D jest @types/jest @babel/preset-env @babel/preset-typescript
+```
+
+`.babelrc.js` の設定
+
+```js
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: { node: 12 },
+      },
+    ],
+    "@babel/preset-typescript",
+  ],
+};
+```
