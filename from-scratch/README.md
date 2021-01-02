@@ -87,8 +87,76 @@ npx eslint --init
 ```
 
 >? How would you like to use ESLint? …
->  To check syntax only
+> To check syntax only
 >▸ To check syntax and find problems
->  To check syntax, find problems, and enforce code style
+> To check syntax, find problems, and enforce code style
 
 Code Style は Prettier に任せたほうが良いので、`To check syntax and find problems`
+
+.eslintrc.js でいくつか修正を加える
+
+```js
+...
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+...
+```
+
+`"plugin:@typescript-eslint/recommended-requireing-type-checking"` より詳細な型についての Lint
+プロジェクトが大きくならないなら入れておいたほうが良い。
+
+```js
+  rules: {
+    "prefer-const": "error",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unused-params": "off",
+  }
+```
+
+`"@typescript-eslint/no-unused-vars": "off",`
+`"@typescript-eslint/no-unused-params": "off",`
+このあたりは TypeScript の Compiler に任せた方が良い
+
+```json
+    "noUnusedLocals": true,                /* Report errors on unused locals. */
+    "noUnusedParameters": true,            /* Report errors on unused parameters. */
+```
+
+`tsconfig.eslint.json` を作成して、 `.eslintrc.js` の `project` に設定する
+もともとの、`tsconfig.json` には、`src` しか include していないが、 ESLint の対象にしたいファイルは、`tests` なども含まれるので。
+
+tsconfig.eslint.json
+
+```json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["jest"]
+  },
+  "include": ["src", "tests"]
+}
+```
+
+.eslintrc.js
+
+```js
+  parserOptions: {
+    ecmaVersion: 12,
+    project: "tsconfig.eslint.json",
+  }
+```
+
+```js
+  overrides: [
+    {
+      files: ["tests/**/*.ts"],
+      env: {
+        jest: true,
+        node: true,
+      },
+    },
+  ],
+```
