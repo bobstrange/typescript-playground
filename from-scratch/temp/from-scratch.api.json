@@ -103,7 +103,7 @@
             },
             {
               "kind": "Content",
-              "text": ", b: "
+              "text": ", b?: "
             },
             {
               "kind": "Content",
