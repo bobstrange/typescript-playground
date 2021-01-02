@@ -187,3 +187,42 @@ module.exports = {
 
 これだけで、 TypeScript で書いたコードで、 jest を実行できる。
 Webpack なども不要 !!
+
+## API Extractor
+
+API Documentation Tool
+@microsoft/api-extractor
+
+インストール
+
+```shell
+npm install @microsoft/api-extractor @microsoft/api-documenter
+```
+
+設定ファイルの初期化
+
+```shell
+npx api-extractor init
+```
+
+`api-extractor.json` が生成される
+※ Editor の設定を、JSON with Comments 形式にするとエラーが消える。
+
+設定ファイルの編集
+
+```json
+"mainEntryPointFilePath": "<projectFolder>/dist/index.d.ts"
+```
+
+`etc` ディレクトリ作成
+
+```shell
+mkdir etc
+```
+
+`api-extractor` を実行すると、 `dist` 配下( `untrimmedFilePath`, `betaTrimmedFilePath`, `publicTrimmedFilePath` に設定したディレクトリ) に型定義ファイルが出力される。
+
+```shell
+npx api-extractor run --local
+```
+
