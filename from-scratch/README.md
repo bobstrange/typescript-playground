@@ -220,9 +220,19 @@ npx api-extractor init
 mkdir etc
 ```
 
+## api-extractor 実行
+
 `api-extractor` を実行すると、 `dist` 配下( `untrimmedFilePath`, `betaTrimmedFilePath`, `publicTrimmedFilePath` に設定したディレクトリ) に型定義ファイルが出力される。
 
 ```shell
 npx api-extractor run --local
 ```
 
+※ `--local` はプロダクションビルドなどの時につかう
+通常時は `--local` オプション無しで実行する
+
+## api-documenter 実行
+
+```shell
+npx api-documenter markdown -i temp -o docs
+```
