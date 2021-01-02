@@ -80,3 +80,15 @@ JSDocに `@internal` のアノテーションをつけた場合に、型定義�
 例えば、 dev dependency の物も、、、
 それを細やかに管理するために、 `"types": []` にすると良い (Library を作る場合は)
 
+## eslint の設定について
+
+```shell
+npx eslint --init
+```
+
+>? How would you like to use ESLint? …
+>  To check syntax only
+>▸ To check syntax and find problems
+>  To check syntax, find problems, and enforce code style
+
+Code Style は Prettier に任せたほうが良いので、`To check syntax and find problems`
