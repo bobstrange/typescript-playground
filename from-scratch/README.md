@@ -184,3 +184,6 @@ module.exports = {
   ],
 };
 ```
+
+これだけで、 TypeScript で書いたコードで、 jest を実行できる。
+Webpack なども不要 !!
