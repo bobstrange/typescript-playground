@@ -1,13 +1,22 @@
-const path = require('path');
-const slsw = require('serverless-webpack');
-const nodeExternals = require('webpack-node-externals');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const path = require('path')
+const slsw = require('serverless-webpack')
+const nodeExternals = require('webpack-node-externals')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+
+const mode = slsw.lib.webpack.isLocal ? 'development' : 'production'
+
+const tsconfigFile =
+  mode === 'production' ? 'tsconfig.production.json' : 'tsconfig.json'
 
 module.exports = {
   context: __dirname,
-  mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
+  mode,
   entry: slsw.lib.entries,
-  devtool: slsw.lib.webpack.isLocal ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: slsw.lib.webpack.isLocal
+    ? 'eval-cheap-module-source-map'
+    : 'source-map',
   resolve: {
     extensions: ['.mjs', '.json', '.ts'],
     symlinks: false,
@@ -44,9 +53,10 @@ module.exports = {
         options: {
           transpileOnly: true,
           experimentalWatchApi: true,
+          configFile: path.resolve(__dirname, tsconfigFile),
         },
       },
     ],
   },
   plugins: [],
-};
+}
