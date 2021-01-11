@@ -4,6 +4,7 @@
   "description": "Serverless aws-nodejs-typescript template",
   "main": "servlerss.ts",
   "scripts": {
+    "test": "jest",
     "lint": "eslint src/**/*.{js,ts} serverless.ts",
     "format": "prettier -w src/**/*.{js,ts} serverless.ts"
   },
@@ -15,13 +16,19 @@
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
     "@serverless/typescript": "^2.18.0",
     "@types/aws-lambda": "^8.10.70",
+    "@types/jest": "^26.0.20",
     "@types/node": "^14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
+    "babel-jest": "^26.6.3",
     "eslint": "^7.17.0",
     "fork-ts-checker-webpack-plugin": "^6.1.0",
+    "jest": "^26.6.3",
     "json-schema-to-ts": "^1.5.0",
     "serverless": "^2.18.0",
     "serverless-webpack": "^5.3.5",
