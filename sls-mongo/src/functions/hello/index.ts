@@ -1,4 +1,4 @@
-import schema from './schema';
+import schema from './schema'
 
 export default {
   handler: `${__dirname.split(process.cwd())[1].substring(1)}/handler.main`,
@@ -9,10 +9,10 @@ export default {
         path: 'hello',
         request: {
           schema: {
-            'application/json': schema
-          }
-        }
-      }
-    }
-  ]
+            'application/json': schema,
+          },
+        },
+      },
+    },
+  ],
 }
