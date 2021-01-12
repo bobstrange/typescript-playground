@@ -1,4 +1,4 @@
-import { getGreetMessage } from '../../src/services/hello.service'
+import { getGreetMessage } from '~/services/hello.service'
 
 describe('hello.service', () => {
   it('returns greeting message with given name', () => {
