@@ -6,7 +6,7 @@ import { middyfy } from '~libs/lambda'
 
 import schema from './schema'
 
-import { getGreetMessage } from '@services/hello.service'
+import { getGreetMessage } from '~services/hello.service'
 
 const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
