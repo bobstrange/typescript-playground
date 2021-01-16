@@ -14,7 +14,7 @@
     "@typegoose/typegoose": "^7.4.7",
     "aws-sdk": "^2.826.0",
     "eslint-config-prettier": "^7.1.0",
-    "mongoose": "^5.11.12",
+    "mongoose": "^5.10.18",
     "prettier": "^2.2.1",
     "source-map-support": "^0.5.19"
   },

@@ -6,14 +6,23 @@ import { middyfy } from '~libs/lambda'
 
 import schema from './schema'
 
-import { getGreetMessage } from '~services/hello.service'
+import { fetchUsersByName } from '~/services/user.service'
+import { mongoose } from '@typegoose/typegoose'
+import { ensureConnection } from '~/libs/dbConnection'
+
+let conn: mongoose.Mongoose
 
 const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
-  event
+  event,
+  context
 ) => {
+  context.callbackWaitsForEmptyEventLoop = false
+
+  if (!conn) {
+    conn = await ensureConnection(conn)
+  }
   return formatJSONResponse({
-    message: getGreetMessage(event.body.name),
-    event,
+    users: await fetchUsersByName(event.body.name),
   })
 }
 

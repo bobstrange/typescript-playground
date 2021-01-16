@@ -1,8 +1,8 @@
-import { getGreetMessage } from '~/services/hello.service'
+import { fetchUsersByName } from '~/services/user.service'
 
 describe('hello.service', () => {
   it('returns greeting message with given name', () => {
-    const res = getGreetMessage('Bob')
+    const res = fetchUsersByName('Bob')
     expect(res).toEqual('Hello Bob, welcome to exciting serverless world')
   })
 })
