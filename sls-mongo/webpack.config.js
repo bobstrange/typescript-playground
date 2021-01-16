@@ -7,8 +7,10 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 const mode = slsw.lib.webpack.isLocal ? 'development' : 'production'
 
+// tsconfig.json について
+// tsconfig.json -> 開発用の tsconfig
 const tsconfigFile =
-  mode === 'production' ? 'tsconfig.production.json' : 'tsconfig.json'
+  mode === 'production' ? 'tsconfig.common.json' : 'tsconfig.json'
 
 module.exports = {
   context: __dirname,

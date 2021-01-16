@@ -11,6 +11,7 @@
   "dependencies": {
     "@middy/core": "^1.5.0",
     "@middy/http-json-body-parser": "^1.5.0",
+    "aws-sdk": "^2.826.0",
     "eslint-config-prettier": "^7.1.0",
     "prettier": "^2.2.1",
     "source-map-support": "^0.5.19"
