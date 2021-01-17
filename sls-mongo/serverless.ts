@@ -1,6 +1,22 @@
 import type { AWS } from '@serverless/typescript'
+import * as minimist from 'minimist'
 
 import { hello } from './src/functions'
+
+const argv = minimist(process.argv.slice(2))
+switch (argv.stage) {
+  case 'prod':
+    console.log('Load prod config')
+    break
+  case 'stg':
+    console.log('Load stg config')
+    break
+
+  case 'dev':
+  default:
+    console.log('Load dev config')
+    break
+}
 
 const serverlessConfiguration: AWS = {
   service: 'sls-mongo',
