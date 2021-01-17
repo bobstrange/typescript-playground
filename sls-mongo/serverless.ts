@@ -18,6 +18,8 @@ switch (argv.stage) {
     break
 }
 
+const serverlessOfflineConfig = {}
+
 const serverlessConfiguration: AWS = {
   service: 'sls-mongo',
   frameworkVersion: '2',
@@ -26,8 +28,9 @@ const serverlessConfiguration: AWS = {
       webpackConfig: './webpack.config.js',
       includeModules: true,
     },
+    'serverless-offline': serverlessOfflineConfig,
   },
-  plugins: ['serverless-webpack'],
+  plugins: ['serverless-offline', 'serverless-webpack'],
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
