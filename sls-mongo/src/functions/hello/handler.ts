@@ -2,7 +2,7 @@ import 'source-map-support/register'
 
 import type { ValidatedEventAPIGatewayProxyEvent } from '~libs/apiGateway'
 import { formatJSONResponse } from '~libs/apiGateway'
-import { connectionCloseMiddleware, middyfy } from '~libs/lambda'
+import { useConnectionMiddleware, middyfy } from '~libs/lambda'
 
 import schema from './schema'
 
@@ -13,10 +13,8 @@ import { ensureConnection } from '~/libs/dbConnection'
 let conn: mongoose.Mongoose
 
 const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
-  event,
-  context
+  event
 ) => {
-  context.callbackWaitsForEmptyEventLoop = false
   if (!conn) {
     conn = await ensureConnection(conn)
   }
@@ -27,7 +25,7 @@ const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
 }
 
 export const main = middyfy(hello).use(
-  connectionCloseMiddleware({
+  useConnectionMiddleware({
     conn: () => {
       return conn
     },

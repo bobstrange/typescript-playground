@@ -6,17 +6,20 @@ export const middyfy = (handler) => {
   return middy(handler).use(middyJsonBodyParser())
 }
 
-export const connectionCloseMiddleware: middy.Middleware<{
+export const useConnectionMiddleware: middy.Middleware<{
   conn: () => mongoose.Mongoose
   stg: 'prod' | 'stg' | 'dev'
 }> = (config) => {
   return {
     after: (_, next) => {
       if (config?.stg === 'dev') {
-        console.log(config?.conn())
         console.log('Disconnect')
         config?.conn().disconnect()
       }
+      next()
+    },
+    before: (handler, next) => {
+      handler.context.callbackWaitsForEmptyEventLoop = false
       next()
     },
   }
