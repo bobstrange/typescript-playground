@@ -2,7 +2,7 @@ import 'source-map-support/register'
 
 import type { ValidatedEventAPIGatewayProxyEvent } from '~libs/apiGateway'
 import { formatJSONResponse } from '~libs/apiGateway'
-import { middyfy } from '~libs/lambda'
+import { connectionCloseMiddleware, middyfy } from '~libs/lambda'
 
 import schema from './schema'
 
@@ -17,13 +17,20 @@ const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   context
 ) => {
   context.callbackWaitsForEmptyEventLoop = false
-
   if (!conn) {
     conn = await ensureConnection(conn)
   }
+  const users = await fetchUsersByName(event.body.name)
   return formatJSONResponse({
-    users: await fetchUsersByName(event.body.name),
+    users,
   })
 }
 
-export const main = middyfy(hello)
+export const main = middyfy(hello).use(
+  connectionCloseMiddleware({
+    conn: () => {
+      return conn
+    },
+    stg: 'dev',
+  })
+)
