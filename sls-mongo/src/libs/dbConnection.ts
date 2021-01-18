@@ -1,22 +1,23 @@
-import { mongoose } from '@typegoose/typegoose'
+import { MongoClient } from 'mongodb'
 import { db } from '~libs/environment'
 
-export async function ensureConnection(
-  conn: mongoose.Mongoose
-): Promise<mongoose.Mongoose> {
-  if (conn) {
-    return await (() => conn)()
+export type DBSession = {
+  client?: MongoClient
+}
+
+export async function ensureConnection(session: DBSession): Promise<void> {
+  if (session.client) {
+    return
   }
-  return connect(db.host, db.name, db.port, db.user, db.password)
+  session.client = await connect(db.host, db.port, db.user, db.password)
 }
 
 async function connect(
   host: string,
-  dbName: string,
   port?: string,
   user?: string,
   password?: string
-) {
+): Promise<MongoClient> {
   let url = 'mongodb://'
   if (user && password) {
     url = `${url}${user}:${password}@`
@@ -25,9 +26,8 @@ async function connect(
   if (port) {
     url = `${url}:${port}`
   }
-  return await mongoose.connect(url, {
+  return await MongoClient.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName,
   })
 }

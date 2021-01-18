@@ -2,33 +2,33 @@ import 'source-map-support/register'
 
 import type { ValidatedEventAPIGatewayProxyEvent } from '~libs/apiGateway'
 import { formatJSONResponse } from '~libs/apiGateway'
-import { useConnectionMiddleware, middyfy } from '~libs/lambda'
+import { mongoConnectionMiddleware, middyfy } from '~libs/lambda'
 
 import schema from './schema'
 
-import { fetchUsersByName } from '~/services/user.service'
-import { mongoose } from '@typegoose/typegoose'
-import { ensureConnection } from '~/libs/dbConnection'
+import { ensureConnection, DBSession } from '~/libs/dbConnection'
 
-let conn: mongoose.Mongoose
+const session: DBSession = {}
 
 const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
-  if (!conn) {
-    conn = await ensureConnection(conn)
-  }
-  const users = await fetchUsersByName(event.body.name)
+  await ensureConnection(session)
+  const db = session.client?.db('dev')
+  const users = await db
+    ?.collection('users')
+    .find({
+      name: event.body.name,
+    })
+    .toArray()
   return formatJSONResponse({
     users,
   })
 }
 
 export const main = middyfy(hello).use(
-  useConnectionMiddleware({
-    conn: () => {
-      return conn
-    },
+  mongoConnectionMiddleware({
+    session,
     stg: 'dev',
   })
 )
