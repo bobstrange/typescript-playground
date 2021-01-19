@@ -39,6 +39,8 @@ const photoInput = {
       name: 'My young years',
     },
   ],
+  created_at: new Date('2020-10-01T01:23:45Z'),
+  updated_at: new Date('2020-10-10T10:23:45+09:00'),
 }
 export class Album {
   id!: string
@@ -81,6 +83,14 @@ export class Photo {
   @Expose({ name: 'test_snake_case' })
   testSnakeCase!: string
 
+  @Type(() => Date)
+  @Expose({ name: 'created_at' })
+  createdAt!: Date
+
+  @Type(() => Date)
+  @Expose({ name: 'updated_at' })
+  updatedAt!: Date
+
   get name() {
     return this.id + '_' + this.filename
   }
@@ -102,6 +112,7 @@ const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
 
   const plain = classToPlain(photo)
   console.log('serialized: ', plain)
+
   const users = await db
     ?.collection('users')
     .find({
