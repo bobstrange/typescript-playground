@@ -212,4 +212,45 @@ filter([1, 2, 3], _ => _ > 2)
 filter(['a', 'b'], _ => _ === 'a')
 ```
 
+### ジェネリックがバインドされるタイミング
+
+一般的に、 TypeScript は、ジェネリックを使用するときに具体的な型をバインドする。
+
+- 関数の場合は、呼び出される時
+- クラスの場合は、インスタンス化される時
+
+### ジェネリックのアノテート
+
+基本的には、 TypeScript は引数の型を推論して、ジェネリックにバインドしてくれるが、
+ジェネリックにバインドされる型を自前でアノテートすることができる.
+例えば、型引数 `T` と `U` を持つ `map` の場合
+
+```ts
+function map<T, U>(arr: T[], mapFunc: (item: T) => U): U[] {
+  const result = []
+  for (let i = 0; i < arr.length; i++) {
+    result[i] = mapFunc(arr[i])
+  }
+  return result
+}
+
+map([1, 2, 3], _ => _ ** 2) // T は number U も number
+map([1, 2, 3], _ => _ % 2 === 0) // T は number U は boolean
+map<number, boolean>([1, 2, 3], _ => _ % 2 === 1)
+// このように、一部だけ型引数を渡すことはできない
+map<number>([1, 2, 3], _ => _ + 1)
+```
+
+自前でアノテートする例は例えば
+
+```ts
+const promise = new Promise(resolve => resolve(100))
+promise.then(d => d + 1) // d の型が unknown に推論されているので、ここでエラー
+```
+
+```ts
+const promise = new Promise<number>(resolve => resolve(100)) // promise が resolve された時の型をアノテート
+promise.then(d => d + 1)
+```
+
 
