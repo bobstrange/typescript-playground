@@ -181,4 +181,35 @@ type CreateElement = {
     (tag: 'table'): HTMLTableElement
     (tag: string): HTMLElement
 }
+
+// 'a', 'canvas', 'table' は string のサブタイプなので、パラメータは string
+const createElement: CreateElement = (tag: string): HTMLElement => {
+    // impl
+}
 ```
+
+### ジェネリック型パラメータ
+
+```ts
+type Filter = <T>(arg: T[], filterFunc: (item: T) => boolean) => T[]
+type Filter = {
+    <T>(arg: T[], filterFunc: (item: T) => boolean): T[]
+}
+
+const filter: Filter = (input, f) => {
+  return input.filter(f)
+}
+
+```
+
+`filter` の引数の型を、ジェネリックの `T` にバインドする
+
+引数が `number[]` なら、 `T` は `number` に
+引数が `string[]` なら、`T` は `string` に
+
+```ts
+filter([1, 2, 3], _ => _ > 2)
+filter(['a', 'b'], _ => _ === 'a')
+```
+
+
