@@ -78,8 +78,107 @@ const both: CatOrDogOrBoth = {
 
 ### 関数
 
-- 用語
-  - パラメータは関数宣言、実際に呼び出し時に指定するのは引数
-    - ( そんな使い分けなのね、、、 )
-  - parameter
-  - argument
+- パラメータは関数宣言、実際に呼び出し時に指定するのは引数
+  - ( そんな使い分けなのね、、、 )
+- parameter
+- argument
+
+### 可変長引数関数
+
+- 毎回忘れる...
+- 引数に `...` をつける
+- 型は `型[]` にする
+
+```ts
+function sum(...numbers: number[]): number {
+    return numbers.reduce((acc, cur) => acc + cur, 0)
+}
+```
+
+### no-invalid-this
+
+[ESLint](https://eslint.org/docs/rules/no-invalid-this)
+
+クラスっぽいオブジェクト以外で `this` を使うと、想定外の挙動が発生しやすいので、ESLint でチェックしましょうというお話
+
+### this の型付け
+
+関数内で `this` を使うときに、関数の第一パラメータとして `this` を宣言し、型付けすることができる。
+(`this` は他のパラメータとは同様に扱われない)
+
+↓のばあい、 `this: Date` が無いと、呼び出し元の型チェックが効かない
+
+```ts
+function ppDate(this: Date) {
+    return `${this.getFullYear()}-${this.getMonth() + 1}-${this.getDate()}`
+}
+
+ppDate.call(new Date()) // ok
+ppDate() // type error
+```
+
+### 関数の型付け
+
+`createUser` の実装部分では、パラメータに型付する必要は無い
+
+```ts
+type User = {
+  name: string
+  isAdmin: boolean
+}
+
+type CreateUser = (name: string, isAdmin: boolean) => User
+
+const createUser: CreateUser = (name, admin) => {
+  return {
+    name,
+    isAdmin: admin,
+  }
+}
+```
+
+`Promise` の場合、シグネチャなので `async` は使えない
+
+```ts
+type FetchUser = (name: string) => Promise<User | undefined>
+
+const fetchUser: FetchUser = async (name) => {
+  const users: User[] = []
+  return users.find((u) => u.name === name)
+}
+
+```
+
+可変長引数の場合、 `...` は当然必要
+
+```ts
+type Sum = (...args: number[]) => number
+
+const sum: Sum = (...args) => {
+  return args.reduce((acc, curr) => acc + curr, 0)
+}
+```
+
+### 関数の呼び出しシグネチャの書き方
+
+呼び出しシグネチャの記法は省略 ver と、完全版がある
+
+```ts
+
+type Sum = (...args: number[]) => number
+
+type Sum = {
+    (...args: number[]): number
+}
+```
+
+オーバーロードされた関数を定義する場合は、完全版で定義したほうが望ましいらしい
+
+```ts
+type CreateElement = {
+    (tag: 'a'): HTMLAnchorElement
+    (tag: 'canvas'): HTMLCanvasElement
+    (tag: 'table'): HTMLTableElement
+    (tag: string): HTMLElement
+}
+```
