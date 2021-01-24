@@ -253,4 +253,27 @@ const promise = new Promise<number>(resolve => resolve(100)) // promise が reso
 promise.then(d => d + 1)
 ```
 
+### ジェネリックの型に制限を加える
 
+型引数に制限を加えたい場合
+例えば、以下の様に、型が、`name` というプロパティを持っていると、制限したい場合。
+`<T extends RestrictType>` とすることで、型引数 `T` に制約を加えることができる
+
+```ts
+type NormalUser = {
+  name: string
+}
+
+type AdminUser = NormalUser & {
+  isAdmin: true
+}
+
+const sameUser = <T extends { name: string }>(left: T, right: T): boolean => {
+  return left.name === right.name
+}
+
+const userA: NormalUser = { name: 'John' }
+const userB: AdminUser = { name: 'Jane', isAdmin: true }
+
+sameUser(userA, userB)
+```
