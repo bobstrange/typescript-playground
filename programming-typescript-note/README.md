@@ -277,3 +277,21 @@ const userB: AdminUser = { name: 'Jane', isAdmin: true }
 
 sameUser(userA, userB)
 ```
+
+### 型引数の制約を複数にしたい場合
+
+交差型を使えば良い
+
+```ts
+```
+
+### ジェネリック型のデフォルトの型
+
+ジェネリック型のパラメータにもデフォルト値が設定できる
+
+```ts
+type MyEvent<T extends HTMLElement = HTMLElement> = {
+    target: T
+    type: string
+}
+```
