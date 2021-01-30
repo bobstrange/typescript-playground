@@ -5,7 +5,7 @@
     "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
     "strict": true /* Enable all strict type-checking options. */,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    // "noEmit": true,
     "outDir": "dist",
     "declaration": true,
     "jsx": "react",
@@ -14,5 +14,9 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts"
   ]
 }
