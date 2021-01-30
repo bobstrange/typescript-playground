@@ -2,15 +2,18 @@ name: Lint
 on:
   push:
     paths:
-      - 'testing/**'
+      - 'testing/src/**'
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: testing
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
       run: npm install
     - name: Run prettier
-      run: npx lint:prettier
+      run: npm run lint:prettier
     - name: Run eslint
-      run: npx lint:eslint
+      run: npm run lint:eslint
