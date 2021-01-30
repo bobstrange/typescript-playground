@@ -1,12 +1,12 @@
 import { ErrorRequestHandler } from 'express'
 import { isHttpError } from 'http-errors'
 
-export const errorHandler: ErrorRequestHandler = (err, _req, res) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   if (isHttpError(err)) {
-    res.status(err.statusCode).json({
+    return res.status(err.statusCode).json({
       errors: [{ message: err.message }],
     })
-    return
   }
   // res.statusCode = 400
   res.status(400).json({
