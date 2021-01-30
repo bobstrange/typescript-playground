@@ -5,6 +5,8 @@ import { app } from '../../app'
 import { errorHandler } from '../error-handler'
 
 describe('errorHandler', () => {
+  // super test を使用して、テストをする場合
+  // Integration テスト的になっているので、app に他の Handler が定義された結果テストが落ちる可能性がある
   describe('supertest', () => {
     it('returns Not Found error with status code 404 if the given URL does not exist', async () => {
       const response = await request(app).get('/not-exists').expect(404)
@@ -12,6 +14,10 @@ describe('errorHandler', () => {
     })
   })
 
+  // jest の mock を使用してテストする場合
+  // 完全に unit テストになっている
+  // コードの記述量は多くなってしまっている
+  // handler なので、入力 -> 出力 のテストができない為、res を mock して引数が呼ばれていることの確認になる
   describe('mock', () => {
     let requestMock: Partial<Request>
     let responseMock: Partial<Response>
