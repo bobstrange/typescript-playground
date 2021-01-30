@@ -8,13 +8,12 @@ export const errorHandler = (
   _next: NextFunction
 ) => {
   if (isHttpError(err)) {
-    res.statusCode = err.statusCode
-    return res.json({
+    return res.status(err.statusCode).json({
       errors: [{ message: err.message }],
     })
   }
-  res.statusCode = 400
-  res.json({
+  // res.statusCode = 400
+  res.status(400).json({
     errors: [{ message: 'Something went wrong' }],
   })
 }

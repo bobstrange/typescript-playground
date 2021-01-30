@@ -20,7 +20,8 @@ describe('errorHandler', () => {
     beforeEach(() => {
       requestMock = {}
       responseMock = {
-        json: jest.fn(),
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn().mockReturnThis(),
       }
     })
 
@@ -32,6 +33,7 @@ describe('errorHandler', () => {
         responseMock as Response,
         nextMock
       )
+      expect(responseMock.status).toHaveBeenCalledWith(httpError.statusCode)
       expect(responseMock.json).toHaveBeenCalledWith({
         errors: [{ message: httpError.message }],
       })
@@ -45,6 +47,7 @@ describe('errorHandler', () => {
         responseMock as Response,
         nextMock
       )
+      expect(responseMock.status).toHaveBeenCalledWith(400)
       expect(responseMock.json).toHaveBeenCalledWith({
         errors: [{ message: 'Something went wrong' }],
       })
