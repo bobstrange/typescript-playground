@@ -3,18 +3,15 @@ import 'express-async-errors'
 import createHttpError from 'http-errors'
 import { errorHandler } from './middlewares/error-handler'
 
-const app = express()
+import { HomeRouter } from './routes/home/index'
+
+export const app = express()
 
 app.use(express.json())
 
-app.get('/', (_, res) => {
-  res.json({ data: 'Hi there' })
-})
-
+app.use(HomeRouter)
 app.all('*', async () => {
   throw new createHttpError.NotFound()
 })
 
 app.use(errorHandler)
-
-export { app }
