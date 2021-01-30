@@ -1,8 +1,8 @@
-import { Request, Response, Router } from 'express'
+import { RequestHandler, Router } from 'express'
 
 const router = Router()
 
-const homeHandler = async (req: Request, res: Response) => {
+const homeHandler: RequestHandler = async (req, res) => {
   res.json({
     data: 'Hi there',
   })

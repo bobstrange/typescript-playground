@@ -1,16 +1,12 @@
-import { Request, Response, NextFunction } from 'express'
+import { ErrorRequestHandler } from 'express'
 import { isHttpError } from 'http-errors'
 
-export const errorHandler = (
-  err: Error,
-  _req: Request,
-  res: Response,
-  _next: NextFunction
-) => {
+export const errorHandler: ErrorRequestHandler = (err, _req, res) => {
   if (isHttpError(err)) {
-    return res.status(err.statusCode).json({
+    res.status(err.statusCode).json({
       errors: [{ message: err.message }],
     })
+    return
   }
   // res.statusCode = 400
   res.status(400).json({
