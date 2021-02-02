@@ -3,7 +3,7 @@ import 'express-async-errors'
 import createHttpError from 'http-errors'
 import { errorHandler } from './middlewares/error-handler'
 
-import { HomeRouter } from './routes/home/index'
+import { HomeRouter } from './handlers/home/index'
 
 export const app = express()
 
