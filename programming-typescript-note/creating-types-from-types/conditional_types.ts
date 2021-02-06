@@ -60,3 +60,5 @@ type DogMessageContents = RefinedMessageOf<IDog> // -> never
 type Flatten<T> = T extends any[] ? T[number] : T
 type Str = Flatten<string[]> // -> type Str = string
 type Num = Flatten<number> // -> type Num = number
+
+type Flatten2<T> = T extends (infer U)[] ? U : T
