@@ -39,3 +39,12 @@ type UserContainer = {
 
 type MyUser = UserContainer[string]
 ```
+
+## Conditional Types
+
+[code](./conditional_types.ts)
+
+- 入力の型を、条件を元に判定して、型を出力する
+  - 入力型 -> 条件 -> 出力型
+- `Input extends Condition ? OutputA : OutputB` の形が頻出
+- 用途としては Generics とよく一緒に使われる
