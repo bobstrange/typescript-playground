@@ -48,3 +48,16 @@ type MyUser = UserContainer[string]
   - 入力型 -> 条件 -> 出力型
 - `Input extends Condition ? OutputA : OutputB` の形が頻出
 - 用途としては Generics とよく一緒に使われる
+  - 入力の型引数 -> 条件 -> 出力の型
+- Conditional Types を使うことによって、Generics の型引数を制約することができる
+  - 例えば
+    - `type Flatten<T> = T extends any[] ? T[number] : T`
+- `infer` との併用
+  - `infer` を使うことによって、構造をどのように lookup すればよいか？考えなくてよくなる。
+  - 例えば ↑ の Flattenは条件が正の場合 T が配列であるということを認識した上で、要素の型を `T[number]` で取り出している
+  - しかし `infer` を使用すると
+    - `type Flatten2<T> = T extends (infer U)[] ? U : T` と書くことができる。
+- Distributive Conditional Types
+  - `type Foo<T> = T extends any ? T[] : never` という型が合った場合
+  - `type Bar = Foo<string | number>` は `(string | number)[]` ではなく `string[] | number[]` となるよという話
+  - そうしたくない場合は、`extends` の両側の型を [] で囲む

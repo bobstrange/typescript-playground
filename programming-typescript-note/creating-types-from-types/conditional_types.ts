@@ -61,4 +61,14 @@ type Flatten<T> = T extends any[] ? T[number] : T
 type Str = Flatten<string[]> // -> type Str = string
 type Num = Flatten<number> // -> type Num = number
 
-type Flatten2<T> = T extends (infer U)[] ? U : T
+type Flatten2<T> = T extends (infer U)[] ? U : T // or T extends Array<infer U> ? U : T
+
+type GetReturnType<T> = T extends (...args: never[]) => infer U ? U : never
+
+type Listify<T> = T extends any ? T[] : never
+type StringArr = Listify<string> // type StringArr = string[]
+type NumberArr = Listify<number> // type NumberArr = number[]
+type DistributedArr = Listify<string | number> // type DistributedArr = string[] | number[]
+
+type NotDistributedListify<T> = [T] extends [any] ? T[] : never
+type NotDistributedArr = NotDistributedListify<string | number> // (string | number)[]
