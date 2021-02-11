@@ -75,3 +75,28 @@ type MyUser = UserContainer[string]
 - as による Key の Remapping
   - `[K in keyof T as NewType]` で、キー名を別の名前にマッピングできる
   - string literal type を使うと、prefix を付加したり capitalize したりなど色々できる
+
+## Template Literal Types
+
+[ref](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
+[code](./template_literal_types.ts)
+
+- JavaScript の template literal のような文法で、文字列リテラル型を元に新しい文字列リテラル型を作る機能
+  - `World` という文字列リテラル型を使って新しく `Greeting` という文字列リテラル型を作る例
+
+```ts
+type World = 'world'
+type Greeting = `hello ${World}`
+```
+
+- Union が interpolate される場所に使用された場合は、有りうる組み合わせ毎に型が作られる
+
+```ts
+type Horizontal = 'Left' | 'Right'
+type Vertical = 'Top' | 'Bottom'
+type Corner = `${Vertical}${Horizontal}`
+// type Corner = 'TopLeft' | 'TopRight' | 'BottomLeft' | 'BottomRight'
+```
+
+- 一般的には、大きな文字列の結合には、事前に生成することを推奨する
+  - 小さい場合には有効
