@@ -61,3 +61,13 @@ type MyUser = UserContainer[string]
   - `type Foo<T> = T extends any ? T[] : never` という型が合った場合
   - `type Bar = Foo<string | number>` は `(string | number)[]` ではなく `string[] | number[]` となるよという話
   - そうしたくない場合は、`extends` の両側の型を [] で囲む
+
+## Mapped Types
+
+[code](./mapped_types.ts)
+
+- Mapping Modifiers
+  - map 時に `readonly` と `?` を使用できる
+  - prefix に `-` もしくは `+` をつけられる (`+` がデフォルト)
+  - `-readonly [k in keyof T]` で、T 型の各キーから `readonly` を外す
+  - `[k in keyof T]-?` で、T型の各キーから `?` を外す など
