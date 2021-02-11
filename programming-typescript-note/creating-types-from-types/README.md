@@ -64,6 +64,7 @@ type MyUser = UserContainer[string]
 
 ## Mapped Types
 
+[ref](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 [code](./mapped_types.ts)
 
 - Mapping Modifiers
@@ -71,3 +72,6 @@ type MyUser = UserContainer[string]
   - prefix に `-` もしくは `+` をつけられる (`+` がデフォルト)
   - `-readonly [k in keyof T]` で、T 型の各キーから `readonly` を外す
   - `[k in keyof T]-?` で、T型の各キーから `?` を外す など
+- as による Key の Remapping
+  - `[K in keyof T as NewType]` で、キー名を別の名前にマッピングできる
+  - string literal type を使うと、prefix を付加したり capitalize したりなど色々できる

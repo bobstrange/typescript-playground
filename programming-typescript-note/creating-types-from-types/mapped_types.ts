@@ -44,3 +44,25 @@ type ConcreteUser = Concrete<OptionalUser>
 //   name: string
 //   age: number
 // }
+
+// Key Remapping via as
+
+type Getters<Type> = {
+  [Property in keyof Type as `get${Capitalize<
+    string & Property
+  >}`]: () => Type[Property]
+}
+// `Capitalize<> は、 string が含まれていないと型エラーになるので、 string & Property と 交差する
+
+interface IUser {
+  name: string
+  age: number
+  location: string
+}
+
+type LazyUser = Getters<IUser>
+// type LazyUser = {
+//   getName: () => string
+//   getAge: () => number
+//   getLocation: () => string
+// }
