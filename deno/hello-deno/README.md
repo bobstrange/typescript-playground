@@ -92,6 +92,10 @@ V8 Inspector Protocol に準拠しているもの (Chrome Devtool など) で De
 
 `--inspect` or `--inspect-brk` オプションをつけて Deno を実行すれば良い
 
+例えば、 file_server.ts を debug するには
 
+```bash
+deno run --inspect-brk --allow-read --allow-net https://deno.land/std@0.97.0/http/file_server.ts
+```
 
-
+を実行した上で、`chrome://inspect` を開いて、**Target** の部分の inspect をクリックすると、chrome 上で debug できるようになる
