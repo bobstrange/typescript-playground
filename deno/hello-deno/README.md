@@ -99,3 +99,33 @@ deno run --inspect-brk --allow-read --allow-net https://deno.land/std@0.97.0/htt
 ```
 
 を実行した上で、`chrome://inspect` を開いて、**Target** の部分の inspect をクリックすると、chrome 上で debug できるようになる
+
+### VSCode での debug
+
+`launch.json` を ↓ のようにして、
+`${file}` を実行ファイル名に変更する
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Deno: Run",
+      "request": "launch",
+      "type": "pwa-node",
+      "program": "main.ts",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": [
+        "run",
+        "--inspect-brk",
+        "--allow-all",
+        "${file}"
+      ],
+      "attachSimplePort": 9229
+    }
+  ]
+}
+```
+
+あとは、普通に Run で実行できる
