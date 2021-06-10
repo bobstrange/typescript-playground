@@ -40,3 +40,37 @@ Local ESLint installation not found.
 ```bash
 yarn add -D eslint-plugin-react@latest, @typescript-eslint/eslint-plugin@latest, @typescript-eslint/parser@latest, eslint@latest
 ```
+
+### prettier の設定をする
+
+まずはインストール
+
+```bash
+yarn add prettier -D
+```
+
+そして、`.prettierrc.js` を作成する
+
+```js
+module.exports = {
+  singleQuote: true,
+  semi: false
+}
+```
+
+ESLint と衝突するルールを抑制するため、`eslint-config-prettier` をインストールする
+
+```bash
+yarn add -D eslint-config-prettier
+```
+
+そして、`.eslintrc.js` の、`extends` の部分の末尾に、 `"prettier"` を追加する
+
+```js
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+  ],
+```
