@@ -74,3 +74,13 @@ yarn add -D eslint-config-prettier
     'prettier',
   ],
 ```
+
+.prettierignore を作成する
+
+```text
+node_modules
+.next
+**/dist/**
+tsconfig.json
+README.md
+```
