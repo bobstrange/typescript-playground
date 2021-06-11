@@ -84,3 +84,28 @@ node_modules
 tsconfig.json
 README.md
 ```
+
+## Page
+
+/pages 配下に格納したファイルがそのまま path となる
+動的な path の定義は、動的に変わる部分を [] で囲めば良い
+
+/pages/index.tsx -> https://<your.domain>
+/pages/notes/index.tsx -> https://<your.domain>/notes
+/pages/notes/[id].tsx -> https://<your.domain>/notes/1
+
+動的な path は、router オブジェクトから取得できる。
+
+```typescript
+import { useRouter } from 'next/router'
+const Page:FC = () => {
+  const router = useRouter()
+  const { id } = router.query
+
+  return (
+    <div>
+      <h1>id: {id}</h1>
+    </div>
+  )
+}
+```
