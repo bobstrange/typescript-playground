@@ -144,4 +144,24 @@ JavaScript の Spread operator みたいな事ができる。
 さらに、親ディレクトリのパスにも対応させるばあいは `[[...]]` のように二重の brackets を使用する
 (Optional catch all routes)
 
-この場合 /notes も、このルートでハンドリングされるようになる。
+この場合 /notes も、このルートでハンドリングされるようになる
+
+Catch-All routes はおもに、Document や Wiki など、同じ構造の大量のページを用意する時に有効
+
+## Navigation
+
+Page 間の遷移は、`next/link` で行う
+
+```typescript
+<Link href="/notes">
+  <a>notes</a>
+</Link>
+```
+
+動的ページへの遷移は `as` を使用する
+
+```typescript
+<Link href="/notes/[id]" as="/notes/1">
+  <a>Notes 1</a>
+</Link>
+```
