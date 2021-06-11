@@ -95,6 +95,9 @@ README.md
 /pages/notes/[id].tsx -> https://<your.domain>/notes/1
 
 動的な path は、router オブジェクトから取得できる。
+パラメータの名前は、 [] で囲った名前と一致する
+
+/[id] -> router.query.id
 
 ```typescript
 import { useRouter } from 'next/router'
@@ -109,3 +112,36 @@ const Page:FC = () => {
   )
 }
 ```
+
+### Catch all routes
+
+JavaScript の Spread operator みたいな事ができる。
+
+/notes/[...params].tsx
+
+```typescript
+  const router = useRouter()
+  const { params } = router.query
+  console.log(params)
+
+  return <h1>Note {params}</h1>
+```
+
+このルートは、以下の全てに match する
+
+/notes/1
+/notes/1/2
+/notes/foo/bar/baz
+
+それぞれの場合の params は
+
+/notes/1             -> ["1"]
+/notes/1/2           -> ["1", "2"]
+/notes/foo/bar/baz   -> ["foo", "bar", "baz"]
+
+のようになる
+
+さらに、親ディレクトリのパスにも対応させるばあいは `[[...]]` のように二重の brackets を使用する
+(Optional catch all routes)
+
+この場合 /notes も、このルートでハンドリングされるようになる。
