@@ -150,6 +150,8 @@ Catch-All routes はおもに、Document や Wiki など、同じ構造の大量
 
 ## Navigation
 
+### Static Routing
+
 Page 間の遷移は、`next/link` で行う
 
 ```typescript
@@ -166,9 +168,26 @@ Page 間の遷移は、`next/link` で行う
 </Link>
 ```
 
-## Programmatic Routing
+### Programmatic Routing
 
 ```typescript
 router.push('/notes')
 router.push('/notes/[id]', `/notes/${id}`)
+```
+
+## Styling
+
+### Global CSS
+
+グローバルに適用する css は `pages/_app.tsx` で読み込む
+
+```typescript
+import React from 'react'
+import { AppProps } from 'next/app'
+import '../styles/globals.css'
+
+const App = ({ Component, pageProps }: AppProps) => {
+  return <Component {...pageProps} />
+}
+export default App
 ```
