@@ -165,3 +165,10 @@ Page 間の遷移は、`next/link` で行う
   <a>Notes 1</a>
 </Link>
 ```
+
+## Programmatic Routing
+
+```typescript
+router.push('/notes')
+router.push('/notes/[id]', `/notes/${id}`)
+```
