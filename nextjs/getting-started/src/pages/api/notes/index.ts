@@ -1,5 +1,11 @@
-import { handler } from '../../../utils/handler_factory'
-import notes from '../../../utils/in_memory_data'
+import nc from 'next-connect'
+import { NextApiRequest, NextApiResponse } from 'next'
+
+import data from '../../../data/data'
+
+const notes = data.notes
+
+const handler = nc<NextApiRequest, NextApiResponse>()
 
 handler
   .post((req, res) => {

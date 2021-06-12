@@ -245,3 +245,13 @@ const withEnv = nextEnv()
 
 module.exports = withEnv()
 ```
+
+## API
+
+`/pages/api` 配下に定義する
+
+`/pages/api/hello.ts` は `https://<your.domain.name>/api/hello`
+
+interface 的には express　と同様
+
+GET/POST/PUT/DELETE などのハンドリングをしたい場合は、 [`next-connect`](https://github.com/hoangvvo/next-connect#readme) を使用して定義する
