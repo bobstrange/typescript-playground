@@ -191,3 +191,12 @@ const App = ({ Component, pageProps }: AppProps) => {
 }
 export default App
 ```
+
+### CSS module
+
+デフォルトで、 CSS module が使用できる
+
+components
+  button.tsx
+  button.module.css
+
