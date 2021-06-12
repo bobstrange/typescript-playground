@@ -1,8 +1,8 @@
 import { Theme } from 'theme-ui'
-import { future } from '@theme-ui/presets'
+import { roboto as presets } from '@theme-ui/presets'
 
 export const theme: Theme = {
-  ...future,
+  ...presets,
   containers: {
     card: {
       boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
@@ -19,6 +19,6 @@ export const theme: Theme = {
     },
   },
   styles: {
-    ...future.styles,
+    ...presets.styles,
   },
 } as Theme
