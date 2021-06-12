@@ -200,3 +200,48 @@ components
   button.tsx
   button.module.css
 
+## Next.js config
+
+設定ファイルは next.config.js
+
+### Plugins
+
+プラグインの規約 `withPluginName`
+
+`withPlugins` を使用して、プラグインの compose ができる
+
+```javascript
+const withPlugins = require('next-compose-plugins')
+const withOffline = require('next-offline')
+const withReactSvg = require('next-react-svg')
+const config = {
+  env: {
+    FOO: process.env.FOO,
+    BAR: process.env.BAR
+  }
+}
+
+module.exports = withPlugins([
+  withOffline,
+  [withReactSvg, {}]
+], config)
+```
+
+### Environment variables
+
+.env ファイルから、Next.js に環境変数を読み込むためには、
+`dotenv-load` と `next-env` を使用する
+
+```bash
+yarn add dotenv-load next-env
+```
+
+```javascript
+const nextEnv = require('next-env')
+const dotenvLoad = require('dotenv-load')
+
+dotenvLoad() // .env の内容を読込
+const withEnv = nextEnv()
+
+module.exports = withEnv()
+```
