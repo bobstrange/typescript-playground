@@ -43,3 +43,22 @@ You should add the tsconfig.json inside your `/cypress` folder.
     "include": ["**/*.ts"]
 }
 ```
+
+## Writing your tests
+
+What you need to do is to put a test into `cypress/integrations` folder.
+In the test files, you can globally use `chai` assertion methods and `cy`.
+
+```typescript
+it('opens google.co.jp', () => {
+  cy.visit('https://google.co.jp')
+})
+```
+
+There is no assertion but if you point a not existing website, the test will be failed.
+
+```typescript
+it('should be failed', () => {
+  cy.visit('https://google.co.jp/not-exsits-document')
+})
+```
