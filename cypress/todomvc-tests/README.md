@@ -79,3 +79,11 @@ cy.get('.new-todo').type('Tidy room{enter}')
 ```
 
 `{enter}` indicates enter key.
+
+What if the operation takes less than 4000 ms, cypress waits for it.
+If the operation takes more than 4000 ms, the test will be failed.
+For such a case, `get` can take an extra argument.
+
+```typescript
+cy.get('.new-todo', { timeout: 6000 })
+```
