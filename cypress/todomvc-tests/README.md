@@ -62,3 +62,20 @@ it('should be failed', () => {
   cy.visit('https://google.co.jp/not-exsits-document')
 })
 ```
+
+## Using selector playground
+
+If you click the icon placed left of the address bar, you'll see selector playground.
+It captures selector of the element you are selecting.
+
+![selector playground](./assets/selector-playground.png)
+
+## Type something in the input box
+
+You get an input selector then you can type anything.
+
+```typescript
+cy.get('.new-todo').type('Tidy room{enter}')
+```
+
+`{enter}` indicates enter key.
