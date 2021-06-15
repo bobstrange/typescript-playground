@@ -87,3 +87,19 @@ For such a case, `get` can take an extra argument.
 ```typescript
 cy.get('.new-todo', { timeout: 6000 })
 ```
+
+## Click event
+
+You get an selector then you can send a click event to it.
+
+```typescript
+cy.get('.toggle').click()
+```
+
+Other way to get element is `cy.contains()`
+
+```typescript
+cy.contains('Clear completed')
+// even this works
+cy.contains('Clear')
+```
