@@ -130,3 +130,9 @@ Because `should` receives string argument as an argument, you highly recommended
 
 it(...)
 ```
+
+You can also check if the element have not any descendants.
+
+```typescript
+cy.get('.todo-list').should('not.have.descendants', 'li')
+```
