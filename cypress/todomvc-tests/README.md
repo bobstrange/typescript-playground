@@ -103,3 +103,30 @@ cy.contains('Clear completed')
 // even this works
 cy.contains('Clear')
 ```
+
+## Validations
+
+If you want to validate, if the effect you did is properly reflects on the UI, you can get a element and check if the element contains value as you expected with using `should`
+
+```typescript
+cy.get('.new-todo').type('Tidy room{enter}')
+
+// Check if there is a label with text 'Tidy room'
+cy.get('label').should('have.text', 'Tidy room')
+```
+
+`should` provides many options, eg: you can check the element is checked or not.
+
+```typescript
+cy.get('toggle').should('not.be.checked')
+cy.get('toggle').click()
+cy.get('toggle').should('be.checked')
+```
+
+Because `should` receives string argument as an argument, you highly recommended using typescript or importing cypress type definition on the top of your code.
+
+```javascript
+/// <reference types="cypress">
+
+it(...)
+```
