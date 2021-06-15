@@ -136,3 +136,22 @@ You can also check if the element have not any descendants.
 ```typescript
 cy.get('.todo-list').should('not.have.descendants', 'li')
 ```
+
+## Mocha
+
+### Run a certain test
+
+```typescript
+it.only(...)
+describe.onlly(...)
+```
+
+### Make each test dependent
+
+You can add common setup for each tests to `beforeEach` block.
+
+```typescript
+beforeEach(() => {
+  cy.visit('https://your.website/')
+})
+```
