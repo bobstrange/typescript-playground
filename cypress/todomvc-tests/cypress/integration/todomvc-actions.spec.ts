@@ -16,6 +16,7 @@ describe('todo actions', () => {
   })
 
   it('should clear completed todos', () => {
+    cy.get('.toggle').click()
     cy.contains('Clear completed').click()
     cy.get('.todo-list').should('not.have.descendants', 'li')
   })
