@@ -155,3 +155,13 @@ beforeEach(() => {
   cy.visit('https://your.website/')
 })
 ```
+
+## cypress CLI
+
+Run cypress non-interactive for CI, Build or etc...
+
+```bash
+npx cypress:run
+```
+
+It runs whole tests on chrome headless, capture whole process and export them into cypress/videos directory.
