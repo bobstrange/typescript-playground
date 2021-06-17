@@ -7,6 +7,10 @@ export class TodoPage {
     return cy.get('.new-todo', { timeout: 6000 }).type(todoText + '{enter}')
   }
 
+  toggleTodo(todoIndex: number): Cypress.Chainable<JQuery<HTMLElement>> {
+    return cy.get(`.todo-list li:nth-child(${todoIndex + 1}) .toggle`).click()
+  }
+
   validateTodoText(
     todoIndex: number,
     expectedText: string
