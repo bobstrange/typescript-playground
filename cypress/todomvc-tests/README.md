@@ -143,7 +143,7 @@ cy.get('.todo-list').should('not.have.descendants', 'li')
 
 ```typescript
 it.only(...)
-describe.onlly(...)
+describe.only(...)
 ```
 
 ### Make each test dependent
@@ -165,3 +165,34 @@ npx cypress:run
 ```
 
 It runs whole tests on chrome headless, capture whole process and export them into cypress/videos directory.
+
+## Page Objects in Cypress
+
+Page Object is an abstraction of dom manipulation.
+
+If you introduce it, you can re-write your test like the following:
+
+```typescript
+// Before
+it('should add a new todo to the list', () => {
+  cy.visit('https://todomvc-app-for-testing.surge.sh')
+  cy.get('.new-todo').type('Tidy room{enter}')
+  cy.get('label').should('have.text', 'Tidy room')
+  cy.get('toggle').should('not.be.checked')
+})
+
+// After
+import { TodoPage } from '../page-objects/todo-page'
+const todoPage = new TodoPage()
+it('should add a new todo to the list', () => {
+  todoPage.navigate()
+  todoPage.addTodo('Tidy room')
+  todoPage.validateTodoText(0, 'Tidy room')
+  todoPage.validateToggleState(0, false)
+})
+```
+
+If your application's dom structure had been changed, you don't need to change test code, just change Page Object is enough.
+
+However there is downside [ref](https://www.cypress.io/blog/2019/01/03/stop-using-page-objects-and-start-using-app-actions/)
+We need to carefully introduce Page Object Pattern.
