@@ -1,7 +1,11 @@
+import { TodoPage } from '../page-objects/todo-page'
+
 describe('todo actions', () => {
+  const todoPage = new TodoPage()
+
   beforeEach(() => {
-    cy.visit('https://todomvc-app-for-testing.surge.sh')
-    cy.get('.new-todo', { timeout: 6000 }).type('Tidy room{enter}')
+    todoPage.navigate()
+    todoPage.addTodo('Tidy room')
   })
 
   it('should add a new todo to the list', () => {
