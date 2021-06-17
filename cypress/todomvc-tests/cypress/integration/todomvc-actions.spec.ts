@@ -9,7 +9,7 @@ describe('todo actions', () => {
   })
 
   it('should add a new todo to the list', () => {
-    cy.get('label').should('have.text', 'Tidy room')
+    todoPage.validateTodoText(0, 'Tidy room')
     cy.get('.toggle').should('not.be.checked')
   })
 
