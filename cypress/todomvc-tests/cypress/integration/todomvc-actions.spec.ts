@@ -10,18 +10,17 @@ describe('todo actions', () => {
 
   it('should add a new todo to the list', () => {
     todoPage.validateTodoText(0, 'Tidy room')
-    cy.get('.toggle').should('not.be.checked')
+    todoPage.validateToggleState(0, false)
   })
 
   it('should mark a todo as completed', () => {
     todoPage.toggleTodo(0)
-    cy.get('.toggle').should('be.checked')
-    cy.get('label').should('have.css', 'text-decoration-line', 'line-through')
+    todoPage.validateTodoCompletedState(0, true)
   })
 
   it('should clear completed todos', () => {
     todoPage.toggleTodo(0)
-    cy.contains('Clear completed').click()
-    cy.get('.todo-list').should('not.have.descendants', 'li')
+    todoPage.clearCompleted()
+    todoPage.validateNumberOfTodosShown(0)
   })
 })
