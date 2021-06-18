@@ -4,10 +4,10 @@ describe('visual validation', () => {
   const todoPage = new TodoPage()
 
   before(() => {
-    // todoPage.navigate()
+    todoPage.navigate()
 
     // simulate title color change
-    cy.visit('https://todomvc-app-for-testing.surge.sh/?different-title-color')
+    // cy.visit('https://todomvc-app-for-testing.surge.sh/?different-title-color')
   })
 
   beforeEach(() => {
