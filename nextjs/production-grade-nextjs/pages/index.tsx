@@ -5,8 +5,16 @@ import Hero from '../components/hero'
 import HomeNav from '../components/homeNav'
 import FeatureSection from '../components/featureSection'
 import { home } from '../content'
+import { GetStaticProps } from 'next'
 
-const Home: FC<{ content: { hero: any; features: any[] } }> = ({ content }) => {
+type Props = {
+  content: {
+    hero: any
+    features: any[]
+  }
+}
+
+const Home: FC<Props> = ({ content }) => {
   return (
     <Pane>
       <header>
@@ -35,7 +43,7 @@ const Home: FC<{ content: { hero: any; features: any[] } }> = ({ content }) => {
   )
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
       content: home.published,
