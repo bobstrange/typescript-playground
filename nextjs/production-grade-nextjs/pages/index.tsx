@@ -43,6 +43,13 @@ const Home: FC<Props> = ({ content }) => {
   )
 }
 
+Home.defaultProps = {
+  content: {
+    features: [{ title: 'default feature', body: 'default body' }],
+    hero: { title: 'default title', body: 'default body' },
+  },
+}
+
 export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
