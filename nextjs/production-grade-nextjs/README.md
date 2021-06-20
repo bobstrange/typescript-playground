@@ -1,4 +1,3 @@
 # Production Grade Next.js course
-> by scott moss and frontendmasters
 
-[Curriculum](https://production-grade-nextjs.vercel.app)
+[こちら](https://github.com/Hendrixer/production-grade-nextjs) の写経
