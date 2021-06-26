@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react'
+import { GetServerSideProps } from 'next'
 import { Pane, Dialog, majorScale } from 'evergreen-ui'
 import { useRouter } from 'next/router'
+import { getSession, useSession } from 'next-auth/client'
 import Logo from '../../components/logo'
 import FolderList from '../../components/folderList'
 import NewFolderButton from '../../components/newFolderButton'
@@ -16,7 +18,12 @@ const App: FC<{ folders?: any[]; activeFolder?: any; activeDoc?: any; activeDocs
   activeDocs,
 }) => {
   const router = useRouter()
+  const [session, loading] = useSession()
   const [newFolderIsShown, setIsShown] = useState(false)
+
+  if (loading) {
+    return null
+  }
 
   const Page = () => {
     if (activeDoc) {
@@ -30,7 +37,7 @@ const App: FC<{ folders?: any[]; activeFolder?: any; activeDoc?: any; activeDocs
     return null
   }
 
-  if (false) {
+  if (!loading && !session) {
     return (
       <Dialog
         isShown
@@ -56,11 +63,11 @@ const App: FC<{ folders?: any[]; activeFolder?: any; activeDoc?: any; activeDocs
           <NewFolderButton onClick={() => setIsShown(true)} />
         </Pane>
         <Pane>
-          <FolderList folders={folders} />{' '}
+          <FolderList folders={[{ _id: 1, name: 'hello' }]} />{' '}
         </Pane>
       </Pane>
       <Pane marginLeft={300} width="calc(100vw - 300px)" height="100vh" overflowY="auto" position="relative">
-        <User user={{}} />
+        <User user={session.user} />
         <Page />
       </Pane>
       <NewFolderDialog close={() => setIsShown(false)} isShown={newFolderIsShown} onNewFolder={() => {}} />
@@ -83,4 +90,12 @@ App.defaultProps = {
  *
  * @param context
  */
+
+export const getServiceSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx)
+  return {
+    props: { session },
+  }
+}
+
 export default App
