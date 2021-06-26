@@ -50,10 +50,10 @@ Home.defaultProps = {
   },
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   return {
     props: {
-      content: home.published,
+      content: ctx.preview ? home.draft : home.published,
     },
   }
 }
