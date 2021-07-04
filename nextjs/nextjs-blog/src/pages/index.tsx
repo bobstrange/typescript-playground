@@ -1,11 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
 import Head from 'next/head'
+import Link from 'next/link'
 
 import * as utilStyles from '../styles/utils'
 import Layout, { siteTitle } from '../components/layout'
 import { GetStaticProps } from 'next'
 import { getSortedPostsData } from '../lib/posts'
+import { Date } from '../components/date'
+import { blockStatement } from '@babel/types'
 
 export const getStaticProps: GetStaticProps<{ allPostsData: Post[] }> = async () => {
   const allPostsData = getSortedPostsData()
@@ -44,11 +47,13 @@ export default function Home({ allPostsData }: { allPostsData: Post[] }) {
         <ul css={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li key={id} css={utilStyles.listItem}>
-              {title}
-              <br />
-              {id}
-              <br />
-              {date}
+              <Link href={`/posts/${id}`}>
+                <a css={{ display: 'block' }}>{title}</a>
+              </Link>
+
+              <small css={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
