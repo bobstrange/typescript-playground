@@ -12,15 +12,17 @@ const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    // increment
     incremented(state) {
       // Immer が Immutable にしてくれているので、Mutate するようにコードを書いてしまって問題ない
       state.value++
+    },
+    amountAdded(state, action: PayloadAction<number>) {
+      state.value += action.payload
     },
     // decrement
     // reset
   },
 })
 
-export const { incremented } = counterSlice.actions
+export const { incremented, amountAdded } = counterSlice.actions
 export default counterSlice.reducer
