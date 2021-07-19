@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
@@ -9,7 +9,8 @@ import { useFetchBreedsQuery } from './features/dogs/dogs-api-slice'
 function App() {
   const count = useAppSelector((state) => state.counter.value)
   const dispatch = useAppDispatch()
-  const { data = [], isFetching } = useFetchBreedsQuery()
+  const [numDogs, setNumDogs] = useState(10)
+  const { data = [], isFetching } = useFetchBreedsQuery(numDogs)
 
   const handleClick = () => {
     dispatch(amountAdded(3))
@@ -25,6 +26,15 @@ function App() {
             count is: {count}
           </button>
         </p>
+        <div>
+          <p>Dogs to fetch:</p>
+          <select value={numDogs} onChange={(e) => setNumDogs(Number(e.target.value))}>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
         <div>
           <p>Number of dogs fetched: {data.length}</p>
           <table>
