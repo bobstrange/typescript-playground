@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const apiKey: string = import.meta.env.VITE_DOG_API_KEY
+const apiKey: string = import.meta.env.VITE_DOG_API_KEY as string
 
 interface Breed {
   id: string
@@ -10,7 +10,7 @@ interface Breed {
   }
 }
 
-const apiSlice = createApi({
+export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.thedogapi.com/v1',
@@ -29,3 +29,5 @@ const apiSlice = createApi({
     }
   },
 })
+
+export const { useFetchBreedsQuery } = apiSlice
