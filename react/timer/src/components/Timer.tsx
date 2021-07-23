@@ -45,19 +45,19 @@ export const Timer: FC = () => {
   const handleHourChange: ChangeEventHandler<HTMLInputElement> = ({
     target,
   }) => {
-    setHour((s) => s + parseInt(target.value))
+    setHour(parseInt(target.value))
   }
 
   const handleMinuteChange: ChangeEventHandler<HTMLInputElement> = ({
     target,
   }) => {
-    setMinute((s) => s + parseInt(target.value))
+    setMinute(parseInt(target.value))
   }
 
   const handleSecondChange: ChangeEventHandler<HTMLInputElement> = ({
     target,
   }) => {
-    setSecond((s) => s + parseInt(target.value))
+    setSecond(parseInt(target.value))
   }
 
   return (
