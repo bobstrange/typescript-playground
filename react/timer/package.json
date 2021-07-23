@@ -9,6 +9,8 @@
     "format": "prettier src/**/*.{ts,tsx} --write"
   },
   "dependencies": {
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
