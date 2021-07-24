@@ -1,10 +1,12 @@
 import React from 'react'
-import { BadExample } from './components/BadExample'
+import { IncorrectWay } from './components/IncorrectWay'
+import { CorrectWay } from './components/CorrectWay'
 
 function App() {
   return (
     <>
-      <BadExample />
+      <IncorrectWay />
+      <CorrectWay />
     </>
   )
 }
