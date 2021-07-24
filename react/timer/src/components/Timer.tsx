@@ -2,9 +2,9 @@ import React, {
   ChangeEventHandler,
   FC,
   MouseEventHandler,
-  useEffect,
   useState,
 } from 'react'
+import { useInterval } from '../hooks/useInterval'
 
 const calcRemaining = (h: number, m: number, s: number, elapsed = 0) => {
   return h * 60 * 60 + m * 60 + s - elapsed
@@ -14,32 +14,36 @@ export const Timer: FC = () => {
   const [hour, setHour] = useState(0)
   const [minute, setMinute] = useState(0)
   const [second, setSecond] = useState(0)
-  const [time, setTime] = useState<Date>()
-  const [timer, setTimer] = useState<NodeJS.Timeout>()
-  const [remainingTime, setRemainingTime] = useState(0)
 
-  useEffect(() => {
-    return () => {
-      if (timer) {
-        clearTimeout(timer)
+  const [isRunning, setIsRunning] = useState(false)
+  const [interval, setInterval] = useState<number | null>(null)
+  const [startTime, setStartTime] = useState<Date>()
+  const [remaining, setRemaining] = useState(
+    calcRemaining(hour, minute, second)
+  )
+
+  useInterval(
+    () => {
+      if (!startTime) {
+        return
       }
-    }
-  }, [])
-
-  const tick = () => {
-    console.log('tick: ', time)
-    if (time) {
-      const now = new Date()
-      const elapsedTime = now.getTime() - time.getTime()
-      const remaining = calcRemaining(hour, minute, second, elapsedTime)
-      setRemainingTime(remaining)
-    }
-  }
+      const elapsedTime = (new Date().getTime() - startTime.getTime()) / 1000
+      const remainingTime = calcRemaining(hour, minute, second, elapsedTime)
+      if (remainingTime <= 0) {
+        setIsRunning(false)
+        setInterval(null)
+        setRemaining(0)
+      } else {
+        setRemaining(remainingTime)
+      }
+    },
+    isRunning ? interval : null
+  )
 
   const handleStart: MouseEventHandler<HTMLButtonElement> = () => {
-    setTime(new Date())
-    setRemainingTime(calcRemaining(hour, minute, second))
-    setTimer(setInterval(tick, 1000))
+    setStartTime(new Date())
+    setInterval(1000)
+    setIsRunning(true)
   }
 
   const handleHourChange: ChangeEventHandler<HTMLInputElement> = ({
@@ -89,8 +93,7 @@ export const Timer: FC = () => {
       />
 
       <button onClick={handleStart}>Start</button>
-
-      {remainingTime && <div>{remainingTime}</div>}
+      <div>remaining: {remaining}</div>
     </>
   )
 }
