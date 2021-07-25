@@ -1,0 +1,12 @@
+version: '3.2'
+services:
+  mongo:
+    image: mongo:5
+    environment:
+      DB_PORT: ${DB_PORT:-27017}
+    volumes:
+      - mongodb:/data/db
+    ports:
+      - "${DB_PORT:-27017}:27017"
+volumes:
+  mongodb:
