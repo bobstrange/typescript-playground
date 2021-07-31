@@ -1,0 +1,42 @@
+# TypeScript Fundamentals
+
+[ref](https://frontendmasters.com/courses/typescript-v2) の写経
+
+## Note
+
+function signature overloading
+
+↓の例のように、引数 type と 引数 people が依存している場合に、
+
+```typescript
+function contactPeople(
+  type: 'email' | 'phone',
+  ...people: (HasEmail | HasPhoneNumber)[]
+): void {
+  if (type === 'email') {
+    (people as HasEmail[]).forEach(sendEmail)
+  } else {
+    (people as HasPhoneNumber[]).forEach(sendTextMessage)
+  }
+}
+
+contactPeople('email', { name: 'Foo', email: 'foo@bar.com' })
+contactPeople('phone', { name: 'Foo', phone: '012-345-6789' })
+```
+
+↓のコードが、型的に許されてしまう
+
+```typescript
+contactPeople('email', { name: 'Foo', phone: '012-345-6789' })
+```
+
+そこで、overloading を使用する
+
+```typescript
+function contactPeople(type: 'email', people: ...HasEmail[]): void
+function contactPeople(type: 'phone', people: ...HasPhoneNumber[]): void
+function contactPeople(type: 'email' | 'phone', ...people: (HasEmail | HasPhoneNumber)[]): void { ... }
+```
+
+そうすると、上記のコードは型的に許されないようになる。
+Elixir や、Scala の PatternMatching みたいなもの
