@@ -21,22 +21,22 @@ function contactPeople(
 }
 
 contactPeople('email', { name: 'Foo', email: 'foo@bar.com' })
-contactPeople('phone', { name: 'Foo', phone: '012-345-6789' })
+contactPeople('phone', { name: 'Foo', phoneNumber: '012-345-6789' })
 ```
 
 ↓のコードが、型的に許されてしまう
 
 ```typescript
-contactPeople('email', { name: 'Foo', phone: '012-345-6789' })
+contactPeople('email', { name: 'Foo', phoneNumber: '012-345-6789' })
 ```
 
 そこで、overloading を使用する
 
 ```typescript
-function contactPeople(type: 'email', people: ...HasEmail[]): void
-function contactPeople(type: 'phone', people: ...HasPhoneNumber[]): void
+function contactPeople(type: 'email', ...people: HasEmail[]): void
+function contactPeople(type: 'phone', ...people: HasPhoneNumber[]): void
 function contactPeople(type: 'email' | 'phone', ...people: (HasEmail | HasPhoneNumber)[]): void { ... }
 ```
 
 そうすると、上記のコードは型的に許されないようになる。
-Elixir や、Scala の PatternMatching みたいなもの
+Elixir や、Scala の PatternMatching みたいなもの。
