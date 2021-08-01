@@ -35,3 +35,36 @@ contactPeople('phone', { name: 'Foo', phoneNumber: '012-345-6789' })
 
 // @ts-expect-error This should be an error
 contactPeople('email', { name: 'Foo', phoneNumber: '012-345-6789' })
+
+function sendMessage(
+  this: HasEmail & HasPhoneNumber,
+  preferredType: 'phone' | 'email'
+) {
+  if (preferredType === 'email') {
+    sendEmail(this)
+  } else {
+    sendTextMessage(this)
+  }
+}
+
+function invokeSoon(cb: () => any, timeout: number) {
+  setTimeout(() => cb.call(null), timeout)
+}
+
+// @ts-expect-error this should be binded
+invokeSoon(() => sendMessage('email'), 1000)
+
+const bound = sendMessage.bind(
+  { name: 'Bar', email: 'bar@baz.com', phoneNumber: '012-345-6789' },
+  'email'
+)
+
+invokeSoon(() => bound(), 1000)
+invokeSoon(
+  () =>
+    sendMessage.apply(
+      { name: 'Bar', email: 'bar@baz.com', phoneNumber: '012-345-6789' },
+      ['email']
+    ),
+  1000
+)
