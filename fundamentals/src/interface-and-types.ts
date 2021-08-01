@@ -14,3 +14,14 @@ interface ContactConstructor {
 }
 
 type ContactConstructor1 = new (...args: any[]) => HasEmail | HasPhoneNumber
+
+interface PhoneNumberDict {
+  [numberName: string]:
+    | undefined
+    | {
+        areaCode: string
+        num: number
+      }
+}
+
+const d: PhoneNumberDict = {}

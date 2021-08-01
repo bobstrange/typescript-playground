@@ -52,3 +52,21 @@ interface ContactConstructor {
 
 type ContactConstructor1 = new (...args: any[]) => HasEmail | HasPhoneNumber
 ```
+
+### index signature
+
+index signature を使用するときには、戻り値を undefined との共用型にしておかないと、
+型が嘘をついてしまう状態になるので注意する
+
+```typescript
+interface PhoneNumberDict {
+  [numberName: string]:
+    {
+      areaCode: string
+      num: number
+    }
+}
+
+const d: PhoneNumberDict = {}
+d.abc // { areaCode: string, num: number }
+```
