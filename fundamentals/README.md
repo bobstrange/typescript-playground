@@ -70,3 +70,19 @@ interface PhoneNumberDict {
 const d: PhoneNumberDict = {}
 d.abc // { areaCode: string, num: number }
 ```
+
+### self referencing type
+
+[example](https://www.typescriptlang.org/ja/play?#code/PTAEn6GQShkdYZCSGR-eUGIMhpBkoZ4ZyB+GQqwyHKGTgnQwIqD2DILoMgMQyB6DBYHYMg+laC-AbYGxKgIL6DWDILnyg0QyAWDIGUGQLEMgGQZAQgyAohkB+DIE0GQEAMAWABQIUAGYAdAHZA5gwlAgAwAXAJ4AHAKagAhgBsAllYDOHQEWpMnu1qJAhgz67AO0NzACcAMysAY3MOEkArBkARBnYRQCklQBM05VVAVQYKKUB1BkB9BkUlDLABCg5AEwZ4wDMGWkBnKMAGXxJzAA8rAFtTG3MALhMLRwBaADchgKCwyPNHWEAh5UBzR1zqwHkGQAMGTPiiktBAU7lAWSUDQCztQEr-JfieQGj1QCvAwGV5WkBQxUALhJ1tk7PLufn3AT4SHUBZBikgG0GQDJDDoCkVVGUSOgsHhCDFABragAp1XIJdg6ST6baAPbVAP4J7higEQdXK0QDSRoBk1JEgFH9QCBkeDCsptoBo+UAEgyABwZ9DtANByJE0ADY9IB87UAMhEA4EgnrKfqWABqtgAruYAPLBACCwWCVmMAB4ACoAPlAAF5QHrQAAfUAarW6+U2JWqm3a-UGg0AbiZKjAMus9icfHGIXCUVggBFfQD+DIAIFUA8QxA-L4wBq3iRtoBCa1ogAiGRCxQBBDLQGUVffbHerNdqAEyuk1my3WsvGZWhYsq0u212epRByZROu2xvNp31qutIL+AAmjl7LoHrYrrqNAG8AL5eqGsNi0NIcDMSfRXQDVcZ9vnwdAApADKyoAcrBAKDKgBujQAhbhxXsdxfIvb7T44APb+auOIYwQBAA5rW-gKu0ABGIS1lBP4-t0Vj-laEE2DYtbfn+ADaAC6tYLqA2EANbmMYPSgIBwH+CBuEUVh-5Lh2ygRH+gGgK0HRdOY56GFYhgKo4F7XvRv7-qaC7KKA1jDFYdg2FYUHdBRQFKgANFJoCCSE-gdL0oAAESnuYyGDDYP4KqYBkaUo0nBAh7QUZJtnSaAuntPpBkABJ2CBAAWETBNMhjWZp0mqAxFyuIADqawIAv-GAAVKAIJGFoCqJZY78fpAAUACUJqLiuLlLjZTGrmAmhaIAmwyYOAgASTrQgBXDI1hCAHMMmCABMMfAAAoAEo6DugBYmsstA-CIgBm2oAngyyFK3rbH5hiGKYjg9CAY7mMMSk-iBjgaO0diBT+v6hIYGise0wAyo4gV2KYhjAMh-gWf4ESgYMV03XdgxqIMWjAPNi3LatwAgXYhh+QqUFnT+F37Ydx33XqZg8Z992mAq6HAGoagAAwAKw40AA)
+
+[example](https://devblogs.microsoft.com/typescript/announcing-typescript-3-7/#more-recursive-type-aliases)
+
+```typescript
+type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [property: string]: Json }
+  | Json[]
+```
