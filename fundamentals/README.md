@@ -4,7 +4,7 @@
 
 ## Note
 
-function signature overloading
+### function signature overloading
 
 ↓の例のように、引数 type と 引数 people が依存している場合に、
 
@@ -40,3 +40,15 @@ function contactPeople(type: 'email' | 'phone', ...people: (HasEmail | HasPhoneN
 
 そうすると、上記のコードは型的に許されないようになる。
 Elixir や、Scala の PatternMatching みたいなもの。
+
+### call signature
+
+Constructor の型を↓のように定義できる
+
+```typescript
+interface ContactConstructor {
+  new (...args: any[]): HasEmail | HasPhoneNumber
+}
+
+type ContactConstructor1 = new (...args: any[]) => HasEmail | HasPhoneNumber
+```
