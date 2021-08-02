@@ -97,3 +97,8 @@ type Json =
 ### Generics
 
 `extends` で、型に制約をつけることができる
+
+### Generics use case
+
+Generics は、入力の型と、出力の型の関連を表したい時に使う
+
