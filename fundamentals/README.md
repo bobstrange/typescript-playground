@@ -86,3 +86,14 @@ type Json =
   | { [property: string]: Json }
   | Json[]
 ```
+
+### dtslint and tsd
+
+型のテストコードを書くことができる
+
+[`dtslint`](https://github.com/Microsoft/dtslint)
+[`tsd`](https://github.com/SamVerschueren/tsd)
+
+### Generics
+
+`extends` で、型に制約をつけることができる
