@@ -39,4 +39,17 @@ mapDict(
 )
 
 // Array.prototype.reduce, but for Dict
-export function reduceDict<T>(dict: Dict<T>) {}
+export function reduceDict<T>(dict: Dict<T>) {
+  const result: T[] = []
+
+  Object.keys(dict).forEach((key) => {
+    const item = dict[key]
+    if (typeof item !== 'undefined') {
+      result.push(item)
+    }
+  })
+
+  return result
+}
+
+reduceDict({ a: 'a', b: 'b' })
