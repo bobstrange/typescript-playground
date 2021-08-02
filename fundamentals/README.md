@@ -102,3 +102,53 @@ type Json =
 
 Generics は、入力の型と、出力の型の関連を表したい時に使う
 
+### Top types and bottom types
+
+Top type は何でも入れることができる型
+`any` と `unknown`
+
+#### any の使いみち
+
+本当に何が入っても良い場合、`console()` や、resolve value を気にしない場合の `Promise` など
+
+#### unknown の使いみち
+
+例えば、API からの response は、何が入っているのか？が全くわからないので、`unknown` で受けて、型の絞り込み (narrow down) をする
+
+Bottom type は、何も入れることができない型
+
+#### never の使いみち
+
+narrowing exhaustively
+
+```typescript
+const x = 'abc' as string | number
+
+if (typeof x === 'string') {
+  // x is string
+} else if (typeof x === 'number') {
+  // x is number
+} else {
+  x
+  // x is never
+}
+```
+
+```typescript
+class UnreachableError extends Error {
+  constructor(value: never, message: string) {
+    super(`We could never end up here ${message}`)
+  }
+}
+
+const y = 'abc' as string | number | boolean
+
+if (typeof y === 'string') {
+  // x is string
+} else if (typeof y === 'number') {
+  // x is number
+} else {
+  // @ts-expect-error y === 'boolean' のケースを handle していないので、UnreachableError のコンストラクタで、型エラーを検出してくれる
+  throw new UnreachableError(y, 'y should be a string or number')
+}
+```
