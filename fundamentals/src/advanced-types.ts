@@ -29,3 +29,9 @@ type ResolveType = typeof Promise.resolve
 let x: typeof Promise.resolve
 
 x(100).then((num) => num + 1)
+
+// conditional types
+
+type EventualType<T> = T extends Promise<infer S> ? S : T
+let a: EventualType<Promise<number>> // a: number
+let b: EventualType<number[]> // b: number[]
