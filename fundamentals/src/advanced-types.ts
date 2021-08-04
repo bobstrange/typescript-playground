@@ -21,3 +21,11 @@ contact('fax', { fax: '123-456-7890' })
 
 type CommunicationMethodKeys = keyof CommunicationMethods
 type CommunicationMethodValues = CommunicationMethods[CommunicationMethodKeys]
+
+// type queries example
+
+const resolvedPromiseNum = Promise.resolve(4)
+type ResolveType = typeof Promise.resolve
+let x: typeof Promise.resolve
+
+x(100).then((num) => num + 1)
