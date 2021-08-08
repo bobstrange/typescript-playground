@@ -4,28 +4,43 @@
  */
 
 const translate = (input: string) => {
-  const sum = input
+  const initialState = { Dev: 0, QA: 0, Blocked: 0 }
+  const state = input
     .split('')
-    .map((char) => {
-      return char === 'd' ? 0.5 : 1.0
-    })
+    .map(parse)
     .reduce((acc, curr) => {
-      return acc + curr
-    }, 0)
+      acc[curr.status] += curr.days
+      return acc
+    }, initialState)
 
-  return {
-    Dev: sum,
+  return state
+}
+
+const parse = (
+  input: string
+): { status: 'Dev' | 'QA' | 'Blocked'; days: number } => {
+  switch (input) {
+    case 'd':
+      return { status: 'Dev', days: 0.5 }
+    case 'D':
+      return { status: 'Dev', days: 1.0 }
+    default:
+      throw new Error(`Unknown status: ${input}`)
   }
 }
 
 it('translates d to half a dev day', () => {
-  expect(translate('d')).toEqual({ Dev: 0.5 })
+  expect(translate('d')).toEqual({ Dev: 0.5, QA: 0, Blocked: 0 })
 })
 
 it('translates D to one dev day', () => {
-  expect(translate('D')).toEqual({ Dev: 1 })
+  expect(translate('D')).toEqual({ Dev: 1, QA: 0, Blocked: 0 })
 })
 
 it('translates dD to one and half dev days', () => {
-  expect(translate('dD')).toEqual({ Dev: 1.5 })
+  expect(translate('dD')).toEqual({ Dev: 1.5, QA: 0, Blocked: 0 })
 })
+
+// it('translates q to half a dev day', () => {
+//   expect(translate('q')).toEqual({ QA: 0.5 })
+// })
