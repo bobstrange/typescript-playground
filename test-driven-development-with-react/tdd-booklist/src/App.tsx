@@ -7,6 +7,10 @@ function App() {
       <Typography variant="h1" component="h1" data-test="heading">
         TDD Booklist
       </Typography>
+      <div data-test="book-list">
+        <div className="book-item">Refactoring</div>
+        <div className="book-item">Clean Code</div>
+      </div>
     </div>
   )
 }
