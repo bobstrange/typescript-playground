@@ -9,31 +9,48 @@ type State = {
 }
 
 const translate = (input: string): State => {
-  const initialState = { Dev: 0, QA: 0, Blocked: 0 }
   const state = input
     .split('')
     .map(parse)
-    .reduce((acc, curr) => {
-      acc[curr.status] += curr.days
-      return acc
-    }, initialState)
+    .reduce(
+      (acc, curr) => {
+        acc[curr.status] += curr.days
+        return acc
+      },
+      { Dev: 0, QA: 0, Blocked: 0 }
+    )
 
   return state
 }
 
-const parse = (
-  input: string
-): { status: 'Dev' | 'QA' | 'Blocked'; days: number } => {
-  switch (input) {
-    case 'd':
-      return { status: 'Dev', days: 0.5 }
-    case 'D':
-      return { status: 'Dev', days: 1.0 }
-    case 'q':
-      return { status: 'QA', days: 0.5 }
-    default:
-      throw new Error(`Unknown status: ${input}`)
+const stateMapping = {
+  d: {
+    status: 'Dev',
+    days: 0.5,
+  },
+  D: {
+    status: 'Dev',
+    days: 1,
+  },
+  q: {
+    status: 'QA',
+    days: 0.5,
+  },
+} as const
+
+type StateInputKey = 'd' | 'D' | 'q'
+
+const isStateInputKeys = (input: string): input is StateInputKey => {
+  return ['d', 'D', 'q'].includes(input)
+}
+
+const parse = (input: string): { status: 'Dev' | 'QA'; days: number } => {
+  if (!isStateInputKeys(input)) {
+    throw new Error(`Invalid input: ${input}`)
   }
+
+  const state = stateMapping[input]
+  return state
 }
 
 it('translates d to half a dev day', () => {
