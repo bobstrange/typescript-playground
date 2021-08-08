@@ -19,11 +19,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "dev": "run-p start stub-db",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "e2e": "cypress run"
+    "e2e": "cypress run",
+    "stub-db": "json-server --watch stub-server/db.json --port 8080"
   },
   "browserslist": {
     "production": [
@@ -44,6 +46,8 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
+    "json-server": "^0.16.3",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2"
   }
 }
