@@ -2,8 +2,13 @@
  *  parser for Tracking Progress
  * ddBQbq -> { Dev days: 2.0, "QA days": 1, "Blocked days": 0.5 }
  */
+type State = {
+  Dev: number
+  QA: number
+  Blocked: number
+}
 
-const translate = (input: string) => {
+const translate = (input: string): State => {
   const initialState = { Dev: 0, QA: 0, Blocked: 0 }
   const state = input
     .split('')
@@ -24,6 +29,8 @@ const parse = (
       return { status: 'Dev', days: 0.5 }
     case 'D':
       return { status: 'Dev', days: 1.0 }
+    case 'q':
+      return { status: 'QA', days: 0.5 }
     default:
       throw new Error(`Unknown status: ${input}`)
   }
@@ -41,6 +48,6 @@ it('translates dD to one and half dev days', () => {
   expect(translate('dD')).toEqual({ Dev: 1.5, QA: 0, Blocked: 0 })
 })
 
-// it('translates q to half a dev day', () => {
-//   expect(translate('q')).toEqual({ QA: 0.5 })
-// })
+it('translates q to half a dev day', () => {
+  expect(translate('q')).toEqual({ Dev: 0, QA: 0.5, Blocked: 0 })
+})
