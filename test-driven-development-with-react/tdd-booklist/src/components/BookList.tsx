@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-type Book = {
+export type Book = {
   name: string
 }
 
