@@ -1,17 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 
-type Book = {
-  name: string
-}
-
-const renderBooks = (books: Book[]): JSX.Element[] => {
-  return books.map((book) => (
-    <div className="book-item" key={book.name}>
-      <h2 className="title">{book.name}</h2>
-    </div>
-  ))
-}
+import { BookList } from './components/BookList'
 
 function App() {
   const books = [{ name: 'Refactoring' }, { name: 'Clean Code' }]
@@ -21,7 +11,7 @@ function App() {
       <Typography variant="h1" component="h1" data-test="heading">
         TDD Booklist
       </Typography>
-      <div data-test="book-list">{renderBooks(books)}</div>
+      <BookList books={books} />
     </div>
   )
 }
