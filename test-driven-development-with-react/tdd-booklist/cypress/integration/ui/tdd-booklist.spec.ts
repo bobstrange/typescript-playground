@@ -54,5 +54,6 @@ describe('TDD Booklist Application', () => {
     cy.visit('http://localhost:3000/')
     cy.get('.book-item').contains('View Details').eq(0).click()
     cy.url().should('include', '/books/1')
+    cy.get('.book-title').should('have.text', 'Refactoring')
   })
 })

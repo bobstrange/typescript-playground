@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 
 type Props = {
   books?: {
+    id: number
     name: string
   }[]
   loading?: boolean
@@ -22,6 +23,7 @@ export const BookList: FC<Props> = ({ books, loading, error }) => {
       {(books || []).map((book) => (
         <div className="book-item" key={book.name}>
           <h2 className="title">{book.name}</h2>
+          <a href={`/books/${book.id}`}>View Details</a>
         </div>
       ))}
     </div>
