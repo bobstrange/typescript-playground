@@ -1,10 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-type Book = {
-  id: number
-  name: string
-}
+import { Book } from '../types/Book'
 
 export const useRemoteService = (
   initial: Book[]
