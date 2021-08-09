@@ -12,4 +12,13 @@ describe('BookList', () => {
     const content = container.querySelector('p')
     expect(content.innerHTML).toContain('Loading')
   })
+
+  it('error', () => {
+    const props = {
+      error: true,
+    }
+    const { container } = render(<BookList {...props} />)
+    const content = container.querySelector('p')
+    expect(content.innerHTML).toContain('Error')
+  })
 })
