@@ -49,4 +49,10 @@ describe('TDD Booklist Application', () => {
       'Clean Architecture'
     )
   })
+
+  it('Goes to the detail page', () => {
+    cy.visit('http://localhost:3000/')
+    cy.get('.book-item').contains('View Details').eq(0).click()
+    cy.url().should('include', '/books/1')
+  })
 })
