@@ -9,7 +9,7 @@ describe('BookList', () => {
       loading: true,
     }
     const { container } = render(<BookList {...props} />)
-    const content = container.querySelector('.loading')
+    const content = container.querySelector('p')
     expect(content.innerHTML).toContain('Loading')
   })
 })

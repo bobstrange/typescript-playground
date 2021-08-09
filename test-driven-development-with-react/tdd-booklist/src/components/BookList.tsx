@@ -1,13 +1,19 @@
 import React, { FC } from 'react'
 
-export type Book = {
-  name: string
+type Props = {
+  books?: {
+    name: string
+  }[]
+  loading?: boolean
 }
 
-export const BookList: FC<{ books: Book[] }> = ({ books }) => {
+export const BookList: FC<Props> = ({ books, loading }) => {
+  if (loading) {
+    return <p>Loading...</p>
+  }
   return (
     <div data-test="book-list">
-      {books.map((book) => (
+      {(books || []).map((book) => (
         <div className="book-item" key={book.name}>
           <h2 className="title">{book.name}</h2>
         </div>
