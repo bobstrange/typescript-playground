@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type Book = {
   id: number
