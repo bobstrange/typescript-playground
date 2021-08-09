@@ -21,4 +21,18 @@ describe('BookList', () => {
     const content = container.querySelector('p')
     expect(content.innerHTML).toContain('Error')
   })
+
+  it('render books', () => {
+    const props = {
+      books: [
+        { name: 'Refactoring', id: 1 },
+        { name: 'Clean Code', id: 2 },
+      ],
+    }
+    const { container } = render(<BookList {...props} />)
+    const titles = [...container.querySelectorAll('.title')].map(
+      (node) => node.innerHTML
+    )
+    expect(titles).toEqual(['Refactoring', 'Clean Code'])
+  })
 })
