@@ -11,6 +11,7 @@ describe('TDD Booklist Application', () => {
     const books = [
       { name: 'Refactoring', id: 1 },
       { name: 'Clean Code', id: 2 },
+      { name: 'Clean Architecture', id: 3 },
     ]
 
     return books.map((book) =>
@@ -34,7 +35,7 @@ describe('TDD Booklist Application', () => {
   it('Shows a book list', () => {
     cy.visit('http://localhost:3000/')
     cy.get('[data-test=book-list]')
-    cy.get('.book-item').should('have.length', 2)
+    cy.get('.book-item').should('have.length', 3)
     cy.get('[data-test=book-list] > :nth-child(1) > .title').should(
       'have.text',
       'Refactoring'
@@ -42,6 +43,10 @@ describe('TDD Booklist Application', () => {
     cy.get('[data-test=book-list] > :nth-child(2) > .title').should(
       'have.text',
       'Clean Code'
+    )
+    cy.get('[data-test=book-list] > :nth-child(3) > .title').should(
+      'have.text',
+      'Clean Architecture'
     )
   })
 })
