@@ -3,20 +3,20 @@ import { useEffect, useState } from 'react'
 
 import { Book } from '../types/Book'
 
-type Args = {
+type Args<T> = {
   url: string
-  initialData: Book[]
+  initialData: T
 }
 
-export const useRemoteService = ({
+export const useRemoteService = <T extends Book[] | Book>({
   url,
   initialData,
-}: Args): {
-  data: Book[]
+}: Args<T>): {
+  data: T
   loading: boolean
   error: boolean
 } => {
-  const [data, setData] = useState<Book[]>(initialData)
+  const [data, setData] = useState<T>(initialData)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
@@ -25,7 +25,7 @@ export const useRemoteService = ({
       setLoading(true)
       setError(false)
       try {
-        const res = await axios.get<Book[]>(url)
+        const res = await axios.get<T>(url)
         setData(res.data)
       } catch (e) {
         setError(true)
