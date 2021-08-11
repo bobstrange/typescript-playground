@@ -1,7 +1,14 @@
-import React from 'react'
-import { render } from '@testing-library/react'
+import React, { ReactElement } from 'react'
+import { render, RenderResult } from '@testing-library/react'
+import { MemoryRouter as Router } from 'react-router-dom'
 
 import { BookList } from '../BookList'
+
+const renderWithRouter = (component: JSX.Element): RenderResult => {
+  return {
+    ...render(<Router>{component}</Router>),
+  }
+}
 
 describe('BookList', () => {
   it('loading', () => {
@@ -29,7 +36,7 @@ describe('BookList', () => {
         { name: 'Clean Code', id: 2 },
       ],
     }
-    const { container } = render(<BookList {...props} />)
+    const { container } = renderWithRouter(<BookList {...props} />)
     const titles = [...container.querySelectorAll('.title')].map(
       (node) => node.innerHTML
     )
