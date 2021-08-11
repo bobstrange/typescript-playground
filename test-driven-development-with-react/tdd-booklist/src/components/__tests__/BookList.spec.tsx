@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 import { MemoryRouter as Router } from 'react-router-dom'
 
