@@ -1,0 +1,19 @@
+{
+  "books": [
+    {
+      "name": "Refactoring",
+      "id": 1,
+      "description": "Improving the Design of Existing Code"
+    },
+    {
+      "name": "Clean Code",
+      "id": 2,
+      "description": "A Handbook of Agile Software Craftsmanship"
+    },
+    {
+      "name": "Clean Architecture",
+      "id": 3,
+      "description": "By applying universal rules of software architecture, you can dramatically improve developer productivity throughout the life of any software system"
+    }
+  ]
+}

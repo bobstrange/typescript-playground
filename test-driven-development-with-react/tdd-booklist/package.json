@@ -22,13 +22,14 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "dev": "run-p start stub-db",
+    "dev": "run-p start json-server",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "e2e": "cypress run",
-    "stub-db": "node stub-server/server.js"
+    "stub-db": "node stub-server/server.js",
+    "json-server": "json-server --watch stub-server/books.json --port 8080"
   },
   "browserslist": {
     "production": [

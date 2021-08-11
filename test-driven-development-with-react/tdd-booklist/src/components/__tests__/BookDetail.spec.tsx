@@ -20,8 +20,7 @@ describe('BookDetail', () => {
     const props = {
       book: {
         name: 'Refactoring',
-        description:
-          'Refactoring: Improving the Design of Existing Code, renowned object technology mentor Martin Fowler breaks new ground, demystifying these master practices and demonstrating how software practitioners can realize the significant benefits of this new process.',
+        description: 'Refactoring: Improving the Design of Existing Code',
       },
     }
 
