@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 
 import { Book } from '../types/Book'
 import { useRemoteService } from '../hooks/useRemoteService'
+import { BookDetail } from './BookDetail'
 
 export const BookDetailContainer: FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -11,5 +12,5 @@ export const BookDetailContainer: FC = () => {
     initialData: {} as Book,
   })
 
-  return <h2 className="book-title">{data.name}</h2>
+  return <BookDetail book={data} />
 }
