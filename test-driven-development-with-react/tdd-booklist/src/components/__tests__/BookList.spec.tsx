@@ -17,7 +17,7 @@ describe('BookList', () => {
     }
     const { container } = render(<BookList {...props} />)
     const content = container.querySelector('p')
-    expect(content.innerHTML).toContain('Loading')
+    expect(content?.innerHTML).toContain('Loading')
   })
 
   it('error', () => {
@@ -26,7 +26,7 @@ describe('BookList', () => {
     }
     const { container } = render(<BookList {...props} />)
     const content = container.querySelector('p')
-    expect(content.innerHTML).toContain('Error')
+    expect(content?.innerHTML).toContain('Error')
   })
 
   it('render books', () => {

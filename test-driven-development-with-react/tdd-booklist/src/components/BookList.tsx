@@ -11,13 +11,10 @@ import {
 } from '@material-ui/core'
 
 import { useStyles } from '../hooks/useStyles'
+import { Book } from '../types/Book'
 
 type Props = {
-  books?: {
-    id: number
-    name: string
-    description: string
-  }[]
+  books?: Book[]
   loading?: boolean
   error?: boolean
 }
