@@ -37,7 +37,7 @@ describe('BookList', () => {
       ],
     }
     const { container } = renderWithRouter(<BookList {...props} />)
-    const titles = [...container.querySelectorAll('.title')].map(
+    const titles = [...container.querySelectorAll('h2')].map(
       (node) => node.innerHTML
     )
     expect(titles).toEqual(['Refactoring', 'Clean Code'])
