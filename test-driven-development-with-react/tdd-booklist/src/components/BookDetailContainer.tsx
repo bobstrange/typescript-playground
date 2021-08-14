@@ -8,7 +8,7 @@ import { BookDetail } from './BookDetail'
 export const BookDetailContainer: FC = () => {
   const { id } = useParams<{ id: string }>()
   const { data } = useRemoteService({
-    url: `http://localhost:8080/books/${id}`,
+    initialUrl: `http://localhost:8080/books/${id}`,
     initialData: {} as Book,
   })
 

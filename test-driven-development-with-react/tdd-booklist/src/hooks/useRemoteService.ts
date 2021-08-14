@@ -1,22 +1,24 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Book } from '../types/Book'
 
 type Args<T> = {
-  url: string
+  initialUrl: string
   initialData: T
 }
 
 export const useRemoteService = <T extends Book[] | Book>({
-  url,
+  initialUrl,
   initialData,
 }: Args<T>): {
   data: T
   loading: boolean
   error: boolean
+  setUrl: React.Dispatch<React.SetStateAction<string>>
 } => {
   const [data, setData] = useState<T>(initialData)
+  const [url, setUrl] = useState(initialUrl)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
@@ -34,7 +36,7 @@ export const useRemoteService = <T extends Book[] | Book>({
       }
     }
     fetchBooks()
-  }, [])
+  }, [url])
 
-  return { data, loading, error }
+  return { data, loading, error, setUrl }
 }
