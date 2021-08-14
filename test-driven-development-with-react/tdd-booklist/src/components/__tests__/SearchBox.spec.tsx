@@ -15,4 +15,15 @@ describe('SearchBox', () => {
     userEvent.type(input, 'Refactoring')
     expect(props.onSearch).toHaveBeenCalled()
   })
+
+  it('trims empty strings', () => {
+    const props = {
+      word: '',
+      onSearch: jest.fn(),
+    }
+    const { container } = render(<SearchBox {...props} />)
+    const input = container.querySelector('input[type="text"]')
+    userEvent.type(input, '   ')
+    expect(props.onSearch).not.toHaveBeenCalled()
+  })
 })
