@@ -8,5 +8,5 @@ export const BookListContainer: FC = () => {
     url: 'http://localhost:8080/books',
     initialData: [],
   })
-  return <BookList books={data} />
+  return <BookList books={data} loading={loading} error={error} />
 }
