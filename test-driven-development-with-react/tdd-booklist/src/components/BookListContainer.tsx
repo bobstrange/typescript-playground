@@ -2,7 +2,8 @@ import React, { FC, useEffect, useState } from 'react'
 
 import { BookList } from './BookList'
 import { useRemoteService } from '../hooks/useRemoteService'
-import { TextField } from '@material-ui/core'
+
+import { SearchBox } from './SearchBox'
 
 export const BookListContainer: FC = () => {
   const [word, setWord] = useState('')
@@ -18,14 +19,7 @@ export const BookListContainer: FC = () => {
 
   return (
     <>
-      <TextField
-        label="Search"
-        value={word}
-        data-test="search"
-        onChange={(e) => setWord(e.target.value)}
-        margin="normal"
-        variant="outlined"
-      />
+      <SearchBox word={word} onSearch={(e) => setWord(e.target.value)} />
       <BookList books={data} loading={loading} error={error} />
     </>
   )
