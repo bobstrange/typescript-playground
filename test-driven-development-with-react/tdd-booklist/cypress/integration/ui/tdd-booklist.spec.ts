@@ -56,4 +56,12 @@ describe('TDD Booklist Application', () => {
     cy.url().should('include', '/books/1')
     cy.get('.book-title').should('have.text', 'Refactoring')
   })
+
+  it('Searches for a title', () => {
+    cy.visit('http://localhost:3000/')
+    cy.get('.book-item').should('have.length', 3)
+    cy.get('[data-test="search"] input').type('Refactoring')
+    cy.get('.book-item').should('have.length', 1)
+    cy.get('.book-item').eq(0).contains('Refactoring')
+  })
 })
