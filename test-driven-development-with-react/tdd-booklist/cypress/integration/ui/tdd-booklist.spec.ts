@@ -37,14 +37,14 @@ describe('TDD Booklist Application', () => {
     cy.get('[data-test=book-list]')
     cy.get('.book-item').should('have.length', 3)
     cy.get(
-      ':nth-child(1) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root > .makeStyles-name-3'
-    ).should('have.text', 'Refactoring')
+      ':nth-child(1) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root'
+    ).contains('Refactoring')
     cy.get(
-      ':nth-child(2) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root > .makeStyles-name-3'
-    ).should('have.text', 'Clean Code')
+      ':nth-child(2) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root'
+    ).contains('Clean Code')
     cy.get(
-      ':nth-child(3) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root > .makeStyles-name-3'
-    ).should('have.text', 'Clean Architecture')
+      ':nth-child(3) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root'
+    ).contains('Clean Architecture')
   })
 
   it('Goes to the detail page', () => {
