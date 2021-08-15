@@ -7,11 +7,14 @@ export const setSearchWord = (word: string) => {
   }
 }
 
-export const fetchBooks = () => {
+export const fetchBooks = (searchWord?: string) => {
   return async (dispatch) => {
     dispatch({ type: 'FETCH_BOOKS_PENDING' })
     try {
-      const res = await axios.get(`http://localhost:8080/books`)
+      const url = searchWord
+        ? `http://localhost:8080/books?q=${searchWord}`
+        : 'http://localhost:8080/books'
+      const res = await axios.get(url)
       dispatch({ type: 'FETCH_BOOKS_SUCCESS', books: res.data })
     } catch (e) {
       dispatch({ type: 'FETCH_BOOKS_FAILED', error: 'Something went wrong' })
