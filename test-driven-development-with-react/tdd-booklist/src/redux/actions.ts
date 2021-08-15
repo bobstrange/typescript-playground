@@ -1,4 +1,3 @@
-import { red } from '@material-ui/core/colors'
 import axios from 'axios'
 
 export const setSearchWord = (word: string) => {
@@ -11,7 +10,11 @@ export const setSearchWord = (word: string) => {
 export const fetchBooks = () => {
   return async (dispatch) => {
     dispatch({ type: 'FETCH_BOOKS_PENDING' })
-    const res = await axios.get(`http://localhost:8080/books`)
-    dispatch({ type: 'FETCH_BOOKS_SUCCESS', books: res.data })
+    try {
+      const res = await axios.get(`http://localhost:8080/books`)
+      dispatch({ type: 'FETCH_BOOKS_SUCCESS', books: res.data })
+    } catch (e) {
+      dispatch({ type: 'FETCH_BOOKS_FAILED', error: 'Something went wrong' })
+    }
   }
 }
