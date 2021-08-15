@@ -28,23 +28,13 @@ describe('TDD Booklist Application', () => {
   })
 
   it('Visits the TDD Booklist', () => {
-    cy.visit('http://localhost:3000/')
-    cy.get('[data-test=heading]').contains('TDD Booklist')
+    visitApp()
+    checkAppTitle()
   })
 
   it('Shows a book list', () => {
-    cy.visit('http://localhost:3000/')
-    cy.get('[data-test=book-list]')
-    cy.get('.book-item').should('have.length', 3)
-    cy.get(
-      ':nth-child(1) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root'
-    ).contains('Refactoring')
-    cy.get(
-      ':nth-child(2) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root'
-    ).contains('Clean Code')
-    cy.get(
-      ':nth-child(3) > .MuiPaper-root > .MuiCardActionArea-root > .MuiCardContent-root'
-    ).contains('Clean Architecture')
+    visitApp()
+    checkBookList(['Refactoring', 'Clean Code', 'Clean Architecture'])
   })
 
   it('Goes to the detail page', () => {
@@ -62,3 +52,20 @@ describe('TDD Booklist Application', () => {
     cy.get('.book-item').eq(0).contains('Refactoring')
   })
 })
+
+const visitApp = () => {
+  cy.visit('http://localhost:3000/')
+}
+
+const checkAppTitle = () => {
+  cy.get('[data-test=heading]').contains('TDD Booklist')
+}
+
+const checkBookList = (expectedBooks: string[]) => {
+  cy.get('[data-test=book-list]')
+  cy.get('.book-item').should((books) => {
+    expect(books).to.have.length(expectedBooks.length)
+    const titles = [...books].map((x) => x.querySelector('h2').innerHTML)
+    expect(titles).to.deep.equal(expectedBooks)
+  })
+}
