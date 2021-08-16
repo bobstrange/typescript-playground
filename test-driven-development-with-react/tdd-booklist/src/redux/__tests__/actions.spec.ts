@@ -10,12 +10,12 @@ const mockStore = configureMockStore(middlewares)
 
 describe('BookListContainer related actions', () => {
   it('Sets the search keyword', () => {
-    const word = ''
+    const searchWord = ''
     const expected = {
       type: types.SET_SEARCH_WORD,
-      word,
+      searchWord,
     }
-    const action = setSearchWord(word)
+    const action = setSearchWord(searchWord)
     expect(action).toEqual(expected)
   })
 
@@ -64,8 +64,8 @@ describe('BookListContainer related actions', () => {
       .fn()
       .mockImplementation(() => Promise.resolve({ data: books }))
 
-    const store = mockStore({ books: [] })
-    await store.dispatch(fetchBooks('Refactoring'))
+    const store = mockStore({ books: [], searchWord: 'Refactoring' })
+    await store.dispatch(fetchBooks())
     expect(axios.get).toHaveBeenCalledWith(
       'http://localhost:8080/books?q=Refactoring'
     )
