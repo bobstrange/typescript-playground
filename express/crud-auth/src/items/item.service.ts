@@ -32,12 +32,11 @@ export const findAll = async (): Promise<Item[]> => {
   return Object.values(items) as Item[]
 }
 
-export const find = async (id: number): Promise<Item> => {
+export const find = async (id: number): Promise<Item | null> => {
   const found = items[id]
   if (!found) {
-    throw new Error('Item not found')
+    return null
   }
-
   return found
 }
 
@@ -55,11 +54,14 @@ type ItemUpdate = {
   update: ItemDTO
 }
 
-export const update = async ({ id, update }: ItemUpdate): Promise<Item> => {
+export const update = async ({
+  id,
+  update,
+}: ItemUpdate): Promise<Item | null> => {
   const found = await find(id)
 
   if (!found) {
-    throw new Error('Item not found')
+    return null
   }
 
   const updated = { ...found, ...update }
