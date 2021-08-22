@@ -1,6 +1,7 @@
 import express, { RequestHandler } from 'express'
 import { findAll, find, create, update, remove } from './item.service'
 import { ItemDTO } from './item.interface'
+import { checkJwt } from '../middlewares/auth.middleware'
 
 export const itemRouter = express.Router()
 
@@ -67,6 +68,9 @@ const removeHandler: RequestHandler = async (req, res) => {
 
 itemRouter.get('/', findAllHandler)
 itemRouter.get('/:id', findHandler)
+
+itemRouter.use(checkJwt)
+
 itemRouter.post('/', createHandler)
 itemRouter.put('/:id', updateHandler)
 itemRouter.delete('/:id', removeHandler)
