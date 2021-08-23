@@ -4,9 +4,11 @@ import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway'
 import { formatJSONResponse } from '@libs/apiGateway'
 import { middyfy } from '@libs/lambda'
 import { v4 as uuid } from 'uuid'
+import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
+
+const dynamoDbClient = new DynamoDBClient({})
 
 import schema from './schema'
-
 const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
@@ -17,6 +19,16 @@ const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     status: 'OPEN',
     createdAt: new Date().toISOString(),
   }
+  const command = new PutItemCommand({
+    TableName: 'AuctionsTable',
+    Item: {
+      id: { S: auction.id },
+      title: { S: auction.title },
+      status: { S: auction.status },
+      createdAt: { S: auction.createdAt },
+    },
+  })
+  await dynamoDbClient.send(command)
 
   return formatJSONResponse(
     {

@@ -26,6 +26,15 @@ const serverlessConfiguration: AWS = {
     memorySize: 128,
     stage: "${opt:stage, 'dev'}",
     region: 'ap-northeast-1',
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: ['dynamodb:PutItem'],
+        Resource: [
+          'arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/AuctionsTable',
+        ],
+      },
+    ],
   },
   resources: {
     Resources: {
