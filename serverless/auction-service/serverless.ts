@@ -1,6 +1,6 @@
-import type { AWS } from '@serverless/typescript';
+import type { AWS } from '@serverless/typescript'
 
-import hello from '@functions/hello';
+import hello from '@functions/hello'
 
 const serverlessConfiguration: AWS = {
   service: 'auction-service',
@@ -23,9 +23,12 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
     },
     lambdaHashingVersion: '20201221',
+    memorySize: 128,
+    stage: "${opt:stage, 'dev'}",
+    region: 'ap-northeast-1',
   },
   // import the function via paths
   functions: { hello },
-};
+}
 
-module.exports = serverlessConfiguration;
+module.exports = serverlessConfiguration
