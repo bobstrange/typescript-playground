@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript'
 
-import hello from '@functions/hello'
+import { createAuction } from '@functions/createAuction'
 
 const serverlessConfiguration: AWS = {
   service: 'auction-service',
@@ -27,8 +27,7 @@ const serverlessConfiguration: AWS = {
     stage: "${opt:stage, 'dev'}",
     region: 'ap-northeast-1',
   },
-  // import the function via paths
-  functions: { hello },
+  functions: { createAuction },
 }
 
 module.exports = serverlessConfiguration

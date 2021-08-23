@@ -6,7 +6,7 @@ import { middyfy } from '@libs/lambda'
 
 import schema from './schema'
 
-const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
+const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   return formatJSONResponse({
@@ -15,4 +15,4 @@ const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   })
 }
 
-export const main = middyfy(hello)
+export const main = middyfy(createAuction)
