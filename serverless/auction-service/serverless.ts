@@ -27,6 +27,29 @@ const serverlessConfiguration: AWS = {
     stage: "${opt:stage, 'dev'}",
     region: 'ap-northeast-1',
   },
+  resources: {
+    Resources: {
+      AuctionsTable: {
+        Type: 'AWS::DynamoDB::Table',
+        Properties: {
+          TableName: 'AuctionsTable',
+          BillingMode: 'PAY_PER_REQUEST',
+          AttributeDefinitions: [
+            {
+              AttributeName: 'id',
+              AttributeType: 'S',
+            },
+          ],
+          KeySchema: [
+            {
+              AttributeName: 'id',
+              KeyType: 'HASH',
+            },
+          ],
+        },
+      },
+    },
+  },
   functions: { createAuction },
 }
 
