@@ -19,6 +19,9 @@ const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     id: uuid(),
     title,
     status: 'OPEN',
+    highestBid: {
+      amount: 0,
+    },
     createdAt: new Date().toISOString(),
   }
   const command = new PutItemCommand({

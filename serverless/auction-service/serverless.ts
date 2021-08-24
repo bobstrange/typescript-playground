@@ -1,6 +1,11 @@
 import type { AWS } from '@serverless/typescript'
 
-import { createAuction, getAuctions, getAuction } from '@functions/index'
+import {
+  createAuction,
+  getAuctions,
+  getAuction,
+  placeBid,
+} from '@functions/index'
 import { AuctionsTable } from './serverless/AuctionsTable'
 
 const serverlessConfiguration: AWS = {
@@ -31,7 +36,12 @@ const serverlessConfiguration: AWS = {
     iamRoleStatements: [
       {
         Effect: 'Allow',
-        Action: ['dynamodb:PutItem', 'dynamodb:Scan', 'dynamodb:GetItem'],
+        Action: [
+          'dynamodb:PutItem',
+          'dynamodb:Scan',
+          'dynamodb:GetItem',
+          'dynamodb:UpdateItem',
+        ],
         Resource: [
           'arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/AuctionsTable',
         ],
@@ -41,7 +51,7 @@ const serverlessConfiguration: AWS = {
   resources: {
     Resources: { AuctionsTable },
   },
-  functions: { createAuction, getAuctions, getAuction },
+  functions: { createAuction, getAuctions, getAuction, placeBid },
 }
 
 module.exports = serverlessConfiguration
