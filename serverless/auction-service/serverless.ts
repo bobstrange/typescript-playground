@@ -1,6 +1,7 @@
 import type { AWS } from '@serverless/typescript'
 
 import { createAuction } from '@functions/createAuction'
+import { AuctionsTable } from './serverless/AuctionsTable'
 
 const serverlessConfiguration: AWS = {
   service: 'auction-service',
@@ -37,27 +38,7 @@ const serverlessConfiguration: AWS = {
     ],
   },
   resources: {
-    Resources: {
-      AuctionsTable: {
-        Type: 'AWS::DynamoDB::Table',
-        Properties: {
-          TableName: 'AuctionsTable',
-          BillingMode: 'PAY_PER_REQUEST',
-          AttributeDefinitions: [
-            {
-              AttributeName: 'id',
-              AttributeType: 'S',
-            },
-          ],
-          KeySchema: [
-            {
-              AttributeName: 'id',
-              KeyType: 'HASH',
-            },
-          ],
-        },
-      },
-    },
+    Resources: { AuctionsTable },
   },
   functions: { createAuction },
 }
