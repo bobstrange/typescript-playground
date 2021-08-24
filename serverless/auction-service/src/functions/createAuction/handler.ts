@@ -1,8 +1,6 @@
 import 'source-map-support/register'
 
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway'
-import middy from '@middy/core'
-import httpJsonBodyParser from '@middy/http-json-body-parser'
 import { InternalServerError } from 'http-errors'
 
 import { formatJSONResponse } from '@libs/apiGateway'
@@ -12,6 +10,7 @@ import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
 const dynamoDbClient = new DynamoDBClient({})
 
 import schema from './schema'
+import { commonMiddleware } from '@libs/commonMiddleware'
 const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
@@ -47,4 +46,4 @@ const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   )
 }
 
-export const main = middy(createAuction).use(httpJsonBodyParser())
+export const main = commonMiddleware(createAuction)
