@@ -30,7 +30,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "dev": "run-p start json-server",
+    "dev": "run-p start stub-db",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

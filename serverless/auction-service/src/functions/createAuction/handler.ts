@@ -3,6 +3,7 @@ import 'source-map-support/register'
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway'
 import middy from '@middy/core'
 import httpJsonBodyParser from '@middy/http-json-body-parser'
+import { InternalServerError } from 'http-errors'
 
 import { formatJSONResponse } from '@libs/apiGateway'
 import { v4 as uuid } from 'uuid'
@@ -30,7 +31,13 @@ const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       createdAt: { S: auction.createdAt },
     },
   })
-  await dynamoDbClient.send(command)
+
+  try {
+    await dynamoDbClient.send(command)
+  } catch (error) {
+    console.error(error)
+    throw new InternalServerError(error)
+  }
 
   return formatJSONResponse(
     {
