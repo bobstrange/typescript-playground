@@ -9,12 +9,12 @@ export const getAuctions: AWS['functions'][string] = {
     {
       http: {
         method: 'get',
-        path: 'auction',
-        request: {
-          schema: {
-            'application/json': schema,
-          },
-        },
+        path: 'auctions',
+        // request: {
+        //   schema: {
+        //     'application/json': schema,
+        //   },
+        // },
       },
     },
   ],
