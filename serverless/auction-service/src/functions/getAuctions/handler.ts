@@ -10,9 +10,10 @@ import {
   ScanCommand,
   ScanOutput,
 } from '@aws-sdk/client-dynamodb'
+import { InternalServerError } from 'http-errors'
 const dynamoDbClient = new DynamoDBClient({})
 
-const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
+const getAuctions: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   let auctions: ScanOutput['Items']
@@ -23,6 +24,7 @@ const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     auctions = result.Items
   } catch (e) {
     console.error(e)
+    throw new InternalServerError(e)
   }
 
   return {
@@ -31,4 +33,4 @@ const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 }
 
-export const main = middy(createAuction).use(httpJsonBodyParser())
+export const main = middy(getAuctions).use(httpJsonBodyParser())
