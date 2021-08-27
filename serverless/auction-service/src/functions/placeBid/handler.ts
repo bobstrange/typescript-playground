@@ -9,7 +9,8 @@ import {
   UpdateItemOutput,
 } from '@aws-sdk/client-dynamodb'
 import { commonMiddleware } from '@libs/commonMiddleware'
-import { InternalServerError } from 'http-errors'
+import { Forbidden, InternalServerError } from 'http-errors'
+import { getAuctionById } from '@functions/getAuction/handler'
 const dynamoDbClient = new DynamoDBClient({})
 
 const placeBid: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
@@ -17,6 +18,16 @@ const placeBid: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
 ) => {
   const { id } = event.pathParameters
   const { amount } = event.body
+
+  const currentAuction = await getAuctionById(id)
+  const currentBidAmount = currentAuction.highestBid.M?.amount?.N
+  if (
+    currentBidAmount &&
+    typeof currentBidAmount === 'string' &&
+    parseInt(currentBidAmount) > amount
+  ) {
+    throw new Forbidden(`Your bid must be higher than ${currentBidAmount}`)
+  }
 
   let updatedAuction: UpdateItemOutput['Attributes']
 
