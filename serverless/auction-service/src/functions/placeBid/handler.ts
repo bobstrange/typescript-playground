@@ -5,7 +5,6 @@ import schema from './schema'
 
 import {
   DynamoDBClient,
-  GetItemCommand,
   UpdateItemCommand,
   UpdateItemOutput,
 } from '@aws-sdk/client-dynamodb'

@@ -31,6 +31,9 @@ const createAuction: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       title: { S: auction.title },
       status: { S: auction.status },
       createdAt: { S: auction.createdAt },
+      highestBid: {
+        M: { amount: { N: auction.highestBid.amount.toString() } },
+      },
     },
   })
 
