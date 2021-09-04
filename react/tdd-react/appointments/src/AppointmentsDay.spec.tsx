@@ -4,10 +4,10 @@ import ReactDOM, { Container } from 'react-dom'
 import { AppointmentsDay } from './AppointmentsDay'
 
 describe('AppointmentsDay', () => {
-  let conatiner: Container
+  let container: Container
 
   beforeEach(() => {
-    conatiner = document.createElement('div')
+    container = document.createElement('div')
   })
 
   const render = (component: JSX.Element) => {
@@ -17,6 +17,6 @@ describe('AppointmentsDay', () => {
 
   it('renders a div with the right id', () => {
     render(<AppointmentsDay appointments={[]} />)
-    expect(container.querySelector('div#appointmentsDay')).not.toBeNull()
+    expect(container.querySelector('div.appointmentsDay')).not.toBeNull()
   })
 })
