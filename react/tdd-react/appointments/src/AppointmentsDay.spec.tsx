@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM, { Container } from 'react-dom'
+import ReactTestUtils from 'react-dom/test-utils'
+
 import { Props } from './AppointmentsDay'
 
 import { AppointmentsDay } from './AppointmentsDay'
@@ -57,5 +59,14 @@ describe('AppointmentsDay', () => {
     const buttons = container.querySelectorAll<HTMLButtonElement>('li > button')
     expect(buttons).toHaveLength(2)
     expect(buttons[0].type).toEqual('button')
+  })
+
+  it('renders another appointment when selected', () => {
+    render(<AppointmentsDay appointments={appointments} />)
+    const buttons = container.querySelectorAll<HTMLButtonElement>('li > button')
+    const button = buttons[1]
+    ReactTestUtils.Simulate.click(button)
+    expect(container.textContent).not.toMatch('Bob')
+    expect(container.textContent).toMatch('Mike')
   })
 })

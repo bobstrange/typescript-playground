@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Appointment } from './Appointment'
 
@@ -17,19 +17,23 @@ const appointTimeOfDay = (unixtime: number): string => {
 }
 
 export const AppointmentsDay: React.FC<Props> = ({ appointments }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
   return (
     <div className="appointmentsDay">
       <ol>
-        {appointments.map(({ startsAt }) => (
+        {appointments.map(({ startsAt }, i) => (
           <li key={startsAt}>
-            <button type="button">{appointTimeOfDay(startsAt)}</button>
+            <button type="button" onClick={() => setSelectedIndex(i)}>
+              {appointTimeOfDay(startsAt)}
+            </button>
           </li>
         ))}
       </ol>
       {appointments.length === 0 ? (
         <p>There are no appointments today</p>
       ) : (
-        <Appointment {...appointments[0]} />
+        <Appointment {...appointments[selectedIndex]} />
       )}
     </div>
   )
