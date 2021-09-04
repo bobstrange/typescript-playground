@@ -30,4 +30,17 @@ describe('AppointmentsDay', () => {
     expect(container.querySelector('ol')).not.toBeNull()
     expect(container.querySelector('ol')?.children).toHaveLength(2)
   })
+
+  it('renders each appointments', () => {
+    const today = new Date()
+    const appointments = [
+      { startsAt: today.setHours(12, 0) },
+      { startsAt: today.setHours(13, 0) },
+    ]
+    render(<AppointmentsDay appointments={appointments} />)
+    const elements = container.querySelectorAll('li')
+    expect(elements).toHaveLength(2)
+    expect(elements[0].textContent).toEqual('12:00')
+    expect(elements[1].textContent).toEqual('13:00')
+  })
 })
