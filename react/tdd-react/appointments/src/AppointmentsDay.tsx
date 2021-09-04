@@ -1,7 +1,9 @@
 import React from 'react'
 
 type Props = {
-  appointments: []
+  appointments: {
+    startsAt: number
+  }[]
 }
 
 export const AppointmentsDay: React.FC<Props> = ({ appointments }) => {

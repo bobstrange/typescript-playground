@@ -15,8 +15,19 @@ describe('AppointmentsDay', () => {
     return ReactDOM.render(component, container)
   }
 
-  it('renders a div with the right id', () => {
+  it('renders a appointmentsDay component', () => {
     render(<AppointmentsDay appointments={[]} />)
     expect(container.querySelector('div.appointmentsDay')).not.toBeNull()
+  })
+
+  it('renders multiple appointments', () => {
+    const today = new Date()
+    const appointments = [
+      { startsAt: today.setHours(12, 0) },
+      { startsAt: today.setHours(13, 0) },
+    ]
+    render(<AppointmentsDay appointments={appointments} />)
+    expect(container.querySelector('ol')).not.toBeNull()
+    expect(container.querySelector('ol')?.children).toHaveLength(2)
   })
 })
