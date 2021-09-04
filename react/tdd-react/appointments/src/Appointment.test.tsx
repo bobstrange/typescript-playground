@@ -14,7 +14,6 @@ describe('Appointment', () => {
 
   beforeEach(() => {
     container = document.createElement('div')
-    document.body.appendChild(container)
   })
 
   it('renders customer first name', () => {
