@@ -7,5 +7,13 @@ type Props = {
 }
 
 export const AppointmentsDay: React.FC<Props> = ({ appointments }) => {
-  return <div className="appointmentsDay"></div>
+  return (
+    <div className="appointmentsDay">
+      <ol>
+        {appointments.map(({ startsAt }) => (
+          <li key={startsAt}>{startsAt}</li>
+        ))}
+      </ol>
+    </div>
+  )
 }
