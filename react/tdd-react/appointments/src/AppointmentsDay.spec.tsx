@@ -5,9 +5,11 @@ import { AppointmentsDay } from './AppointmentsDay'
 
 describe('AppointmentsDay', () => {
   let container: Container
+  let today: Date
 
   beforeEach(() => {
     container = document.createElement('div')
+    today = new Date()
   })
 
   const render = (component: JSX.Element) => {
@@ -21,7 +23,6 @@ describe('AppointmentsDay', () => {
   })
 
   it('renders multiple appointments', () => {
-    const today = new Date()
     const appointments = [
       { startsAt: today.setHours(12, 0) },
       { startsAt: today.setHours(13, 0) },
@@ -32,7 +33,6 @@ describe('AppointmentsDay', () => {
   })
 
   it('renders each appointments', () => {
-    const today = new Date()
     const appointments = [
       { startsAt: today.setHours(12, 0) },
       { startsAt: today.setHours(13, 0) },
@@ -42,5 +42,10 @@ describe('AppointmentsDay', () => {
     expect(elements).toHaveLength(2)
     expect(elements[0].textContent).toEqual('12:00')
     expect(elements[1].textContent).toEqual('13:00')
+  })
+
+  it('initially shows a message saying there are no appointments today', () => {
+    render(<AppointmentsDay appointments={[]} />)
+    expect(container.textContent).toMatch('There are no appointments today')
   })
 })

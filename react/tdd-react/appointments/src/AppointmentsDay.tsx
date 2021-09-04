@@ -19,6 +19,7 @@ export const AppointmentsDay: React.FC<Props> = ({ appointments }) => {
           <li key={startsAt}>{appointTimeOfDay(startsAt)}</li>
         ))}
       </ol>
+      <p>There are no appointments today</p>
     </div>
   )
 }
