@@ -51,4 +51,11 @@ describe('AppointmentsDay', () => {
     render(<AppointmentsDay appointments={appointments} />)
     expect(container.textContent).toMatch('Bob')
   })
+
+  it('has a button element in each appointment', () => {
+    render(<AppointmentsDay appointments={appointments} />)
+    const buttons = container.querySelectorAll<HTMLButtonElement>('li > button')
+    expect(buttons).toHaveLength(2)
+    expect(buttons[0].type).toEqual('button')
+  })
 })

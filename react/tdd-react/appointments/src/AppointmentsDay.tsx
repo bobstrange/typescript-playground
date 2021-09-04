@@ -21,7 +21,9 @@ export const AppointmentsDay: React.FC<Props> = ({ appointments }) => {
     <div className="appointmentsDay">
       <ol>
         {appointments.map(({ startsAt }) => (
-          <li key={startsAt}>{appointTimeOfDay(startsAt)}</li>
+          <li key={startsAt}>
+            <button type="button">{appointTimeOfDay(startsAt)}</button>
+          </li>
         ))}
       </ol>
       {appointments.length === 0 ? (
