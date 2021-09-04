@@ -1,8 +1,13 @@
 import React from 'react'
 
-type Props = {
+import { Appointment } from './Appointment'
+
+export type Props = {
   appointments: {
     startsAt: number
+    customer: {
+      firstName: string
+    }
   }[]
 }
 
@@ -19,7 +24,11 @@ export const AppointmentsDay: React.FC<Props> = ({ appointments }) => {
           <li key={startsAt}>{appointTimeOfDay(startsAt)}</li>
         ))}
       </ol>
-      <p>There are no appointments today</p>
+      {appointments.length === 0 ? (
+        <p>There are no appointments today</p>
+      ) : (
+        <Appointment {...appointments[0]} />
+      )}
     </div>
   )
 }

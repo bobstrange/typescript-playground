@@ -1,15 +1,21 @@
 import React from 'react'
 import ReactDOM, { Container } from 'react-dom'
+import { Props } from './AppointmentsDay'
 
 import { AppointmentsDay } from './AppointmentsDay'
 
 describe('AppointmentsDay', () => {
   let container: Container
   let today: Date
+  let appointments: Props['appointments']
 
   beforeEach(() => {
     container = document.createElement('div')
     today = new Date()
+    appointments = [
+      { startsAt: today.setHours(12, 0), customer: { firstName: 'Bob' } },
+      { startsAt: today.setHours(13, 0), customer: { firstName: 'Mike' } },
+    ]
   })
 
   const render = (component: JSX.Element) => {
@@ -23,20 +29,12 @@ describe('AppointmentsDay', () => {
   })
 
   it('renders multiple appointments', () => {
-    const appointments = [
-      { startsAt: today.setHours(12, 0) },
-      { startsAt: today.setHours(13, 0) },
-    ]
     render(<AppointmentsDay appointments={appointments} />)
     expect(container.querySelector('ol')).not.toBeNull()
     expect(container.querySelector('ol')?.children).toHaveLength(2)
   })
 
   it('renders each appointments', () => {
-    const appointments = [
-      { startsAt: today.setHours(12, 0) },
-      { startsAt: today.setHours(13, 0) },
-    ]
     render(<AppointmentsDay appointments={appointments} />)
     const elements = container.querySelectorAll('li')
     expect(elements).toHaveLength(2)
@@ -47,5 +45,10 @@ describe('AppointmentsDay', () => {
   it('initially shows a message saying there are no appointments today', () => {
     render(<AppointmentsDay appointments={[]} />)
     expect(container.textContent).toMatch('There are no appointments today')
+  })
+
+  it('selects the first appointment by default', () => {
+    render(<AppointmentsDay appointments={appointments} />)
+    expect(container.textContent).toMatch('Bob')
   })
 })
