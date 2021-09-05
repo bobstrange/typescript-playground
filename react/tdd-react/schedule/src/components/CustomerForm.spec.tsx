@@ -16,6 +16,12 @@ describe('CustomerForm', () => {
   const getForm = (id: string): HTMLFormElement | null =>
     container.querySelector(`form[id=${id}]`)
 
+  const expectTextInput = (input: HTMLInputElement) => {
+    expect(input).not.toBeNull()
+    expect(input.tagName).toBe('INPUT')
+    expect(input.type).toBe('text')
+  }
+
   it('renders a form', () => {
     render(<CustomerForm />)
     expect(getForm('customer')).not.toBeNull()
@@ -25,8 +31,6 @@ describe('CustomerForm', () => {
     render(<CustomerForm />)
     const form = getForm('customer')
     const field = (form?.elements as any).firstName as HTMLInputElement
-    expect(field).not.toBeNull()
-    expect(field.tagName).toBe('INPUT')
-    expect(field.type).toBe('text')
+    expectTextInput(field)
   })
 })
