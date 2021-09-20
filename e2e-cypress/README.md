@@ -9,4 +9,7 @@ Ref <https://www.youtube.com/watch?v=WYeXWoNr5oU>
 npm i -D cypress typescript
 
 # Init cypress repo
+npx cypress open
+
+# Create cypress/tsconfig.json
 ```
