@@ -6,9 +6,16 @@ describe('Complete code base of E2E test', () => {
 
   it('Launching EA website', () => {})
 
-  it('XHR Testing', () => {
+  it('XHR Testing', async () => {
     cy.wait('@homepage')
       .its('response.statusCode')
       .should('be.oneOf', [200, 304])
+    cy.wait('@homepage').then(({ response }) => {
+      expect(response.body.courses).to.above(20)
+      expect(response.body.courses[0]).to.have.property(
+        'title',
+        'Selenium Grid with Docker'
+      )
+    })
   })
 })
