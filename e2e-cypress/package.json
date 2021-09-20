@@ -1,0 +1,16 @@
+{
+  "name": "e2e-cypress",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "keywords": [],
+  "author": "bobstrange <bob.1983.g@gmail.com> (https://github.com/bobstrange)",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^8.4.1",
+    "typescript": "^4.4.3"
+  }
+}
