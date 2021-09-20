@@ -4,7 +4,13 @@ describe('Complete code base of E2E test', () => {
     cy.visit('https://www.executeautomation.com')
   })
 
-  it('Launching EA website', () => {})
+  it('Launching EA website', () => {
+    /* ==== Generated with Cypress Studio ==== */
+    cy.get('.ct-header-content > .ct-ul > :nth-child(3) > a').click();
+    cy.get('.ct-btn-blue').click();
+    cy.get('.swal-button').click();
+    /* ==== End Cypress Studio ==== */
+  })
 
   it('XHR Testing', async () => {
     cy.wait('@homepage')
