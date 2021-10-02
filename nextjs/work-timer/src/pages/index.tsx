@@ -5,7 +5,7 @@ import { TimerInput } from '../components/TimerInput'
 
 export default function Home() {
   const [hour, setHour] = useState(0)
-  const [minute, setMinute] = useState(0)
+  const [minute, setMinute] = useState(10)
 
   const handleChangeHour = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHour(parseInt(e.target.value))
