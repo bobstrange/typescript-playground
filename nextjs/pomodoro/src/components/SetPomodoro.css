@@ -1,0 +1,15 @@
+.form-container {
+  text-align: center;
+}
+
+.input {
+  margin: 1em;
+  height: 2rem;
+  width: 2rem;
+  padding: 2rem;
+  background-color: darkolivegreen;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.1rem;
+}

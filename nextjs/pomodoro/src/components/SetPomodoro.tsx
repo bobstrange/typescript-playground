@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button } from './Button'
 
+import './SetPomodoro.css'
+
 export const SetPomodoro = () => {
   const [newTimer, setNewTimer] = useState({
     work: 0.3,
@@ -33,8 +35,9 @@ export const SetPomodoro = () => {
     }
   }
 
-  const handleSubmit = () => {
-    console.log('hi')
+  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault()
+    console.log(newTimer)
   }
 
   return (
