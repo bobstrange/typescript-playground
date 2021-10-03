@@ -63,11 +63,13 @@ export const SetPomodoro = () => {
             value={newTimer.long}
           />
         </div>
-        <Button
-          title="Set Timer"
-          callback={handleSubmit}
-          activeClass={newTimer.active}
-        />
+        <div className="button-container">
+          <Button
+            title="Set Timer"
+            callback={handleSubmit}
+            activeClass={newTimer.active}
+          />
+        </div>
       </form>
     </div>
   )
