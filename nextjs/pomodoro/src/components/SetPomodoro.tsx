@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
+import { PomodoroSettings } from '../context/SettingsContext'
 import { Button } from './Button'
 
 import './SetPomodoro.css'
 
-export const SetPomodoro = () => {
-  const [newTimer, setNewTimer] = useState({
+type Props = {
+  updateExecute?: (settings: PomodoroSettings) => void
+}
+
+export const SetPomodoro: React.FC<Props> = ({ updateExecute }) => {
+  const [newTimer, setNewTimer] = useState<PomodoroSettings>({
     work: 0.3,
     short: 0.2,
     long: 1,
@@ -37,7 +42,7 @@ export const SetPomodoro = () => {
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault()
-    console.log(newTimer)
+    updateExecute && updateExecute(newTimer)
   }
 
   return (

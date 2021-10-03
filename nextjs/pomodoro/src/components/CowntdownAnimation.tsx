@@ -5,11 +5,13 @@ type Props = {
   key?: string
   timer?: number
   animate?: boolean
+  onComplete?: () => void
 }
 export const CountdownAnimation: React.FC<Props> = ({
   key = 1,
   timer = 20,
   animate = true,
+  onComplete,
   children,
 }) => {
   return (
@@ -24,9 +26,7 @@ export const CountdownAnimation: React.FC<Props> = ({
       ]}
       strokeWidth={6}
       trailColor="darkolivegreen"
-      onComplete={() => {
-        // stopAnimate()
-      }}
+      onComplete={onComplete}
     >
       {children}
     </CountdownCircleTimer>
