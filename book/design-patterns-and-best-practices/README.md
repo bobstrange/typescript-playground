@@ -11,7 +11,6 @@
 
 A common use case is when you want to declare configuration types, as in the following example.
 
-[例](./chap2_records.ts.ts)
 
 こんなことする？
 普通に interface とか type とかで定義するような、、、
@@ -21,4 +20,13 @@ A common use case is when you want to declare configuration types, as in the fol
 If you want to create a type from exiting type but with all property as optional.
 
 コンストラクタに渡す引数など、渡されなかった時にデフォルト値が指定されるようなケースで使用する
-[例](./chap_2_partial.ts)
+
+### Required
+
+If you want to create a type from existing type but with all key as required.
+
+### Pick
+
+If you want to create a type with only specific properties selected out of the present ones.
+
+Interface (Type) が大きめで、一部のプロパティを除外したい時に使用する。
