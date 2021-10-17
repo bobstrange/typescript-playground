@@ -15,5 +15,5 @@ module.exports = {
     image:
       'https://res.cloudinary.com/dpdcr5cvy/image/upload/v1634398090/sample.jpg',
   },
-  plugins: [],
+  plugins: ['gatsby-plugin-react-helmet'],
 }
