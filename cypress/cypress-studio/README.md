@@ -15,6 +15,7 @@ module.exports = {
   singleQuote: true
 }
 EOF
+npx cypress open
 cat <<EOF > cypress/tsconfig.json
 {
   "compilerOptions": {
@@ -25,4 +26,12 @@ cat <<EOF > cypress/tsconfig.json
   "include": ["**/*.ts"]
 }
 EOF
+```
+
+Cypress Studio を使用するためには、`cypress.json` に設定を追加する必要あり
+
+```json
+{
+  "experimentalStudio": true
+}
 ```

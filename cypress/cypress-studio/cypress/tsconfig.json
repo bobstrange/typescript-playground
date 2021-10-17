@@ -3,6 +3,5 @@
     "target": "ES2019",
     "lib": ["ES2019", "dom"],
     "types": ["cypress"]
-  },
-  "include": ["**/*.ts"]
+  }
 }
