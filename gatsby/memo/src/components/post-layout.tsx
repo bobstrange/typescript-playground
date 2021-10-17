@@ -7,15 +7,21 @@ type Props = {
     frontMatter: Record<string, string | undefined>
   }
 }
-export const PostLayout: React.FC<Props> = ({ children, pageContext }) => {
+export const PostLayout: React.FC<Props> = ({
+  children,
+  pageContext,
+  ...props
+}) => {
   const frontMatter = pageContext.frontMatter
   const title = frontMatter?.title
   const description = frontMatter?.description
 
   return (
-    <Layout title={title} description={description}>
-      {children}
-    </Layout>
+    <>
+      <Layout title={title} description={description}>
+        {children}
+      </Layout>
+    </>
   )
 }
 

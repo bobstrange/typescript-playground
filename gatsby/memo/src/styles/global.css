@@ -28,3 +28,7 @@ h5,
 h6 {
   color: var(--black);
 }
+
+a {
+  text-decoration: none;
+}
