@@ -2,12 +2,13 @@ import * as React from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-type Props = {
+export type SeoProps = {
   title: string
   description: string
   image: string
   path: string
 }
+
 export const Seo: React.FC<Partial<Props>> = (props) => {
   const data = useStaticQuery(graphql`
     query GetSiteMetadata {
