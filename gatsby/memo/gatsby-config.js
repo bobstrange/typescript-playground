@@ -15,5 +15,24 @@ module.exports = {
     image:
       'https://res.cloudinary.com/dpdcr5cvy/image/upload/v1634398090/sample.jpg',
   },
-  plugins: ['gatsby-plugin-react-helmet'],
+  plugins: [
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'posts',
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-page-creator',
+      options: {
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {},
+    },
+  ],
 }
