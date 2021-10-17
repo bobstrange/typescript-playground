@@ -1,5 +1,8 @@
 import * as React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
+
+import '../styles/global.css'
+
 import { Seo, SeoProps } from './seo'
 
 export const Layout: React.FC<Partial<SeoProps>> = ({
