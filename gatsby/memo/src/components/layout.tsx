@@ -38,3 +38,5 @@ export const Layout: React.FC<Partial<SeoProps>> = ({
     </>
   )
 }
+
+export default Layout
