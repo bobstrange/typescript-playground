@@ -8,7 +8,9 @@ type Props = {
   }
 }
 export const PostLayout: React.FC<Props> = ({ children, pageContext }) => {
-  const { title, description } = pageContext.frontMatter
+  const frontMatter = pageContext.frontMatter
+  const title = frontMatter?.title
+  const description = frontMatter?.description
 
   return (
     <Layout title={title} description={description}>
