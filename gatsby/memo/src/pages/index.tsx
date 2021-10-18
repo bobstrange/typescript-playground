@@ -31,7 +31,7 @@ export default function IndexPage() {
           <StaticImage
             src="../images/cyclist.jpg"
             alt="A cyclist"
-            placeholder="dominantColor"
+            placeholder="tracedSVG"
             width={300}
             height={300}
           />
