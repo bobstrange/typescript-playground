@@ -19,10 +19,25 @@ export default function IndexPage() {
           slug
         }
       }
+      allSanityEpisode(
+        sort: { fields: date, order: DESC }
+        filter: { youtubeID: { ne: null } }
+        limit: 10
+      ) {
+        nodes {
+          id
+          title
+          guest {
+            name
+          }
+          gatsbyPath(filePath: "/episode/{SanityEpisode.slug__current}")
+        }
+      }
     }
   `)
 
   const posts = data.allMdx.nodes
+  const episodes = data.allSanityEpisode.nodes
 
   return (
     <>
@@ -45,6 +60,16 @@ export default function IndexPage() {
             <li key={post.id}>
               <Link to={post.slug}>{post.frontmatter.title}</Link>{' '}
               <small>posted {post.frontmatter.date}</small>
+            </li>
+          ))}
+        </ul>
+        <h2>Latest episodes</h2>
+        <ul>
+          {episodes.map((episode: any) => (
+            <li key={episode.id}>
+              <Link to={episode.gatsbyPath}>
+                {episode.title} (with {episode.guest?.[0]?.name})
+              </Link>
             </li>
           ))}
         </ul>
