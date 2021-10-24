@@ -9,7 +9,7 @@ export type SeoProps = {
   path: string
 }
 
-export const Seo: React.FC<Partial<Props>> = (props) => {
+export const Seo: React.FC<Partial<SeoProps>> = (props) => {
   const data = useStaticQuery(graphql`
     query GetSiteMetadata {
       site {
