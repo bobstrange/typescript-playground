@@ -1,9 +1,10 @@
 import * as React from 'react'
 
-export const CustomPage = () => {
+export const CustomPage = ({ pageContext }) => {
   return (
     <div>
-      <h1>Hi there</h1>
+      <h1>{pageContext.title}</h1>
+      <pre>{JSON.stringify(pageContext, null, 2)}</pre>
     </div>
   )
 }
