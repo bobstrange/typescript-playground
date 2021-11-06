@@ -1,0 +1,2 @@
+[build]
+  base = "gatsby/frontend-masters-intermediate-gatsby-project/site/"
