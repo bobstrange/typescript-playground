@@ -1,3 +1,6 @@
+const fetch = require('node-fetch')
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
+
 const authors = require('./src/data/authors.json')
 const books = require('./src/data/books.json')
 
@@ -58,13 +61,49 @@ exports.createPages = ({ actions }) => {
   })
 }
 
-exports.createResolvers = ({ createResolvers }) => {
+exports.createResolvers = ({
+  actions,
+  cache,
+  createNodeId,
+  createResolvers,
+  store,
+  reporter,
+}) => {
+  const { createNode } = actions
+
   const resolvers = {
     Book: {
       buyLink: {
         type: 'String',
         resolve: (source) =>
           `https://www.powells.com/searchresults?keyword=${source.isbn}`,
+      },
+      cover: {
+        type: 'File',
+        resolve: async (source) => {
+          const response = await fetch(
+            `https://openlibrary.org/isbn/${source.isbn}.json`,
+          )
+          if (!response.ok) {
+            reporter.warn(
+              `Could not fetch cover for book ${source.isbn}: ${response.statusText}`,
+            )
+          }
+          const { covers } = await response.json()
+
+          if (covers.length) {
+            return createRemoteFileNode({
+              url: `https://covers.openlibrary.org/b/id/${covers[0]}-L.jpg`,
+              store,
+              cache,
+              createNode,
+              createNodeId,
+              reporter,
+            })
+          } else {
+            return null
+          }
+        },
       },
     },
   }
