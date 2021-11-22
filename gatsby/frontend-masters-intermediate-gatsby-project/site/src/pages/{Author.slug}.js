@@ -17,14 +17,45 @@ export const query = graphql`
   }
 `
 
+function sortAndExtendBooks(books) {
+  return books
+    .sort((a, b) => {
+      return a.seriesOrder - b.seriesOrder
+    })
+    .map((book) => {
+      const series = book.series
+        ? `(${book.series}, book ${book.seriesOrder})`
+        : ''
+      const displayName = `${book.name} ${series}`
+      const bookSlug = slugify(book.name, { lower: true })
+
+      let path
+      if (book.series !== null) {
+        const seriesSlug = slugify(book.series, { lower: true })
+        path = `/book/${seriesSlug}/${bookSlug}`
+      } else {
+        path = `/book/${bookSlug}`
+      }
+      return { ...book, displayName, path }
+    })
+}
+
 const AuthorPage = ({ data }) => {
   const { author } = data
-  const { books } = author
+  const books = sortAndExtendBooks(author.books)
 
   return (
     <div>
       <h1>{author.name}</h1>
-      <pre>{JSON.stringify(books, null, 2)}</pre>
+      <p>Books by {author.name}</p>
+      <ul>
+        {books.map((book) => (
+          <li key={book.id}>
+            <Link to={book.path}>{book.displayName}</Link>
+          </li>
+        ))}
+      </ul>
+      <Link to="/authors">&larr; back to all authors</Link>
     </div>
   )
 }
