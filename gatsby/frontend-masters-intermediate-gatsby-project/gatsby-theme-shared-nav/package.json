@@ -1,0 +1,8 @@
+{
+  "name": "gatsby-theme-shared-nav",
+  "version": "1.0.0",
+  "main": "gatsby-config.js",
+  "peerDependencies": {
+    "gatsby": "^4.2.0"
+  }
+}
