@@ -23,7 +23,18 @@ const SearchClientOnly = ({ params }) => {
     navigate('/search')
   }
 
-  async function bookSearch(query) {}
+  async function bookSearch(query) {
+    setStatus('LOADING')
+    const res = await fetch(`https://openlibrary.org/search.json?q=${query}`)
+
+    if (!res.ok) {
+      throw new Error(`Search failed: ${res.status}`)
+    }
+
+    const result = await res.json()
+    setResult(result)
+    setStatus('IDLE')
+  }
 
   React.useEffect(() => {
     if (currentQuery === '') {
@@ -46,6 +57,21 @@ const SearchClientOnly = ({ params }) => {
           reset
         </button>
       </form>
+      {status === 'LOADING' && <p>Loading...</p>}
+      {status === 'IDLE' && currentQuery !== '' ? (
+        <>
+          <h2>Search results for {currentQuery}</h2>
+          <ul>
+            {result &&
+              result.docs.map((doc) => (
+                <li key={doc.key}>
+                  <strong>{doc.title}</strong>{' '}
+                  {doc.author_name && `by ${doc.author_name?.[0]}`}
+                </li>
+              ))}
+          </ul>
+        </>
+      ) : null}
     </>
   )
 }
