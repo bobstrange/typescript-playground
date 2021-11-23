@@ -4,5 +4,8 @@
   "main": "gatsby-config.js",
   "peerDependencies": {
     "gatsby": "^4.2.0"
+  },
+  "dependencies": {
+    "gatsby-plugin-layout": "^3.2.0"
   }
 }
