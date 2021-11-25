@@ -1,0 +1,13 @@
+.input {
+  padding: 0.2rem 0.5rem;
+  text-decoration: none;
+}
+
+.button {
+  margin-left: 0.5rem;
+  background-color: teal;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  border: none;
+}

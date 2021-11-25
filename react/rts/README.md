@@ -8,6 +8,8 @@
 - State の型付け
 - Event Handler の型付け
 
+### Props の型付け
+
 ```typescript
 type Props = {
   propA: string
@@ -37,3 +39,17 @@ type ChildProps = {
 ```
 
 引数、戻り値が無い巻数型になる
+
+### State の型付け
+
+`useState` で初期化するときに、型推論で解決出来ない場合があるので、型引数を渡す必要があるケースがある。
+
+```typescript
+// この状態だと、users がなにかの配列であることはわかるが、何の配列であるかはわからない
+const [users, setUsers] = useState([])
+
+// 型引数を渡せば、 User[] であることがわかる
+const [users, setUsers] = useState<User[]>([])
+```
+
+
