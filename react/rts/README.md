@@ -27,3 +27,13 @@ const Component: React.FC<Props> = ({ propA }) => {
   return <div>Hi {propA}</div>
 }
 ```
+
+Component に onClick ハンドラを Props で受け渡す場合の型
+
+```typescript
+type ChildProps = {
+  onClick: () => void
+}
+```
+
+引数、戻り値が無い巻数型になる
