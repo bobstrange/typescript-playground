@@ -5,8 +5,9 @@ export const GuestList: React.FC = () => {
   const [name, setName] = useState('')
   const [guests, setGuests] = useState<string[]>([])
 
-  function onClick = () => {
-
+  const onClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+    setName('')
+    setGuests([...guests, name])
   }
 
   return (
@@ -18,7 +19,9 @@ export const GuestList: React.FC = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button className={styles.button}>Add Guest</button>
+      <button className={styles.button} onClick={onClick}>
+        Add Guest
+      </button>
     </div>
   )
 }

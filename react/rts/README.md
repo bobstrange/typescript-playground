@@ -52,4 +52,14 @@ const [users, setUsers] = useState([])
 const [users, setUsers] = useState<User[]>([])
 ```
 
+onClick の型付け
+button などの `onClick()` についても、インラインで書かない場合は型付けする必要がある。
+VSCode で `<button onClick={}>` とか書いて、マウスオーバーして型をゲットする
 
+```tsx
+const onClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+  console.log('clicked')
+}
+
+return <button onClick={onClick}>Click Me</button>
+```
