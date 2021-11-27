@@ -55,6 +55,7 @@ const [users, setUsers] = useState<User[]>([])
 onClick の型付け
 button などの `onClick()` についても、インラインで書かない場合は型付けする必要がある。
 ※型付けしなくても 型推論した型との型チェックが、onClick に渡す部分でされるのだが。
+
 VSCode で `<button onClick={}>` とか書いて、マウスオーバーして型をゲットする
 
 ```tsx
@@ -84,3 +85,29 @@ return (
 ```typescript
 const [user, setUser] = useState<{ name: string, age: number } | undefined>()
 ```
+
+### ref
+
+ref を使って、画面遷移時に、input element に focus を合わせておく例
+
+```typescript
+const Search: React.FC = () => {
+  const ref = useRef<HTMLInputElement|null>(null)
+  const [text, setText] = useState()
+
+  useEffect(() => {
+    ref.current?.focus()
+  }, [])
+
+  return (
+    <div>
+      <input type="text" ref={ref} value={text} onChange={e => setText(e.target.value)}>
+    </div>
+  )
+}
+```
+
+`useRef` の型引数は、ref に実際に渡す DOM の型 (この場合は input なので HTMLInputElement) になる。
+型も、要素に hover (この場合 input) すれば取得できる
+
+画面遷移時の処理を実行するために `useEffect` 内で、`ref.current` が存在したら `focus()` を実行するようにしている
