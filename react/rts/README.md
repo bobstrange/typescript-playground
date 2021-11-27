@@ -54,6 +54,7 @@ const [users, setUsers] = useState<User[]>([])
 
 onClick の型付け
 button などの `onClick()` についても、インラインで書かない場合は型付けする必要がある。
+※型付けしなくても 型推論した型との型チェックが、onClick に渡す部分でされるのだが。
 VSCode で `<button onClick={}>` とか書いて、マウスオーバーして型をゲットする
 
 ```tsx
@@ -62,4 +63,11 @@ const onClick: React.MouseEventHandler<HTMLButtonElement> = () => {
 }
 
 return <button onClick={onClick}>Click Me</button>
+```
+
+配列でない、単体のオブジェクトの型付け
+初期化の時に設定出来ないなら `undefined` との union 型で定義する
+
+```typescript
+const [user, setUser] = useState<{ name: string, age: number } | undefined>()
 ```
