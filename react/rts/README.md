@@ -58,11 +58,24 @@ button などの `onClick()` についても、インラインで書かない場
 VSCode で `<button onClick={}>` とか書いて、マウスオーバーして型をゲットする
 
 ```tsx
-const onClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+// button
+const onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
   console.log('clicked')
+  console.log(e.target.value)
 }
 
 return <button onClick={onClick}>Click Me</button>
+
+// input
+const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  console.log(event)
+}
+
+return (
+  <div>
+    <input type="text" onChange={onChange} />
+  </div>
+)
 ```
 
 配列でない、単体のオブジェクトの型付け
