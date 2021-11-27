@@ -4,9 +4,29 @@ type RepositoriesState = {
   data: string[]
 }
 
-type Action = {
-  type: string
-  payload?: any
+type SearchRepositoriesAction = {
+  type: ActionType.SEARCH_REPOSITORIES
+}
+
+type SearchRepositoriesSuccessAction = {
+  type: ActionType.SEARCH_REPOSITORIES_SUCCESS
+  payload: string[]
+}
+
+type SearchRepositoriesErrorAction = {
+  type: ActionType.SEARCH_REPOSITORIES_ERROR
+  payload: string
+}
+
+type Action =
+  | SearchRepositoriesAction
+  | SearchRepositoriesSuccessAction
+  | SearchRepositoriesErrorAction
+
+enum ActionType {
+  SEARCH_REPOSITORIES = 'search_repositories',
+  SEARCH_REPOSITORIES_SUCCESS = 'search_repositories_success',
+  SEARCH_REPOSITORIES_ERROR = 'search_repositories_error',
 }
 
 export const RepositoryReducer = (
@@ -14,11 +34,11 @@ export const RepositoryReducer = (
   action: Action
 ): RepositoriesState => {
   switch (action.type) {
-    case 'SEARCH_REPOSITORIES':
+    case ActionType.SEARCH_REPOSITORIES:
       return { loading: true, error: null, data: [] }
-    case 'SEARCH_REPOSITORIES_SUCCESS':
+    case ActionType.SEARCH_REPOSITORIES_SUCCESS:
       return { loading: false, error: null, data: action.payload }
-    case 'SEARCH_REPOSITORIES_ERROR':
+    case ActionType.SEARCH_REPOSITORIES_ERROR:
       return { loading: false, error: action.payload, data: [] }
     default:
       return state
