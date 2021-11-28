@@ -17,9 +17,11 @@ export const searchRepositories = (text: string) => {
         payload: names,
       })
     } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Something went wrong'
       dispatch({
         type: ActionType.SEARCH_REPOSITORIES_ERROR,
-        payload: error.message,
+        payload: errorMessage,
       })
     }
   }
