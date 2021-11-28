@@ -7,7 +7,7 @@ type RepositoriesState = {
   data: string[]
 }
 
-export const RepositoryReducer = (
+export const repositoriesReducer = (
   state: RepositoriesState,
   action: Action
 ): RepositoriesState => {
@@ -23,4 +23,4 @@ export const RepositoryReducer = (
   }
 }
 
-export default RepositoryReducer
+export default repositoryReducer
