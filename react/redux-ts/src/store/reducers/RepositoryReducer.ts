@@ -1,32 +1,10 @@
+import { ActionType } from '../action-types'
+import { Action } from '../actions'
+
 type RepositoriesState = {
   loading: boolean
   error: string | null
   data: string[]
-}
-
-type SearchRepositoriesAction = {
-  type: ActionType.SEARCH_REPOSITORIES
-}
-
-type SearchRepositoriesSuccessAction = {
-  type: ActionType.SEARCH_REPOSITORIES_SUCCESS
-  payload: string[]
-}
-
-type SearchRepositoriesErrorAction = {
-  type: ActionType.SEARCH_REPOSITORIES_ERROR
-  payload: string
-}
-
-type Action =
-  | SearchRepositoriesAction
-  | SearchRepositoriesSuccessAction
-  | SearchRepositoriesErrorAction
-
-enum ActionType {
-  SEARCH_REPOSITORIES = 'search_repositories',
-  SEARCH_REPOSITORIES_SUCCESS = 'search_repositories_success',
-  SEARCH_REPOSITORIES_ERROR = 'search_repositories_error',
 }
 
 export const RepositoryReducer = (
