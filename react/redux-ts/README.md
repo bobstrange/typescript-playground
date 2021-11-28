@@ -57,3 +57,28 @@ src/
     reducers
     action_creators
     middlewares
+
+## Store の型付け
+
+Reducer を JavaScript で書くと
+
+```javascript
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 'SOMETHING':
+      return { foo: action.payload.foo, ...state }
+    default:
+      return state
+  }
+}
+```
+
+- state を型付けする
+- action を型付けする
+  - 各 Action の type の型 を作る
+    - store/action-types/index.ts
+    - こちらは 1 つのファイルに全部格納する
+  - 各 Action を作る
+    - store/actions/index.ts
+    - こちらは、複数のファイルに分けても良い
+      - store/actions/repositories.ts
