@@ -9,7 +9,12 @@ export const searchRepositories = (text: string) => {
 
     try {
       const { data } = await axios.get(
-        `https://api.github.com/search/repositories?q=${text}`
+        `https://registry.npmjs.org/-/v1/search`,
+        {
+          params: {
+            text,
+          },
+        }
       )
       const names = data.objects.map((item: any) => item.package.name)
       dispatch({
