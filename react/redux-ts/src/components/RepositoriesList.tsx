@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { actionCreators } from '../state'
 
 export const RepositoriesList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('')
+  const dispatch = useDispatch()
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log('Searching for', searchTerm)
+    dispatch(actionCreators.searchRepositories(searchTerm))
   }
 
   return (
