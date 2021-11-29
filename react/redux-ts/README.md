@@ -52,10 +52,13 @@ src/
   components/
     App.tsx
     RepositoriesList.tsx
-  redux/
+  store/
     index.ts
-    reducers
-    action_creators
+    actions/
+    action-types/
+      index.ts -> 全てこの index.ts の enum or type で表現
+    reducers/
+    action_creators/
     middlewares
 
 ## Store の型付け
@@ -78,7 +81,83 @@ const reducer = (state, action) => {
   - 各 Action の type の型 を作る
     - store/action-types/index.ts
     - こちらは 1 つのファイルに全部格納する
-  - 各 Action を作る
+  - 各 Action の型を作る
     - store/actions/index.ts
     - こちらは、複数のファイルに分けても良い
       - store/actions/repositories.ts
+  - Action の実装 (dispatch) の部分は action-creator に書く
+
+### Action Creator の型付け
+
+JavaScript だと↓のようになるが
+
+```javascript
+const doSomething = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'SOMETHING', payload: 'foo' })
+  }
+}
+```
+
+`dispatch` に渡す `type` や、 `payload` の型チェックをしたい
+-> `dispatch: Dispatch<Action>` で型付けする
+
+### Reducer の型付け
+
+### Store の型付け
+
+### Redux 関連の index.ts を作成
+
+state/index.ts に
+
+- reducers
+- action-creators
+- middlewares
+
+の I/F を集約する
+
+```typescript
+export * from './store
+export * as actionCreators from './action-creators
+```
+
+## action の dispatch の簡易化 (useDispatch)
+
+```typescript
+import { useDispatch } from 'react-redux'
+
+const Component: React.FC = () => {
+
+}
+```
+
+
+## state の選択 (useSelector)
+
+`useSelector` には型引数を渡さないと、store が保持する state に対する情報が得られない。
+-> Redux Store に保持する情報の型を定義する必要がある
+
+```typescript
+import { combineReducers } from 'redux'
+import { repositoriesReducer } from './RepositoryReducer'
+
+const reducers = combineReducers({
+  repositories: repositoriesReducer,
+})
+
+export default reducers
+
+export type RootState = ReturnType<typeof reducers>
+```
+
+`RootState` 型をわざわざ定義して渡す必要がある。。。
+
+`useSelector` に毎回型引数を渡すのも手間なので、
+↓のような customHook を作ったほうが良い
+
+```typescript
+import { useSelector as orgUseSelector, TypedUseSelectorHook } from 'react-redux'
+import { RootState } from '../state'
+
+export const useSelector: TypedUseSelectorHook<RootState> = orgUseSelector
+```
