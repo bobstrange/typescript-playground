@@ -45,10 +45,12 @@ export const unpkgPathPlugin = () => {
         }
 
         const { data, request } = await axios.get(args.path)
+
+        const resolveDir = new URL('./', request.responseURL).pathname
         return {
           loader: 'jsx',
           contents: data,
-          resolveDir: new URL(request.responseURL).pathname,
+          resolveDir,
         }
       })
     },
