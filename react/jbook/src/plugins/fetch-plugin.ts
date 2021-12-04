@@ -18,19 +18,21 @@ export const fetchPlugin = ({ inputCode }: { inputCode: string }) => {
           }
         }
 
-        const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(
-          args.path
-        )
+        // const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(
+        //   args.path
+        // )
 
-        if (cachedResult) {
-          return cachedResult
-        }
+        // if (cachedResult) {
+        //   return cachedResult
+        // }
 
         const { data, request } = await axios.get(args.path)
+        console.log(`args.path: ${args.path}`)
 
+        const loader = args.path.match(/\.css$/) ? 'css' : 'jsx'
         const resolveDir = new URL('./', request.responseURL).pathname
         const result: esbuild.OnLoadResult = {
-          loader: 'jsx',
+          loader,
           contents: data,
           resolveDir,
         }
