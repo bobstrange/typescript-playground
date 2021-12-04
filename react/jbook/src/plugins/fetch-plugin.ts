@@ -37,9 +37,7 @@ export const fetchPlugin = ({ inputCode }: { inputCode: string }) => {
         const contents =
           fileType === 'css'
             ? `
-            const style = document.createElement('style')
             style.innerText = '${escaped}'
-            document.head.appendChild(style)
           `
             : data
         const resolveDir = new URL('./', request.responseURL).pathname
