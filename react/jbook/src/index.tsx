@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin'
 import { fetchPlugin } from './plugins/fetch-plugin'
 
+const ESBUILD_WASM_VERSION = '0.8.27'
 const App = () => {
   const ref = useRef<any>()
   const [input, setInput] = useState('')
@@ -12,7 +13,7 @@ const App = () => {
   const startService = async () => {
     const service = await esbuild.startService({
       worker: true,
-      wasmURL: '/esbuild.wasm',
+      wasmURL: `https://unpkg.com/esbuild-wasm@${ESBUILD_WASM_VERSION}/esbuild.wasm`,
     })
     ref.current = service
   }
