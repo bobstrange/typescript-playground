@@ -30,11 +30,16 @@ You could init project with TypeScript support with `--typescript` option but th
     - `npm -i D prettier eslint-config-prettier`
 - Add `.eslintrc.js`
   - You just need to extend `next` and `prettier`
+
     ```js
     /** @type {import('eslint').Linter.Config} */
     module.exports = {
       extends: ["next", "prettier"]
     }
     ```
+
 - Add `.prettierrc.js`
 
+## Fix TypeScript configuration
+
+As Next.js generates tsconfig.json but some configuration are not
