@@ -13,5 +13,5 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({ products }: Props) {
-  return <pre>{JSON.stringify(products, null, 2)}</pre>
+  return <div>{JSON.stringify(products, null, 2)}</div>
 }
