@@ -7,8 +7,14 @@ interface Todo {
 }
 
 // Exclude を使えば簡単にできるが、、、
+// type MyOmit<T, K extends keyof T> = {
+//   [U in Exclude<keyof T, K>]: T[U]
+// }
+
+// Exclude の型定義 が↓だから、MyExclude を作るのか
+type MyExclude<T, U> = T extends U ? never : T
 type MyOmit<T, K extends keyof T> = {
-  [U in Exclude<keyof T, K>]: T[U]
+  [U in MyExclude<keyof T, K>]: T[U]
 }
 
 type TodoPreview = MyOmit<Todo, 'description' | 'title'>
