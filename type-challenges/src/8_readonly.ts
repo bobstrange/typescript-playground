@@ -9,28 +9,33 @@ interface Todo {
 // わからなかった :-(
 // 回答例を見るに、一回指定された key に readonly をつけた上で、
 // 交差で、Generics の第二引数にあるもの以外のキーについてを定義し直す感じ
-// うーん、回答例を入れてみたけど、readonly がつかない :-()
+// うーん、回答例を入れてみたけど、readonly がつかない :-(
+// どうやら expectation の書き方がまずかっただけみたい
+
 type MyReadonly2<T, K extends keyof T> = {
   readonly [U in K]: T[U]
 } & {
   [S in Exclude<keyof T, K>]: T[S]
 }
-
-const todo: MyReadonly2<Todo, 'title' | 'description'> = {
+type hogehoge = MyReadonly2<Todo, 'title' | 'description'>
+const hoge: hogehoge = {
   title: 'Hey',
   description: 'foobar',
-  completed: false,
+  completed: true,
 }
 
-type cases_8 = [
-  Expect<
-    Equal<
-      MyReadonly2<Todo, 'title' | 'description'>,
-      {
-        readonly title: 'Hey'
-        readonly description: 'foobar'
-        completed: boolean
-      }
-    >
-  >
-]
+hoge.title = 'aaa'
+hoge.completed = false
+
+// type cases_8 = [
+//   Expect<
+//     Equal<
+//       MyReadonly2<Todo, 'title' | 'description'>,
+//       {
+//         readonly title: 'Hey'
+//         readonly description: 'foobar'
+//         completed: boolean
+//       }
+//     >
+//   >
+// ]
