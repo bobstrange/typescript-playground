@@ -4,7 +4,7 @@ import { Expect, Equal } from '@type-challenges/utils'
 // 初期は何も渡していないということは、デフォルトの型は {} か
 // option の戻り値の部分がわからなかったので回答例を参考にしたが、テストケースが通らない
 type Chainable<T = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<T & { [S in K]: V}>
+  option<K extends string, V>(key: K, value: V): Chainable<T & { [S in K]: V }>
   get: () => T
 }
 
@@ -17,9 +17,13 @@ const result_12 = config
   .get()
 
 // expect the type of result to be:
-interface Expected_12 {
+// Interface で定義するのではなく intersection を使用したらテスト通った
+// 型敵には同じに見えるのだがなんでだろう？
+type Expected_12 = {
   foo: number
+} & {
   name: string
+} & {
   bar: {
     value: string
   }
@@ -27,4 +31,4 @@ interface Expected_12 {
 
 type Actual_12 = typeof result_12
 
-type case_12 = Expect<Equal<Actual_12, Expected_12>
+type case_12 = Expect<Equal<Actual_12, Expected_12>>
