@@ -4,9 +4,14 @@ type Replace<
   S extends string,
   From extends string,
   To extends string
-> = S extends `${infer First}${From}${infer Rest}` ? `${First}${To}${Rest}` : S
+> = From extends ''
+  ? S
+  : S extends `${infer First}${From}${infer Rest}`
+  ? `${First}${To}${Rest}`
+  : S
 
 // First とか Rest とかが '' になるパターンこれで対応できてるか？
+// 回答例見たら、 From が '' になるケース漏れてた
 type case_116 = [
   Expect<
     Equal<Replace<'types are fun!', 'fun', 'awesome'>, 'types are awesome!'>
@@ -22,5 +27,6 @@ type case_116 = [
       Replace<'types are fun!', 'fun!', 'interesting?'>,
       'types are interesting?'
     >
-  >
+  >,
+  Expect<Equal<Replace<'types are fun!', '', 'fun?'>, 'types are fun!'>>
 ]
