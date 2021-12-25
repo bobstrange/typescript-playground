@@ -1,5 +1,8 @@
 import { Expect, Equal } from '@type-challenges/utils'
 
+// Replace と同様に、 From が '' の場合は、型変換せず
+// あとは、First と Rest で再帰的に ReplaceAll
+
 type ReplaceAll<
   S extends string,
   From extends string,
@@ -8,5 +11,6 @@ type ReplaceAll<
   ? S
   : S extends `${infer First}${From}${infer Rest}`
   ? `${ReplaceAll<First, From, To>}${To}${ReplaceAll<Rest, From, To>}`
-  : s
+  : S
+
 type cases_119 = [Expect<Equal<ReplaceAll<'t y p e s', ' ', ''>, 'types'>>]
