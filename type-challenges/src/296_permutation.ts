@@ -4,6 +4,19 @@ import { Expect, Equal } from '@type-challenges/utils'
 // しかたが無いので回答例を見る
 // https://github.com/type-challenges/type-challenges/issues/614
 
+/**
+ * Union を loop する方法
+ */
+
+type LoopUnion_296<
+  Union extends string,
+  Item extends string = Union
+> = Item extends Item ? `loop ${Item}` : never
+
+type ResultLoopUnion_296 = Expect<
+  Equal<LoopUnion_296<'a' | 'b' | 'c'>, 'loop a' | 'loop b' | 'loop c'>
+>
+
 type cases_296 = [
   Expect<
     Equal<
