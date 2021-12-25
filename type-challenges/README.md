@@ -16,14 +16,16 @@ Generic 型に対して、Conditional Type が作用する場合に、与えら�
 ```typescript
 type ToArray<Type> = Type extends any ? Type[] : never
 
-type StrArrOrNumArr = ToArray<string | number> // string[] | number[]
+type StrArrOrNumArr = ToArray<string | number>
+string extends any ? string[] : never | number extends any ? number[] : never
+string[] | number[]
 
 // union のそれぞれの型に対して ToArray が作用する
 // ToArray<string> | ToArray<number>
 // つまり string[] | number[]
 ```
 
-一般的には、分配してくれたほうが望ましいことが多いが、そのような挙動を割けたい場合は、`[Type] extends [any]` とする
+一般的には、分配してくれたほうが望ましいことが多いが、そのような挙動を避けたい場合は、`[Type] extends [any]` とする
 
 ```typescript
 type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never
