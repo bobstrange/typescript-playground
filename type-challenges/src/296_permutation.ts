@@ -17,6 +17,12 @@ type ResultLoopUnion_296 = Expect<
   Equal<LoopUnion_296<'a' | 'b' | 'c'>, 'loop a' | 'loop b' | 'loop c'>
 >
 
+type Permutation<T, K = T> = [T] extends [never]
+  ? []
+  : K extends K
+  ? [K, ...Permutation<Exclude<T, K>>]
+  : never
+
 type cases_296 = [
   Expect<
     Equal<
