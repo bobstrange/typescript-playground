@@ -10,7 +10,9 @@ type ReplaceAll<
 > = From extends ''
   ? S
   : S extends `${infer First}${From}${infer Rest}`
-  ? `${ReplaceAll<First, From, To>}${To}${ReplaceAll<Rest, From, To>}`
+  ? // ? `${ReplaceAll<First, From, To>}${To}${ReplaceAll<Rest, From, To>}`
+    // First と Rest 両方で再帰的に ReplaceAll 読んでたけど、Rest の方だけで良いっぽい
+    `${First}${To}${ReplaceAll<Rest, From, To>}`
   : S
 
 type cases_119 = [Expect<Equal<ReplaceAll<'t y p e s', ' ', ''>, 'types'>>]
