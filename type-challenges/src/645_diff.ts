@@ -24,6 +24,7 @@ type Expected_645 = {
 
 // これだと、b の差分が出てくれない
 // [K in keyof T | keyof U] にして、never の値の key を除外できる？
+// わからん、、、
 type Diff<T, U> = {
   [K in
     | Exclude<keyof T, keyof U>
