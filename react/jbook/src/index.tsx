@@ -35,6 +35,13 @@ const App = () => {
     })
 
     setCode(result.outputFiles[0].text)
+
+    // This cannot handle asynchronous code execution error
+    try {
+      eval(result.outputFiles[0].text)
+    } catch (e) {
+      alert(e)
+    }
   }
 
   useEffect(() => {
