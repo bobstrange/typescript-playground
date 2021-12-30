@@ -1,8 +1,10 @@
 import * as esbuild from 'esbuild-wasm'
 import { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
+
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin'
 import { fetchPlugin } from './plugins/fetch-plugin'
+import { CodeEditor } from './components/code-editor'
 
 const ESBUILD_WASM_VERSION = '0.8.27'
 const App = () => {
@@ -65,6 +67,7 @@ const App = () => {
 
   return (
     <div>
+      <CodeEditor />
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
