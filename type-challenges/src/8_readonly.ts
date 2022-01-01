@@ -18,7 +18,6 @@ type MyReadonly2<T, K extends keyof T = keyof T> = {
 } & {
   [S in Exclude<keyof T, K>]: T[S]
 }
-type hogehoge = MyReadonly2<Todo, 'title' | 'description'>
 const hoge: hogehoge = {
   title: 'Hey',
   description: 'foobar',

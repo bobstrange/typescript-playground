@@ -13,7 +13,6 @@ type Fn = (a: number, b: string) => number
 type AppendArgument<Fn, T> = Fn extends (...args: infer U) => infer R
   ? (...args: [...U, T]) => R
   : never
-type hoge = AppendArgument<Fn, boolean>
 
 type cases_191 = [
   Expect<

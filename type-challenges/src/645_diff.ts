@@ -39,6 +39,4 @@ type Diff<T, U> = {
     : never
 }
 
-type hoge = Diff<O_645_1, O_645_2>
-
 type case_645 = Expect<Equal<Diff<O_645_1, O_645_2>, Expected_645>>

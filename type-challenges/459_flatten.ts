@@ -10,8 +10,6 @@ type Flatten<T> = T extends any[]
     : never
   : [T]
 
-type hoge = Flatten<[1, 2, [3, 4], [[[5]]]]>
-
 type cases_459 = [
   Expect<Equal<Flatten<[1, 2, [3, 4], [[[5]]]]>, [1, 2, 3, 4, 5]>>
 ]
