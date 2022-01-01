@@ -7,7 +7,6 @@ type DropChar<
   ? DropChar<`${First}${Rest}`, R>
   : S
 
-type hoge = DropChar<' b u t t e r f l y ! ', ' '>
 type case_2070 = Expect<
   Equal<DropChar<' b u t t e r f l y ! ', ' '>, 'butterfly!'>
 >
