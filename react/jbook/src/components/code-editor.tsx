@@ -29,16 +29,20 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
 
     editor.getModel()?.updateOptions({ tabSize: 2 })
 
-    if (editor && monaco) {
-      const highlighter = new Highlighter(
-        // @ts-ignore
-        monaco,
-        parse,
-        traverse,
-        editor
-      )
-      highlighter.highLightOnDidChangeModelContent()
-    }
+    const highlighter = new Highlighter(
+      // @ts-ignore
+      monaco,
+      parse,
+      traverse,
+      editor
+    )
+    highlighter.highLightOnDidChangeModelContent(
+      100,
+      () => {},
+      () => {},
+      undefined,
+      () => {}
+    )
   }
 
   const onFormatClick = () => {
