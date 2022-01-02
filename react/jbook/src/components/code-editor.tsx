@@ -70,7 +70,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
       <MonacoEditor
         onMount={onMount}
         value={initialValue}
-        height={500}
+        height="100%"
         language="javascript"
         theme="vs-dark"
         options={{
