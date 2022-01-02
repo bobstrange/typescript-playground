@@ -2,7 +2,9 @@ import MonacoEditor, { OnMount } from '@monaco-editor/react'
 
 import prettier from 'prettier'
 import parser from 'prettier/parser-babel'
-import codeShift from 'jscodeshift'
+import { parse } from '@babel/parser'
+import traverse from '@babel/traverse'
+
 import Highlighter from 'monaco-jsx-highlighter'
 
 import { useRef } from 'react'
@@ -27,14 +29,16 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
 
     editor.getModel()?.updateOptions({ tabSize: 2 })
 
-    const highlighter = new Highlighter(
-      // @ts-ignore
-      window.monaco,
-      codeShift,
-      editor
-    )
-    console.log(highlighter)
-    // highlighter.highLightOnDidChangeModelContent()
+    if (editor && monaco) {
+      const highlighter = new Highlighter(
+        // @ts-ignore
+        monaco,
+        parse,
+        traverse,
+        editor
+      )
+      highlighter.highLightOnDidChangeModelContent()
+    }
   }
 
   const onFormatClick = () => {
