@@ -12,4 +12,9 @@ type RequiredByKeys<T, S = keyof T> = {
   [K in keyof T as K extends S ? never : K]: T[K]
 }
 
-type UserPartialName = RequiredByKeys<User, 'name'> // { name: string; age?: number; address?: string }
+type case_2759 = Expect<
+  Equal<
+    RequiredByKeys<User, 'name'>,
+    { name: string } & { age?: number; address?: string }
+  >
+>
