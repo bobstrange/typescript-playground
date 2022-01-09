@@ -36,7 +36,7 @@ export const Resizable: React.FC<ResizableProps> = ({
     return () => {
       window.removeEventListener('resize', listener)
     }
-  }, [])
+  }, [width])
 
   if (direction === 'horizontal') {
     resizableProps = {
