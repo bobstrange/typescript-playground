@@ -3,6 +3,7 @@ import './preview.css'
 
 type PreviewProps = {
   code: string
+  err: string
 }
 
 const html = `
@@ -37,7 +38,7 @@ const html = `
     </html>
   `
 
-export const Preview: React.FC<PreviewProps> = ({ code }) => {
+export const Preview: React.FC<PreviewProps> = ({ code, err }) => {
   const iframe = useRef<any>()
 
   useEffect(() => {
@@ -46,6 +47,8 @@ export const Preview: React.FC<PreviewProps> = ({ code }) => {
       iframe.current.contentWindow.postMessage(code, '*')
     }, 50)
   }, [code])
+
+  console.log(err)
 
   return (
     <div className="preview-wrapper">
