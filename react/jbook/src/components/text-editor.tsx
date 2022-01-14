@@ -1,6 +1,8 @@
 import MDEditor from '@uiw/react-md-editor'
 import React, { useEffect, useRef, useState } from 'react'
 
+import './text-editor.css'
+
 export const TextEditor: React.FC = () => {
   const [editing, setEditing] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
