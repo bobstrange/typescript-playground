@@ -31,8 +31,24 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
       state.order = state.order.filter((_id) => _id !== id)
       return
     }
-    case ActionType.INSERT_CELL_BEFORE:
+    case ActionType.INSERT_CELL_BEFORE: {
+      const { id, type } = action.payload
+      const cell: Cell = {
+        content: '',
+        id: randomId(),
+        type,
+      }
+
+      state.data[cell.id] = cell
+      const index = state.order.findIndex((_id) => _id === id)
+
+      if (index < 0) {
+        state.order.push(cell.id)
+      } else {
+        state.order.splice(index, 0, cell.id)
+      }
       return state
+    }
     case ActionType.MOVE_CELL: {
       const { id, direction } = action.payload
       const index = state.order.findIndex((_id) => _id === id)
@@ -50,5 +66,9 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
       return state
   }
 })
+
+const randomId = () => {
+  return Math.random().toString(36).substr(2, 5)
+}
 
 export default reducer
