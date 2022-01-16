@@ -38,10 +38,8 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
         id: randomId(),
         type,
       }
-
       state.data[cell.id] = cell
       const index = state.order.findIndex((_id) => _id === id)
-
       if (index < 0) {
         state.order.push(cell.id)
       } else {
@@ -53,17 +51,16 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
       const { id, direction } = action.payload
       const index = state.order.findIndex((_id) => _id === id)
       const targetIndex = direction === 'up' ? index - 1 : index + 1
-
       if (targetIndex < 0 || targetIndex >= state.order.length) {
         return state
       }
-
       state.order[index] = state.order[targetIndex]
       state.order[targetIndex] = id
       return state
     }
-    default:
+    default: {
       return state
+    }
   }
 })
 
