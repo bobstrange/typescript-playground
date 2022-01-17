@@ -9,9 +9,30 @@ export const ActionBar: React.FC<ActionBarProps> = ({ cellId }) => {
 
   return (
     <div>
-      <button onClick={() => moveCell(cellId, 'up')}>Up</button>
-      <button onClick={() => moveCell(cellId, 'down')}>Down</button>
-      <button onClick={() => deleteCell(cellId)}>Delete</button>
+      <button
+        className="button is-primary is-small"
+        onClick={() => moveCell(cellId, 'up')}
+      >
+        <span className="icon">
+          <i className="fas fa-arrow-up"></i>
+        </span>
+      </button>
+      <button
+        className="button is-primary is-small"
+        onClick={() => moveCell(cellId, 'down')}
+      >
+        <span className="icon">
+          <i className="fas fa-arrow-down"></i>
+        </span>
+      </button>
+      <button
+        className="button is-primary is-small"
+        onClick={() => deleteCell(cellId)}
+      >
+        <span className="icon">
+          <i className="fas fa-times"></i>
+        </span>
+      </button>
     </div>
   )
 }
