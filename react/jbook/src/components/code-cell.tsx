@@ -46,17 +46,18 @@ export const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
             }}
           />
         </Resizable>
-        {!bundle || bundle.loading ? (
-          <div className="base-progress-cover">
+
+        <div className="base-progress-cover">
+          {!bundle || bundle.loading ? (
             <div className="progress-cover">
               <progress className="progress is-small is-primary" max="100">
                 Loading
               </progress>
             </div>
-          </div>
-        ) : (
-          <Preview code={bundle.code} err={bundle.err} />
-        )}
+          ) : (
+            <Preview code={bundle.code} err={bundle.err} />
+          )}
+        </div>
       </div>
     </Resizable>
   )
