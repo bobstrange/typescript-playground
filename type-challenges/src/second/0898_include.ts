@@ -1,10 +1,24 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
-type Includes<T extends readonly unknown[], U> = U extends T[number]
-  ? true
-  : false
+// type Includes<T extends readonly unknown[], U> = U extends T[number]
+//   ? true
+//   : false
+
 /**
  * ↑だと一部のテストケースが通らない
+ */
+
+type Includes<T extends readonly unknown[], U> = T extends [
+  infer First,
+  ...infer Rest
+]
+  ? Equal<First, U> extends true
+    ? true
+    : Includes<Rest, U>
+  : false
+/**
+ * T extends [infer First, infer Rest] 型を確定させて、Equal で U と比較する
+ * 再帰的に Include を呼び出してどこかで true が返ったら true、最後まで一致しなかったら false
  */
 
 type cases_0898 = [
