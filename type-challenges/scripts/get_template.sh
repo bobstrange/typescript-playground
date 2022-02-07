@@ -12,6 +12,10 @@ EOF
     exit 1
 }
 
+if [ $# -ne 1 ]; then
+    usage
+fi
+
 while getopts ":h" opt; do
   case $opt in
     h)
