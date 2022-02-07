@@ -4,7 +4,8 @@
   "description": "My solutions for [Type<Challenge[]>](https://github.com/type-challenges/type-challenges)",
   "main": "index.js",
   "scripts": {
-    "check": "tsc -w --noEmit"
+    "check": "tsc -w --noEmit",
+    "generate_question": "scripts/get_template.sh"
   },
   "keywords": [],
   "author": "bobstrange <bob.1983.g@gmail.com> (https://github.com/bobstrange)",
