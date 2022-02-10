@@ -18,11 +18,14 @@ export const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
     const orderedCells = order.map((id) => data[id])
     const cumulativeCode = [
       `
+        import _React from 'react'
+        import _ReactDOM from 'react-dom'
         const show = (value) => {
           const rootElement = document.querySelector('#root')
+
           if (typeof value === 'object') {
             if (value.$$typeof && value.props) {
-              ReactDOM.render(value, rootElement)
+              _ReactDOM.render(value, rootElement)
             } else {
               rootElement.innerHTML = JSON.stringify(value, null, 2)
             }
