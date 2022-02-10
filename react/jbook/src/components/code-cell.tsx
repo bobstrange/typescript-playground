@@ -19,10 +19,15 @@ export const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
     const cumulativeCode = [
       `
         const show = (value) => {
+          const rootElement = document.querySelector('#root')
           if (typeof value === 'object') {
-            document.querySelector('#root').innerHTML = JSON.stringify(value, null, 2)
+            if (value.$$typeof && value.props) {
+              ReactDOM.render(value, rootElement)
+            } else {
+              rootElement.innerHTML = JSON.stringify(value, null, 2)
+            }
           } else {
-            document.querySelector('#root').innerHTML = value
+            rootElement.innerHTML = value
           }
         }
       `,
