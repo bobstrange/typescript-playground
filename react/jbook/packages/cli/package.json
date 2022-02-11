@@ -5,6 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^9.0.0",
-    "local-api": "^1.0.0"
+    "eslint-config-prettier": "^8.3.0",
+    "local-api": "^1.0.0",
+    "prettier": "^2.5.1"
   }
 }
