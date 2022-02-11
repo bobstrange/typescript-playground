@@ -1,0 +1,19 @@
+{
+	"configurations": [
+		{
+			"type": "aws-sam",
+			"request": "direct-invoke",
+			"name": "jbook:src/plugins/unpkg-path-plugin.unpkgPathPlugin (nodejs14.x)",
+			"invokeTarget": {
+				"target": "code",
+				"projectRoot": "${workspaceFolder}/",
+				"lambdaHandler": "src/plugins/unpkg-path-plugin.unpkgPathPlugin"
+			},
+			"lambda": {
+				"runtime": "nodejs14.x",
+				"payload": {},
+				"environmentVariables": {}
+			}
+		}
+	]
+}
