@@ -1,12 +1,17 @@
 {
   "name": "cli",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "tsc --watch --preserveWatchOutput"
+  },
   "dependencies": {
     "commander": "^9.0.0",
     "eslint-config-prettier": "^8.3.0",
     "local-api": "^1.0.0",
     "prettier": "^2.5.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
   }
 }
