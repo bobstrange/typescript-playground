@@ -10,7 +10,8 @@ export const serve = ({
   dir: string
 }) => {
   const app = express()
-  app.listen(port, () => {
-    console.log('listening on port', port)
+
+  return new Promise<void>((resolve, reject) => {
+    app.listen(port, resolve).on('error', reject)
   })
 }
