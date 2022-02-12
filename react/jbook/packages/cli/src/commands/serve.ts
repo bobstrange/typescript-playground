@@ -12,7 +12,15 @@ export const serveCommand = new Command()
 
       const port = parseInt(options.port)
       await serve({ port, filename: path.basename(filename), dir })
-    } catch (error) {
-      console.error(error)
+      console.log(`
+        Opened ${filename}. Navigate to http://localhost:${port} to edit the file.
+      `)
+    } catch (error: any) {
+      if (error.code === 'EADDRINUSE') {
+        console.log('Port is in use. Try running on a different port.')
+      } else {
+        console.log('Something wrong', error.message)
+      }
+      process.exit(1)
     }
   })
