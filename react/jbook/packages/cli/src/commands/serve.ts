@@ -1,8 +1,9 @@
 import { Command } from 'commander'
 
 export const serveCommand = new Command()
-  .command('serve')
+  .command('serve [filename]')
   .description('opean a file for editing')
-  .action(() => {
-    console.log('server is running')
+  .option('-p, --port <nunmber>', 'port number', '8080')
+  .action((filename = 'notebook.js', options) => {
+    console.log(filename, options)
   })
