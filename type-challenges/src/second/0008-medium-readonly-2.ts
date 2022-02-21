@@ -4,6 +4,11 @@ type MyReadonly2<T, K extends keyof T = keyof T> = Omit<T, K> & {
   readonly [P in K]: T[P]
 }
 
+/**
+ * まず始めに T から K が含まれるキーを省いた型を作る
+ * その上で、K のそれぞれについて T[P] を readonly にする
+ */
+
 type cases = [
   Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
   Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
