@@ -1,6 +1,6 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
-type Last<T extends any[]> = T extends [...unknown[], infer U] ? U : never
+type Last<T extends unknown[]> = T extends [...unknown[], infer U] ? U : never
 
 type cases = [
   Expect<Equal<Last<[3, 2, 1]>, 1>>,
