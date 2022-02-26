@@ -1,12 +1,20 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
-type MapTypes<T, R> = R extends { mapFrom: infer U; mapTo: infer V }
-  ? T extends { [key in infer TKey]: infer TValue }
-    ? TValue extends U
-      ? { [key in TKey]: V }
-      : T
-    : never
-  : never
+// type MapTypes<T, R extends { mapFrom: unknown; mapTo: unknown }> = {
+//   [K in keyof T]: T[K] extends R['mapFrom'] ? R['mapTo'] : T[K]
+// }
+
+// ↑ だと最後のテストケースが通らない
+
+type MapTypes<T, R extends { mapFrom: unknown; mapTo: unknown }> = {
+  [K in keyof T]: T[K] extends R['mapFrom']
+    ? R extends { mapFrom: T[K] }
+      ? R['mapTo']
+      : never
+    : T[K]
+}
+
+// ↑だと通る
 
 type cases = [
   Expect<
