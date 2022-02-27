@@ -63,3 +63,19 @@ isPositive2(5)
 isPositive2('foo')
 // @ts-expect-error 戻り値は boolean なので number には assign できない
 const res2: number = isPositive2(123)
+
+/**
+ * 1-4 配列の型
+ */
+
+function sumOfPos(arr: number[]): number {
+  return arr.filter((num) => num >= 0).reduce((acc, num) => acc + num, 0)
+}
+
+// 使用例
+const sum: number = sumOfPos([1, 3, -2, 0])
+
+// @ts-expect-error 引数は number[] であるべき
+sumOfPos(123, 456)
+// @ts-expect-error 引数は number[] であるべき
+sumOfPos([123, 'foobar'])
