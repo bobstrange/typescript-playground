@@ -41,6 +41,8 @@ showUserInfo({
   private: false,
 })
 
+export {}
+
 // @ts-expect-error private は必須
 const user: User = {
   name: 'Gombe Nanashino',
