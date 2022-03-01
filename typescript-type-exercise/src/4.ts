@@ -98,7 +98,25 @@ ed.emit('stop', {
 })
 ed.emit('end', {})
 
-// エラー例
 ed.emit<'start' | 'stop'>('stop', {
+  // @ts-expect-error 引数が union の場合型エラーにする
   user: 'user1',
 })
+
+/**
+ * 4-4. 一部だけPartial
+ */
+
+type PartiallyPartial<T, U extends keyof T> = Partial<Pick<T, U>> & Omit<T, U>
+// 使用例
+
+// 元のデータ
+interface Data {
+  foo: number
+  bar: string
+  baz: string
+}
+/*
+ * T1は { foo?: number; bar?: string; baz: string } 型
+ */
+type T1 = PartiallyPartial<Data, 'foo' | 'bar'>
