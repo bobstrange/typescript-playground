@@ -120,3 +120,33 @@ interface Data {
  * T1は { foo?: number; bar?: string; baz: string } 型
  */
 type T1 = PartiallyPartial<Data, 'foo' | 'bar'>
+
+/**
+ * 4-5. 最低一つは必要なオプションオブジェクト
+ */
+
+type AtLeastOne<T, K extends keyof T = keyof T> = K extends keyof T
+  ? PartiallyPartial<T, Exclude<keyof T, K>>
+  : never
+
+// 使用例
+interface Options {
+  foo: number
+  bar: string
+  baz: boolean
+}
+
+function test(options: AtLeastOne<Options>) {
+  const { foo, bar, baz } = options
+  // 省略
+}
+test({
+  foo: 123,
+  bar: 'bar',
+})
+test({
+  baz: true,
+})
+
+// @ts-expect-error 最低一つは key が必要
+test({})
