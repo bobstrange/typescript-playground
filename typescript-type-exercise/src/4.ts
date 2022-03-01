@@ -70,15 +70,19 @@ interface EventPayloads {
   end: {}
 }
 
-type Distribute<T> = T extends any ? T[] : never
-type NotDistribute<T> = [T] extends [any] ? T[] : never
-type IsUnion<T> = NotDistribute<T> extends Distribute<T> ? false : true
+type IsUnion<T, OrigT = T> = T extends OrigT
+  ? OrigT[] extends T[]
+    ? false
+    : true
+  : false
+type Payload<EventKey, Payloads> = IsUnion<EventKey> extends true
+  ? never
+  : EventKey extends keyof Payloads
+  ? Payloads[EventKey]
+  : never
 
 class EventDischarger<E> {
-  emit<Ev extends keyof E>(
-    eventName: Ev,
-    payload: Ev extends IsUnion<Ev> ? never : E[Ev]
-  ) {
+  emit<Ev extends keyof E>(eventName: Ev, payload: Payload<Ev, E>) {
     console.log(eventName, payload)
   }
 }
