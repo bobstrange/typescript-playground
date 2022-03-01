@@ -74,7 +74,7 @@ type IsUnion<T, OrigT = T> = T extends OrigT
   ? OrigT[] extends T[]
     ? false
     : true
-  : false
+  : never
 type Payload<EventKey, Payloads> = IsUnion<EventKey> extends true
   ? never
   : EventKey extends keyof Payloads
@@ -150,3 +150,36 @@ test({
 
 // @ts-expect-error 最低一つは key が必要
 test({})
+
+/**
+ * 4-6. ページを描画
+ */
+
+type Page =
+  | {
+      page: 'top'
+    }
+  | {
+      page: 'mypage'
+      userName: string
+    }
+  | {
+      page: 'ranking'
+      articles: string[]
+      sort: 'new' | 'old'
+    }
+
+// まず key は Page['page'] が union なので分配で作成できる
+type PageGenerators = {
+  [page in Page['page']]: (args: Extract<Page, { page: page }>) => string
+}
+
+const pageGenerators: PageGenerators = {
+  top: () => '<p>top page</p>',
+  mypage: ({ userName }) => `<p>Hello, ${userName}!</p>`,
+  ranking: ({ articles, sort }) =>
+    `<h1>ranking</h1>
+         <ul>
+        ${articles.map((name) => `<li>${name}</li>`).join('')}</ul>`,
+}
+const renderPage = (page: Page) => pageGenerators[page.page](page as any)
