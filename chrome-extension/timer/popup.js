@@ -12,6 +12,6 @@ chrome.action.setBadgeText(
   }
 )
 
-chrome.storage.sync.get(['name'], ({ name }) => {
+chrome.storage.sync.get(['name'], ({ name = '???' }) => {
   nameElement.textContent = `Your name is ${name}`
 })
