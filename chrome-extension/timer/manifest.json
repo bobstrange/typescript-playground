@@ -15,8 +15,8 @@
       "32": "icon.png"
     },
     "default_title": "Timer extension action title",
-    "default_popup": "popup.html"
+    "default_popup": "src/popup.html"
   },
-  "options_page": "options.html",
+  "options_page": "src/options.html",
   "permissions": ["storage"]
 }

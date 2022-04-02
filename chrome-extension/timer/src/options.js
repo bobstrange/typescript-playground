@@ -14,5 +14,7 @@ saveButton.addEventListener('click', () => {
 })
 
 chrome.storage.sync.get(['name'], ({ name }) => {
-  nameInput.value = name
+  if (name) {
+    nameInput.value = name
+  }
 })
