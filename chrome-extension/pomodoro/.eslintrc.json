@@ -21,6 +21,9 @@
         "react",
         "@typescript-eslint"
     ],
+    "globals": {
+      "chrome": "readonly"
+    },
     "rules": {
     }
 }
