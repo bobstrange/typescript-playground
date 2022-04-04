@@ -1,7 +1,18 @@
-const tasks = []
+let tasks = []
+
+chrome.storage.sync.get(['tasks'], (res) => {
+  tasks = res.tasks ? res.tasks : []
+  renderTasks()
+})
 
 const addTaskButton = document.getElementById('add-task-button')
 addTaskButton.addEventListener('click', () => addTask())
+
+const saveTasks = () => {
+  chrome.storage.sync.set({
+    tasks,
+  })
+}
 
 const renderTasks = () => {
   const taskContainer = document.getElementById('task-container')
@@ -19,6 +30,7 @@ const renderTask = (taskNum) => {
   text.value = tasks[taskNum]
   text.addEventListener('change', () => {
     tasks[taskNum] = text.value
+    saveTasks()
   })
   const deleteButton = document.createElement('input')
   deleteButton.type = 'button'
@@ -37,10 +49,12 @@ const renderTask = (taskNum) => {
 const addTask = () => {
   const taskNum = tasks.length
   tasks.push('')
+  saveTasks()
   renderTask(taskNum)
 }
 
 const removeTask = (taskNum) => {
   tasks.splice(taskNum, 1)
+  saveTasks()
   renderTasks()
 }

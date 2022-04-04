@@ -16,5 +16,6 @@
     },
     "default_title": "Pomodoro",
     "default_popup": "src/popup/popup.html"
-  }
+  },
+  "permissions": ["storage"]
 }
