@@ -1,5 +1,21 @@
 let tasks = []
 
+const startTimerButton = document.getElementById('start-timer-button')
+startTimerButton.addEventListener('click', () => {
+  chrome.storage.local.get(['isRunning'], (res) => {
+    chrome.storage.local.set(
+      {
+        isRunning: !res.isRunning,
+      },
+      () => {
+        startTimerButton.textContent = !res.isRunning
+          ? 'Pause Timer'
+          : 'Start Timer'
+      }
+    )
+  })
+})
+
 chrome.storage.sync.get(['tasks'], (res) => {
   tasks = res.tasks ? res.tasks : []
   renderTasks()
