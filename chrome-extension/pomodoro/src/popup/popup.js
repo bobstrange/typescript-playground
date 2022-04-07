@@ -9,9 +9,9 @@ const updateTime = () => {
     if (res.timer % 60 !== 0) {
       seconds = 60 - (res.timer % 60)
     }
-    time.textContent = `${minutes.toString().padStart(2, '0')}:${seconds
-      .toString()
-      .padStart(2, '0')}`
+    const min = minutes.toString().padStart(2, '0')
+    const sec = seconds.toString().padStart(2, '0')
+    time.textContent = `${min}:${sec}`
   })
 }
 
