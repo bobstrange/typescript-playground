@@ -1,5 +1,23 @@
 let tasks = []
 
+const updateTime = () => {
+  chrome.storage.local.get(['timer'], (res) => {
+    const time = document.getElementById('time')
+    const minutes = 25 - Math.ceil(res.timer / 60)
+
+    let seconds = 0
+    if (res.timer % 60 !== 0) {
+      seconds = 60 - (res.timer % 60)
+    }
+    time.textContent = `${minutes.toString().padStart(2, '0')}:${seconds
+      .toString()
+      .padStart(2, '0')}`
+  })
+}
+
+updateTime()
+setInterval(updateTime, 1000)
+
 const startTimerButton = document.getElementById('start-timer-button')
 startTimerButton.addEventListener('click', () => {
   chrome.storage.local.get(['isRunning'], (res) => {
