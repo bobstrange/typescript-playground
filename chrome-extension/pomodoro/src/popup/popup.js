@@ -16,6 +16,19 @@ startTimerButton.addEventListener('click', () => {
   })
 })
 
+const resetTimerButton = document.getElementById('reset-timer-button')
+resetTimerButton.addEventListener('click', () => {
+  chrome.storage.local.set(
+    {
+      timer: 0,
+      isRunning: false,
+    },
+    () => {
+      startTimerButton.textContent = 'Start Timer'
+    }
+  )
+})
+
 chrome.storage.sync.get(['tasks'], (res) => {
   tasks = res.tasks ? res.tasks : []
   renderTasks()
