@@ -15,6 +15,10 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@testing-library/user-event": "^14.0.4",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
@@ -24,6 +28,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "jsdom": "^19.0.0",
     "prettier": "^2.6.2",
     "stylelint": "^14.6.1",
     "stylelint-config-prettier": "^9.0.3",
