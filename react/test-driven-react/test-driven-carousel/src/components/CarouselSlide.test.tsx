@@ -26,8 +26,7 @@ describe('CarouselSlide', () => {
   })
 
   it('uses `description` and `attribution` as the <figcaption>', () => {
-    expect(
-      screen.getByText(`${description} ${attribution}`)
-    ).toBeInTheDocument()
+    expect(screen.getByText(`${description}`)).toBeInTheDocument()
+    expect(screen.getByText(`${attribution}`)).toBeInTheDocument()
   })
 })
