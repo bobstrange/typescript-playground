@@ -1,3 +1,8 @@
 export const CarouselSlide = () => {
-  return <figure />
+  return (
+    <figure>
+      <img />
+      <figcaption />
+    </figure>
+  )
 }
