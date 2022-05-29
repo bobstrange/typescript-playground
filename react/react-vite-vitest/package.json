@@ -7,8 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint --ignore-path .gitignore src/**/*.{ts,tsx}",
-    "format": "prettier --ignore-path .gitignore --write **/*.{ts,tsx,json}",
-    "check-format": "prettier --ignore-path .gitignore --list-different **/*.{ts,tsx,json}"
+    "prettier": "prettier --ignore-path .gitignore **/*.{ts,tsx,json}",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different"
   },
   "dependencies": {
     "react": "^18.0.0",
