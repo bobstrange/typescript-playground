@@ -1,28 +1,25 @@
 import type { GetServerSideProps, NextPage } from "next"
 import Link from "next/link"
 import axios from "axios"
+import { Photo } from "../types"
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get("https://jsonplaceholder.typicode.com/users")
+  const res = await axios.get("https://jsonplaceholder.typicode.com/photos")
+
   return {
     props: {
-      users: res.data,
+      photos: res.data,
     },
   }
 }
 
-type User = {
-  id: string
-  username: string
-}
-
-const Home: NextPage<{ users: User[] }> = ({ users }) => {
+const Home: NextPage<{ photos: Photo[] }> = ({ photos }) => {
   return (
     <ul>
-      {users.map((user) => (
-        <li key={user.id}>
-          <Link href={`/users/${user.username}`} passHref>
-            <a>{user.username}</a>
+      {photos.map((photo) => (
+        <li key={photo.id}>
+          <Link href={`/photos/${photo.id}`} passHref>
+            <a>{photo.title}</a>
           </Link>
         </li>
       ))}
