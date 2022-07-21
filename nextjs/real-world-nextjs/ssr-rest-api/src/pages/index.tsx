@@ -4,7 +4,7 @@ import axios from "axios"
 import { Photo } from "../types"
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get("https://jsonplaceholder.typicode.com/photos")
+  const res = await axios.get("https://jsonplaceholder.typicode.com/users")
 
   return {
     props: {
@@ -16,13 +16,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home: NextPage<{ photos: Photo[] }> = ({ photos }) => {
   return (
     <ul>
-      {photos.map((photo) => (
-        <li key={photo.id}>
-          <Link href={`/photos/${photo.id}`} passHref>
-            <a>{photo.title}</a>
-          </Link>
-        </li>
-      ))}
+      <li>
+        <Link href="/users">
+          <a>Users</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/photos">
+          <a>Photos</a>
+        </Link>
+      </li>
     </ul>
   )
 }
