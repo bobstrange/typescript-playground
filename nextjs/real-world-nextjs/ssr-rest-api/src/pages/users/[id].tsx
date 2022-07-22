@@ -31,9 +31,7 @@ const UserPage: NextPage<{ id: string }> = ({ id }) => {
   const [data, setData] = useState<User | null>(null)
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get<User>(
-        `https://jsonplaceholder.typicode.com/users/${id}`
-      )
+      const res = await axios.get<User>(`/api/singleUser?id=${id}`)
       setLoading(false)
       setData(res.data)
     }
