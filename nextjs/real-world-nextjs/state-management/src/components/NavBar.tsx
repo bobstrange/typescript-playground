@@ -1,7 +1,14 @@
 import Link from "next/link"
+import { useContext } from "react"
+import { CartContext } from "../context/CartContext"
 
 function Navbar() {
-  const totalItemsAmount = 0 /* To be implemented */
+  const { items } = useContext(CartContext)
+  console.log(items)
+  const totalItemsAmount = Object.values(items).reduce((acc, curr) => {
+    return acc + curr
+  }, 0)
+  console.log(Object.values(items))
 
   return (
     <div className="w-full bg-purple-600 p-4 text-white">

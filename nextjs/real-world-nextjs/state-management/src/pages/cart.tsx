@@ -1,7 +1,10 @@
+import { useContext } from "react"
 // eslint-disable-next-line no-unused-vars
 import data from "../data/items"
+import { CartContext } from "../context/CartContext"
 
 function Cart() {
+  const { items } = useContext(CartContext)
   return (
     <div>
       <h1 className="text-xl font-bold"> Total: ${/* To be implemented */} </h1>
