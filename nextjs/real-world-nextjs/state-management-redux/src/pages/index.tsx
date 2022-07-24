@@ -1,21 +1,14 @@
-import Head from "next/head"
-import Navbar from "../components/NavBar"
+import ProductCard from "../components/ProductCard"
+import products from "../data/items"
 
-function MyApp({ Component, pageProps }) {
+function Home() {
   return (
-    <>
-      <Head>
-        <link
-          href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-          rel="stylesheet"
-        />
-      </Head>
-      <Navbar />
-      <div className="w-9/12 m-auto pt-10">
-        <Component {...pageProps} />
-      </div>
-    </>
+    <div className="grid grid-cols-4 gap-4">
+      {products.map((product) => (
+        <ProductCard key={product.id} {...product} />
+      ))}
+    </div>
   )
 }
 
-export default MyApp
+export default Home

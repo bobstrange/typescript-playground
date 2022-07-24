@@ -1,8 +1,5 @@
-import { useDispatch, useSelector, shallowEqual } from "react-redux"
-
-function useGlobalItems() {
-  return useSelector((state) => state, shallowEqual)
-}
+import { useDispatch } from "react-redux"
+import { useGlobalItems } from "../hooks/useGlobalItems"
 
 // eslint-disable-next-line no-unused-vars
 function ProductCard({ id, name, price, picture }) {

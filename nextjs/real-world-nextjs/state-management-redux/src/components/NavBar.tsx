@@ -1,7 +1,15 @@
 import Link from "next/link"
+import { useGlobalItems } from "../hooks/useGlobalItems"
 
 function Navbar() {
-  const totalItemsAmount = 0 /* To be implemented */
+  const items = useGlobalItems()
+  const totalItemsAmount = Object.entries(items)
+    .map(([_, amount]) => {
+      return amount
+    })
+    .reduce((acc, curr) => {
+      return acc + curr
+    }, 0)
 
   return (
     <div className="w-full bg-purple-600 p-4 text-white">
