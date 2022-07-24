@@ -1,7 +1,10 @@
 import Head from "next/head"
-import Navbar from "../components/Navbar"
+import { Provider } from "react-redux"
+import { useStore } from "../redux/store"
+import Navbar from "../components/NavBar"
 
 function MyApp({ Component, pageProps }) {
+  const store = useStore(pageProps.initialReduxState)
   return (
     <>
       <Head>
@@ -10,10 +13,12 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <Navbar />
-      <div className="w-9/12 m-auto pt-10">
-        <Component {...pageProps} />
-      </div>
+      <Provider store={store}>
+        <Navbar />
+        <div className="w-9/12 m-auto pt-10">
+          <Component {...pageProps} />
+        </div>
+      </Provider>
     </>
   )
 }

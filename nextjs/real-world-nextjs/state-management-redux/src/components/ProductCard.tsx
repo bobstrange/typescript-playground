@@ -1,5 +1,15 @@
+import { useDispatch, useSelector, shallowEqual } from "react-redux"
+
+function useGlobalItems() {
+  return useSelector((state) => state, shallowEqual)
+}
+
 // eslint-disable-next-line no-unused-vars
 function ProductCard({ id, name, price, picture }) {
+  const dispatch = useDispatch()
+  const items = useGlobalItems()
+  const productAmount = items?.[id] ?? 0
+
   return (
     <div className="bg-gray-200 p-6 rounded-md">
       <div className="relative 100% h-40 m-auto">
@@ -12,15 +22,19 @@ function ProductCard({ id, name, price, picture }) {
       <div className="flex justify-between mt-4 w-2/4 m-auto">
         <button
           className="pl-2 pr-2 bg-red-400 text-white rounded-md"
-          disabled={false /* To be implemented */}
-          onClick={() => {} /* To be implemented */}
+          disabled={productAmount === 0}
+          onClick={() => {
+            dispatch({ type: "DECREMENT", id })
+          }}
         >
           -
         </button>
-        <div>{/* To be implemented */}</div>
+        <div>{productAmount}</div>
         <button
           className="pl-2 pr-2 bg-green-400 text-white rounded-md"
-          onClick={() => {} /* To be implemented */}
+          onClick={() => {
+            dispatch({ type: "INCREMENT", id })
+          }}
         >
           +
         </button>
