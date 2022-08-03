@@ -13,7 +13,7 @@ import Link from "next/link"
 
 import { users } from "../../data/users"
 
-const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = () => {
   const paths = users.map(({ username }) => ({
     params: {
       username,
@@ -25,7 +25,7 @@ const getStaticPaths: GetStaticPaths = () => {
   }
 }
 
-const getStaticProps: GetStaticProps<
+export const getStaticProps: GetStaticProps<
   { user: unknown },
   { username: string }
 > = ({ params }) => {
