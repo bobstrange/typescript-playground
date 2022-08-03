@@ -83,7 +83,7 @@ const User: NextPage = ({ user }) => {
           backgroundColor={useColorModeValue("white", "gray.700")}
         >
           <Text as="p">{description}</Text>
-          <Link href="/" passHref>
+          <Link href="/users" passHref>
             <Button marginTop="8" colorScheme="whatsapp" as="a">
               Back to all users
             </Button>
