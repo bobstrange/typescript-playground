@@ -19,7 +19,9 @@ async function main() {
       console.log("listening on port 3000")
     })
   } catch (err) {
-    console.log(err.stack)
+    if (err instanceof Error) {
+      console.log(err.stack)
+    }
   }
 }
 
