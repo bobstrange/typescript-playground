@@ -1,6 +1,7 @@
 import { NextPage } from "next"
-import Router from "next/router"
+import { useRouter } from "next/router"
 import { FormEventHandler, useState } from "react"
+import { useAuth } from "../lib/hooks/auth"
 
 const handleLogin = async ({
   email,
@@ -24,7 +25,17 @@ const handleLogin = async ({
 }
 
 const LoginPage: NextPage = () => {
+  const router = useRouter()
   const [loginError, setLoginError] = useState<Error | null>(null)
+  const { loading, loggedIn } = useAuth()
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (!loading && loggedIn) {
+    router.push("/protected-route")
+  }
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
 
@@ -32,7 +43,7 @@ const LoginPage: NextPage = () => {
     setLoginError(null)
     try {
       await handleLogin({ email: email.value, password: password.value })
-      Router.push("/protected-route")
+      router.push("/protected-route")
     } catch (error) {
       if (error instanceof Error) {
         setLoginError(error)
