@@ -1,10 +1,10 @@
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const webpack = require("webpack");
-const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const webpack = require("webpack")
+const path = require("path")
 
 module.exports = {
   mode: "development",
-  entry: "./src/app.js",
+  entry: "./src/app.ts",
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
@@ -12,10 +12,19 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.{ts,tsx}$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+
+      {
         test: /\.js$/,
         exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
   },
   devServer: {
     client: {
@@ -30,4 +39,4 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
-};
+}
