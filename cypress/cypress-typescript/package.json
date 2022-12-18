@@ -4,18 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "start": "cd app && npm start"
   },
   "keywords": [],
   "author": "bobstrange <bob.1983.g@gmail.com> (https://github.com/bobstrange)",
   "license": "MIT",
   "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.2.3",
+    "@applitools/eyes-cypress": "^3.27.8",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "cypress": "^12.1.0",
+    "cypress-file-upload": "^5.0.8",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.8.1",
     "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "cypress-real-events": "^1.7.4"
   }
 }
