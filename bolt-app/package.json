@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node src/app.ts"
+    "dev": "ts-node src/index.ts"
   },
   "author": "bobstrange <bob.1983.g@gmail.com> (https://github.com/bobstrange)",
   "license": "MIT",
