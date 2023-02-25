@@ -1,14 +1,25 @@
-import './utils/env'
-import { App, LogLevel } from '@slack/bolt'
+import { token, signingSecret, appToken, port } from './utils/env'
+import { App, LogLevel, AppOptions, AwsLambdaReceiver } from '@slack/bolt'
 
-const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-  logLevel: LogLevel.DEBUG,
-  appToken: process.env.SLACK_APP_TOKEN,
-  socketMode: true,
-  port: Number(process.env.PORT || 3000),
-})
+let options: AppOptions = {
+  token,
+  port,
+}
+
+if (process.env.NODE_ENV === 'production') {
+  const receiver = new AwsLambdaReceiver({
+    signingSecret,
+  })
+  options.receiver = receiver
+  options.logLevel = LogLevel.WARN
+} else {
+  options.signingSecret = signingSecret
+  options.logLevel = LogLevel.DEBUG
+  options.appToken = appToken
+  options.socketMode = true
+}
+
+const app = new App(options)
 
 app.use(async ({ next }) => {
   await next()
