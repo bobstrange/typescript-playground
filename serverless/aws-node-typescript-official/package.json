@@ -1,7 +1,10 @@
 {
   "devDependencies": {
-    "esbuild": "^0.14.25",
-    "serverless-esbuild": "^1.25.0"
+    "@serverless/typescript": "^3.27.0",
+    "@types/node": "^18.14.1",
+    "esbuild": "^0.17.10",
+    "serverless-esbuild": "^1.39.0",
+    "ts-node": "^10.9.1"
   },
   "name": "aws-node-typescript-official"
 }
