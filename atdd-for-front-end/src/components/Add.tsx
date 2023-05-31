@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { ChangeEventHandler, useState } from "react"
 
 export default function Add() {
   const [data, setData] = useState({
     add_todo: "",
   })
-  const onChange = (evt) => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
     const key = evt.target.name
     const value = evt.target.value
     setData((oldData) => ({ ...oldData, [key]: value }))
