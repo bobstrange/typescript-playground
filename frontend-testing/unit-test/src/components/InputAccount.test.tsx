@@ -12,3 +12,13 @@ test('input mail address', async () => {
 
   expect(textbox).toHaveDisplayValue(email)
 })
+
+test('input password', async () => {
+  render(<InputAccount />)
+  const textbox = screen.getByPlaceholderText('more than 8 characters')
+
+  const password = 'password'
+  await user.type(textbox, password)
+
+  expect(textbox).toHaveDisplayValue(password)
+})
