@@ -1,20 +1,22 @@
-type Props = {
-  name: string
-  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
-}
+import { useId, useState } from 'react'
+import { Agreement } from './Agreement'
+import { InputAccount } from './InputAccount'
 
-export const Form = ({ name, onSubmit }: Props) => {
+export const Form = () => {
+  const [checked, setChecked] = useState(false)
+  const headingId = useId()
+
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault()
-        onSubmit?.(event)
-      }}
-    >
-      <h2>Account Info</h2>
-      <p>{name}</p>
+    <form aria-labelledby={headingId}>
+      <h2 id={headingId}>Register new account</h2>
+      <InputAccount />
+      <Agreement
+        onChange={(event) => {
+          setChecked(event.currentTarget.checked)
+        }}
+      />
       <div>
-        <button>Edit</button>
+        <button disabled={!checked}>Signup</button>
       </div>
     </form>
   )
