@@ -5,3 +5,4 @@
     "lib": ["esnext"],
     "esModuleInterop": true
   }
+}
