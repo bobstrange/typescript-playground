@@ -3,6 +3,7 @@ import morgan from "morgan"
 import cors from "cors"
 
 import { router } from "./router"
+import { protect } from "./modules/auth"
 
 const app = express()
 app.use(morgan("dev"))
@@ -21,6 +22,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello" })
 })
 
-app.use("/api", router)
+app.use("/api", protect, router)
 
 export { app }
