@@ -3,7 +3,7 @@ import { Router } from "express"
 const router = Router()
 
 router.get("/products", (req, res) => {
-  res.json({ message: "Hello" })
+  res.json({ message: req.something_secret })
 })
 router.get("/products/:id", () => {})
 router.put("/products/:id", () => {})
