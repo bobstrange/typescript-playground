@@ -3,7 +3,7 @@ import { query, validationResult } from "express-validator"
 
 const router = Router()
 
-const nameValidateChain = () => query("name").isString()
+const nameValidateChain = () => query("name").isString().withMessage("Name must be a string")
 
 router.get("/products", (req, res) => {
   res.json({ message: req.something_secret })
