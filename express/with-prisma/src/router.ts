@@ -20,11 +20,16 @@ router.put(
   "/updates/:id",
   body("title").optional(),
   body("body").optional(),
-  body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]).optional(
+  body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]).optional(),
   body("version").optional(),
   () => {}
 )
-router.post("/updates", () => {})
+router.post(
+  "/updates",
+  body("title").exists().isString(),
+  body("body").exists().isString(),
+  () => {}
+)
 router.delete("/updates/:id", () => {})
 
 router.get("/update_details", () => {})
