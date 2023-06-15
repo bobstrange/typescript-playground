@@ -18,23 +18,25 @@ router.get("/updates", () => {})
 router.get("/updates/:id", () => {})
 router.put(
   "/updates/:id",
-  body("title").optional(),
-  body("body").optional(),
+  body("title").optional().isString(),
+  body("body").optional().isString(),
   body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]).optional(),
-  body("version").optional(),
+  body("version").optional().isString(),
   () => {}
 )
 router.post(
   "/updates",
   body("title").exists().isString(),
   body("body").exists().isString(),
+  body("status").not().exists(),
+  body("version").optional().isString(),
   () => {}
 )
 router.delete("/updates/:id", () => {})
 
 router.get("/update_details", () => {})
 router.get("/update_details/:id", () => {})
-router.put("/update_details/:id", () => {})
+router.put("/update_details/:id", body("name").isString(), body("description").isString(), () => {})
 router.post("/update_details", () => {})
 router.delete("/update_details/:id", () => {})
 
