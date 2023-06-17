@@ -29,6 +29,7 @@ model Product {
   userId  String
   user    User     @relation(fields: [userId], references: [id])
   updates Update[]
+  @@index([id, userId])
 }
 
 enum UpdateStatus {
