@@ -38,8 +38,25 @@ export const createProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   const updated = await prismaClient.product.update({
-    where: { id: req.params.id },
+    where: {
+      id_userId: {
+        id: req.params.id,
+        userId: req.user.id,
+      },
+    },
     data: { name: req.body.name },
   })
   res.json({ data: updated })
+}
+
+export const deleteProduct = async (req, res) => {
+  await prismaClient.product.delete({
+    where: {
+      id_userId: {
+        id: req.params.id,
+        userId: req.user.id,
+      },
+    },
+  })
+  res.json({ data: true })
 }
