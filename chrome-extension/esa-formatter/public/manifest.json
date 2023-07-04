@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Markdown Formatter",
+  "version": "1.0",
+  "description": "Format textarea content as Markdown using Prettier",
+  "icons": {
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": ["activeTab", "storage", "https://*/*", "http://*/*"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
