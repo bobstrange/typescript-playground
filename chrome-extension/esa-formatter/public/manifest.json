@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Markdown Formatter",
+  "name": "esa formatter",
   "version": "1.0",
-  "description": "Format textarea content as Markdown using Prettier",
+  "description": "Format esa content using Prettier",
   "icons": {
     "128": "icon.png"
   },
