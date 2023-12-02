@@ -46,6 +46,8 @@ export async function fetchLatestInvoices() {
   try {
     const client = await pool.connect()
 
+    console.log('Fetching revenue data...')
+    await new Promise((resolve) => setTimeout(resolve, 2000))
     const data = await client.query<LatestInvoiceRaw>(`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
@@ -53,6 +55,7 @@ export async function fetchLatestInvoices() {
       ORDER BY invoices.date DESC
       LIMIT 5`)
 
+    console.log('Data fetch complete after 2 seconds.')
     const latestInvoices = data.rows.map((invoice) => ({
       ...invoice,
       amount: formatCurrency(invoice.amount),
