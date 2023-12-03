@@ -210,14 +210,17 @@ export async function fetchInvoiceById(id: string) {
 
 export async function fetchCustomers() {
   try {
-    const data = await sql<CustomerField>`
+    const client = await pool.connect()
+
+    const data = await client.query<CustomerField>(`
       SELECT
         id,
         name
       FROM customers
       ORDER BY name ASC
-    `
+    `)
 
+    client.release()
     const customers = data.rows
     return customers
   } catch (err) {
