@@ -143,7 +143,7 @@ export async function fetchFilteredInvoices(
       ORDER BY invoices.date DESC
       LIMIT $2 OFFSET $3
     `,
-      [`%${query}$`, ITEMS_PER_PAGE, offset],
+      [`%${query}%`, ITEMS_PER_PAGE, offset],
     )
     client.release()
 
