@@ -64,3 +64,17 @@ export async function updateInvoice(id: string, formData: FormData) {
   revalidatePath('/dashboard/invoices')
   redirect('/dashboard/invoices')
 }
+
+export async function deleteInvoice(id: string) {
+  const client = await pool.connect()
+  await client.query(
+    `
+    DELETE FROM invoices
+    WHERE id = $1
+  `,
+    [id],
+  )
+  client.release()
+
+  revalidatePath('/dashboard/invoices')
+}
