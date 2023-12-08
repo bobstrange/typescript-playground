@@ -186,15 +186,22 @@ export async function fetchInvoicesPages(query: string) {
 export async function fetchInvoiceById(id: string) {
   noStore()
   try {
-    const data = await sql<InvoiceForm>`
+    const client = await pool.connect()
+
+    const data = await client.query<InvoiceForm>(
+      `
       SELECT
         invoices.id,
         invoices.customer_id,
         invoices.amount,
         invoices.status
       FROM invoices
-      WHERE invoices.id = ${id};
-    `
+      WHERE invoices.id = $1;
+    `,
+      [id],
+    )
+
+    client.release()
 
     const invoice = data.rows.map((invoice) => ({
       ...invoice,
