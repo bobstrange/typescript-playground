@@ -16,6 +16,7 @@ const FormSchema = z.object({
 })
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true })
+const UpdateInvoice = FormSchema.omit({ id: true, date: true })
 
 export async function createInvoice(formData: FormData) {
   const { customerId, amount, status } = CreateInvoice.parse({
@@ -27,13 +28,37 @@ export async function createInvoice(formData: FormData) {
   const date = new Date().toISOString().split('T')[0]
 
   const client = await pool.connect()
-  client.query(
+  await client.query(
     `
     INSERT INTO invoices (customer_id, amount, status, date)
     VALUES ($1, $2, $3, $4)
   `,
     [customerId, amountInCents, status, date],
   )
+  client.release()
+
+  revalidatePath('/dashboard/invoices')
+  redirect('/dashboard/invoices')
+}
+
+export async function updateInvoice(id: string, formData: FormData) {
+  const { customerId, amount, status } = UpdateInvoice.parse({
+    customerId: formData.get('customerId'),
+    amount: formData.get('amount'),
+    status: formData.get('status'),
+  })
+  const amountInCents = amount * 100
+
+  const client = await pool.connect()
+  await client.query(
+    `
+    UPDATE invoices
+    SET customer_id = $1, amount = $2, status = $3
+    WHERE id = $4
+  `,
+    [customerId, amountInCents, status, id],
+  )
+
   client.release()
 
   revalidatePath('/dashboard/invoices')
