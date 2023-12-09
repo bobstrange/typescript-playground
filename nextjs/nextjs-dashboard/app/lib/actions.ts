@@ -27,15 +27,21 @@ export async function createInvoice(formData: FormData) {
   const amountInCents = amount * 100
   const date = new Date().toISOString().split('T')[0]
 
-  const client = await pool.connect()
-  await client.query(
-    `
+  try {
+    const client = await pool.connect()
+    await client.query(
+      `
     INSERT INTO invoices (customer_id, amount, status, date)
     VALUES ($1, $2, $3, $4)
   `,
-    [customerId, amountInCents, status, date],
-  )
-  client.release()
+      [customerId, amountInCents, status, date],
+    )
+    client.release()
+  } catch (error) {
+    return {
+      message: 'Failed to create invoice.',
+    }
+  }
 
   revalidatePath('/dashboard/invoices')
   redirect('/dashboard/invoices')
@@ -49,32 +55,40 @@ export async function updateInvoice(id: string, formData: FormData) {
   })
   const amountInCents = amount * 100
 
-  const client = await pool.connect()
-  await client.query(
-    `
+  try {
+    const client = await pool.connect()
+    await client.query(
+      `
     UPDATE invoices
     SET customer_id = $1, amount = $2, status = $3
     WHERE id = $4
   `,
-    [customerId, amountInCents, status, id],
-  )
+      [customerId, amountInCents, status, id],
+    )
 
-  client.release()
+    client.release()
+  } catch (error) {
+    return { message: 'Failed to update invoice.' }
+  }
 
   revalidatePath('/dashboard/invoices')
   redirect('/dashboard/invoices')
 }
 
 export async function deleteInvoice(id: string) {
-  const client = await pool.connect()
-  await client.query(
-    `
+  try {
+    const client = await pool.connect()
+    await client.query(
+      `
     DELETE FROM invoices
     WHERE id = $1
   `,
-    [id],
-  )
-  client.release()
+      [id],
+    )
+    client.release()
+  } catch (error) {
+    return { message: 'Failed to delete invoice.' }
+  }
 
   revalidatePath('/dashboard/invoices')
 }
