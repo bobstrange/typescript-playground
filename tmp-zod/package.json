@@ -1,0 +1,11 @@
+{
+  "name": "tmp-zod",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "bobstrange <bob.1983.g@gmail.com> (https://github.com/bobstrange)",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
+  }
+}
