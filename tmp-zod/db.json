@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "name": "Taro Yamada",
+      "age": 20,
+      "status": "active"
+    },
+    {
+      "name": "Jiro Tanaka",
+      "age": 25,
+      "profession": "programmer",
+      "status": "inactive"
+    },
+    {
+      "name": "Saburo Suzuki",
+      "age": 30,
+      "profession": "baseball player",
+      "status": "registered"
+    }
+  ]
+}
