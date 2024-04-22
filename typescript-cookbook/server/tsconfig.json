@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["ESNext"],
-    "module": "CommonJS",
+    "module": "NodeNext",
     "rootDir": "./src",
     "moduleResolution": "NodeNext",
     "outDir": "./dist",

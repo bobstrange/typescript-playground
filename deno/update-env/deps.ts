@@ -1,2 +1,1 @@
-export * from "npm:@aws-sdk/client-sts@^3.245.0";
-export * from "https://deno.land/std@0.171.0/flags/mod.ts";
+export { default as $ } from "https://deno.land/x/dax@0.39.2/mod.ts";
